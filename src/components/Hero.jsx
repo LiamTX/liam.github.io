@@ -3,11 +3,13 @@ import { ChevronDown, Github, Linkedin, Mail, MapPin } from "lucide-react";
 import { Button } from "./ui/button";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../data/translations";
+import { isUpworkMode } from "../utils/upworkMode";
 
 const Hero = () => {
   const { language } = useLanguage();
   const t = translations[language];
   const personalInfo = t.personalInfo;
+  const upworkMode = isUpworkMode();
   const [displayText, setDisplayText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
   const fullText = personalInfo.title;
@@ -132,12 +134,14 @@ const Hero = () => {
             >
               <Github size={24} className="sm:w-7 sm:h-7" />
             </a>
-            <a
-              href={`mailto:${personalInfo.email}`}
-              className="text-gray-400 hover:text-blue-400 transition-colors duration-300 transform hover:scale-110"
-            >
-              <Mail size={24} className="sm:w-7 sm:h-7" />
-            </a>
+            {!upworkMode && (
+              <a
+                href={`mailto:${personalInfo.email}`}
+                className="text-gray-400 hover:text-blue-400 transition-colors duration-300 transform hover:scale-110"
+              >
+                <Mail size={24} className="sm:w-7 sm:h-7" />
+              </a>
+            )}
           </div>
 
           {/* Scroll Indicator */}
