@@ -6,10 +6,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta name="description" content="Portfólio de Liam Cabral - Especialista em Desenvolvimento de Sistemas especializado em Node.js, Angular e sistemas escaláveis" />
+    <meta name="robots" content="index, follow" />
+    <meta name="googlebot" content="index, follow" />
     <title>Liam Cabral - Especialista em Desenvolvimento de Sistemas</title>
+    
+    <!-- Preload critical resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
+    <noscript>
+      <div style="padding: 20px; text-align: center; font-family: Arial, sans-serif;">
+        <h1>Liam Cabral - Portfolio</h1>
+        <p>JavaScript is required to view this portfolio. Please enable JavaScript in your browser settings.</p>
+        <p>Portfolio showcasing expertise in Node.js, Angular, and scalable systems development.</p>
+      </div>
+    </noscript>
+    <div id="root">
+      <!-- Fallback content for crawlers -->
+      <div style="display: none;">
+        <h1>Liam Cabral - Systems Development Specialist</h1>
+        <p>Portfolio of Liam Cabral - Specialist in Systems Development with expertise in Node.js, Angular, and scalable systems.</p>
+        <p>Available for projects through Upwork.</p>
+      </div>
+    </div>
   </body>
 </html>
