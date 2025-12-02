@@ -2,13 +2,11 @@ import React from "react";
 import { Mail, Phone, MapPin, Linkedin, Github, Heart } from "lucide-react";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../data/translations";
-import { isUpworkMode } from "../utils/upworkMode";
 
 const Footer = () => {
   const { language } = useLanguage();
   const t = translations[language];
   const personalInfo = t.personalInfo;
-  const upworkMode = isUpworkMode();
   const currentYear = new Date().getFullYear();
 
   const scrollToSection = (sectionId) => {
@@ -61,14 +59,12 @@ const Footer = () => {
               >
                 <Github size={20} />
               </a>
-              {!upworkMode && (
-                <a
-                  href={`mailto:${personalInfo.email}`}
-                  className="w-10 h-10 bg-gray-800 hover:bg-blue-600 rounded-lg flex items-center justify-center text-gray-400 hover:text-white transition-all duration-300"
-                >
-                  <Mail size={20} />
-                </a>
-              )}
+              <a
+                href={`mailto:${personalInfo.email}`}
+                className="w-10 h-10 bg-gray-800 hover:bg-blue-600 rounded-lg flex items-center justify-center text-gray-400 hover:text-white transition-all duration-300"
+              >
+                <Mail size={20} />
+              </a>
             </div>
           </div>
 
@@ -104,66 +100,43 @@ const Footer = () => {
           </div>
 
           {/* Contact Info */}
-          {!upworkMode && (
-            <div>
-              <h3 className="text-white font-semibold text-lg mb-4">{t.footer.contact}</h3>
-              <div className="space-y-4">
-                <div className="flex items-center text-gray-400">
-                  <Mail size={16} className="mr-3 text-blue-400" />
-                  <a
-                    href={`mailto:${personalInfo.email}`}
-                    className="hover:text-blue-400 transition-colors"
-                  >
-                    {personalInfo.email}
-                  </a>
-                </div>
-                <div className="flex items-center text-gray-400">
-                  <Phone size={16} className="mr-3 text-blue-400" />
-                  <a
-                    href={`tel:${personalInfo.phone}`}
-                    className="hover:text-blue-400 transition-colors"
-                  >
-                    {personalInfo.phone}
-                  </a>
-                </div>
-                <div className="flex items-start text-gray-400">
-                  <MapPin size={16} className="mr-3 text-blue-400 mt-1" />
-                  <span>{personalInfo.location}</span>
-                </div>
+          <div>
+            <h3 className="text-white font-semibold text-lg mb-4">{t.footer.contact}</h3>
+            <div className="space-y-4">
+              <div className="flex items-center text-gray-400">
+                <Mail size={16} className="mr-3 text-blue-400" />
+                <a
+                  href={`mailto:${personalInfo.email}`}
+                  className="hover:text-blue-400 transition-colors"
+                >
+                  {personalInfo.email}
+                </a>
               </div>
-
-              {/* Availability Status */}
-              <div className="mt-6 bg-green-500/10 border border-green-500/20 rounded-lg p-3">
-                <div className="flex items-center">
-                  <div className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
-                  <span className="text-green-400 text-sm font-semibold">
-                    {t.footer.available}
-                  </span>
-                </div>
+              <div className="flex items-center text-gray-400">
+                <Phone size={16} className="mr-3 text-blue-400" />
+                <a
+                  href={`tel:${personalInfo.phone}`}
+                  className="hover:text-blue-400 transition-colors"
+                >
+                  {personalInfo.phone}
+                </a>
+              </div>
+              <div className="flex items-start text-gray-400">
+                <MapPin size={16} className="mr-3 text-blue-400 mt-1" />
+                <span>{personalInfo.location}</span>
               </div>
             </div>
-          )}
-          {upworkMode && (
-            <div>
-              <h3 className="text-white font-semibold text-lg mb-4">{t.footer.contact}</h3>
-              <div className="space-y-4">
-                <div className="flex items-start text-gray-400">
-                  <MapPin size={16} className="mr-3 text-blue-400 mt-1" />
-                  <span>{personalInfo.location}</span>
-                </div>
-              </div>
 
-              {/* Availability Status */}
-              <div className="mt-6 bg-green-500/10 border border-green-500/20 rounded-lg p-3">
-                <div className="flex items-center">
-                  <div className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
-                  <span className="text-green-400 text-sm font-semibold">
-                    {t.footer.available}
-                  </span>
-                </div>
+            {/* Availability Status */}
+            <div className="mt-6 bg-green-500/10 border border-green-500/20 rounded-lg p-3">
+              <div className="flex items-center">
+                <div className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
+                <span className="text-green-400 text-sm font-semibold">
+                  {t.footer.available}
+                </span>
               </div>
             </div>
-          )}
+          </div>
         </div>
 
         {/* Bottom Bar */}

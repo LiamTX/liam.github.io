@@ -1,9 +1,3 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Allow: /
-
-# Allow Upwork bot specifically
-User-agent: *
-Crawl-delay: 1
-
-Sitemap: https://liam-port.netlify.app/sitemap.xml
+Disallow:

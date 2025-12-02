@@ -2,31 +2,11 @@
   publish = "build"
   command = "npm run build"
 
-# Redirect all routes to index.html for SPA (except upwork.html)
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-  force = false
-
-# Serve upwork.html directly (no redirect)
-[[redirects]]
-  from = "/upwork.html"
-  to = "/upwork.html"
-  status = 200
-  force = true
 
 [build.environment]
   NODE_VERSION = "18"
-  # Variável de ambiente para modo Upwork - pode ser sobrescrita na UI do Netlify
-  # REACT_APP_UPWORK_MODE = "true"
-
-# Headers to allow crawlers and bots
-[[headers]]
-  for = "/*"
-  [headers.values]
-    X-Frame-Options = "SAMEORIGIN"
-    X-Content-Type-Options = "nosniff"
-    Referrer-Policy = "strict-origin-when-cross-origin"
-    X-Robots-Tag = "index, follow"
 

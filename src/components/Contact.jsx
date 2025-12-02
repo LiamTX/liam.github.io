@@ -15,14 +15,12 @@ import { Textarea } from "./ui/textarea";
 import { useToast } from "../hooks/use-toast";
 import { useLanguage } from "../context/LanguageContext";
 import { translations } from "../data/translations";
-import { isUpworkMode } from "../utils/upworkMode";
 
 const Contact = () => {
   const { language } = useLanguage();
   const t = translations[language];
   const personalInfo = t.personalInfo;
   const { toast } = useToast();
-  const upworkMode = isUpworkMode();
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -68,14 +66,14 @@ const Contact = () => {
       icon: Mail,
       title: t.contact.contactTypes.email,
       info: personalInfo.email,
-      link: upworkMode ? null : `mailto:${personalInfo.email}`,
+      link: `mailto:${personalInfo.email}`,
       color: "blue",
     },
     {
       icon: Phone,
       title: t.contact.contactTypes.phone,
       info: personalInfo.phone,
-      link: upworkMode ? null : `tel:${personalInfo.phone}`,
+      link: `tel:${personalInfo.phone}`,
       color: "green",
     },
     {
@@ -88,65 +86,6 @@ const Contact = () => {
 
   const budgetOptions = t.contact.budgetOptions;
   const timelineOptions = t.contact.timelineOptions;
-
-  // In Upwork mode, show a simplified version without form or contact info
-  if (upworkMode) {
-    return (
-      <section id="contact" className="py-20 bg-gray-800">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-              {language === 'en' ? 'Available for Projects' : 'Disponível para Projetos'}
-            </h2>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              {language === 'en' 
-                ? 'I am available for new projects and opportunities. Please contact me through Upwork for inquiries.'
-                : 'Estou disponível para novos projetos e oportunidades. Entre em contato através do Upwork para consultas.'}
-            </p>
-          </div>
-
-          <div className="max-w-2xl mx-auto text-center">
-            <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-8">
-              <div className="flex items-center justify-center mb-4">
-                <CheckCircle size={32} className="text-green-400 mr-3" />
-                <span className="text-green-400 font-semibold text-xl">
-                  {t.contact.available}
-                </span>
-              </div>
-              <p className="text-gray-300 mt-4">
-                {language === 'en'
-                  ? 'Connect with me on Upwork to discuss your project needs.'
-                  : 'Conecte-se comigo no Upwork para discutir suas necessidades de projeto.'}
-              </p>
-              
-              {/* Social Links Only - No contact info */}
-              <div className="mt-8">
-                <h4 className="text-white font-semibold mb-4">{t.contact.social}</h4>
-                <div className="flex justify-center space-x-4">
-                  <a
-                    href={personalInfo.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-12 h-12 bg-blue-600 hover:bg-blue-700 rounded-lg flex items-center justify-center text-white transition-colors"
-                  >
-                    <Linkedin size={24} />
-                  </a>
-                  <a
-                    href={personalInfo.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-12 h-12 bg-gray-700 hover:bg-gray-600 rounded-lg flex items-center justify-center text-white transition-colors"
-                  >
-                    <Github size={24} />
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    );
-  }
 
   return (
     <section id="contact" className="py-20 bg-gray-800">
