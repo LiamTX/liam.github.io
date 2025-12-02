@@ -1,12 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { ChevronDown, Github, Linkedin, Mail, MapPin } from "lucide-react";
 import { Button } from "./ui/button";
-import { personalInfo } from "../data/mock";
+import { useLanguage } from "../context/LanguageContext";
+import { translations } from "../data/translations";
 
 const Hero = () => {
+  const { language } = useLanguage();
+  const t = translations[language];
+  const personalInfo = t.personalInfo;
   const [displayText, setDisplayText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
   const fullText = personalInfo.title;
+
+  // Reset typing effect when language changes
+  useEffect(() => {
+    setDisplayText("");
+    setCurrentIndex(0);
+  }, [language]);
 
   useEffect(() => {
     if (currentIndex < fullText.length) {
@@ -66,8 +76,8 @@ const Hero = () => {
 
           {/* Description */}
           <p className="text-base sm:text-lg md:text-xl text-gray-300 mb-6 sm:mb-8 max-w-3xl mx-auto leading-relaxed px-4 sm:px-0">
-            {personalInfo.yearsExperience} anos de experiência desenvolvendo
-            soluções inovadoras e escaláveis. Especialista em{" "}
+            {personalInfo.yearsExperience} {t.hero.experienceYears}{" "}
+            {t.hero.description}{" "}
             <span className="text-blue-400 font-semibold">Node.js</span>,
             <span className="text-blue-400 font-semibold"> Angular</span> e
             <span className="text-blue-400 font-semibold">
@@ -92,7 +102,7 @@ const Hero = () => {
               className="bg-blue-600 hover:bg-blue-700 text-white px-6 sm:px-8 py-3 text-base sm:text-lg font-semibold transition-all duration-300 transform hover:scale-105"
             >
               <Mail className="mr-2" size={20} />
-              Vamos conversar
+              {t.hero.ctaContact}
             </Button>
             <Button
               onClick={() => scrollToSection("projects")}
@@ -100,7 +110,7 @@ const Hero = () => {
               size="lg"
               className="border-gray-600 text-gray-300 hover:bg-gray-800 hover:text-white px-6 sm:px-8 py-3 text-base sm:text-lg font-semibold transition-all duration-300"
             >
-              Ver Projetos
+              {t.hero.ctaProjects}
             </Button>
           </div>
 

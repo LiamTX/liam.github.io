@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { LanguageProvider } from "./context/LanguageContext";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import About from "./components/About";
@@ -14,28 +15,30 @@ import Footer from "./components/Footer";
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-        <div className="min-h-screen bg-gray-900 text-white">
-          <Header />
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <>
-                  <Hero />
-                  <About />
-                  <Experience />
-                  <Skills />
-                  <Projects />
-                  <Services />
-                  <Contact />
-                </>
-              }
-            />
-          </Routes>
-          <Footer />
-        </div>
-      </BrowserRouter>
+      <LanguageProvider>
+        <BrowserRouter>
+          <div className="min-h-screen bg-gray-900 text-white">
+            <Header />
+            <Routes>
+              <Route
+                path="/"
+                element={
+                  <>
+                    <Hero />
+                    <About />
+                    <Experience />
+                    <Skills />
+                    <Projects />
+                    <Services />
+                    <Contact />
+                  </>
+                }
+              />
+            </Routes>
+            <Footer />
+          </div>
+        </BrowserRouter>
+      </LanguageProvider>
     </div>
   );
 }

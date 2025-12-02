@@ -2,18 +2,24 @@ import React from "react";
 import { MapPin, Calendar, Building } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Badge } from "./ui/badge";
-import { experience } from "../data/mock";
+import { useLanguage } from "../context/LanguageContext";
+import { translations } from "../data/translations";
+import { getTranslatedExperience } from "../data/translatedData";
 
 const Experience = () => {
+  const { language } = useLanguage();
+  const t = translations[language];
+  const experience = getTranslatedExperience(language);
+  
   return (
     <section id="experience" className="py-20 bg-gray-900">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-            Experiência Profissional
+            {t.experience.title}
           </h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Minha trajetória desenvolvendo soluções inovadoras
+            {t.experience.subtitle}
           </p>
         </div>
 
@@ -64,7 +70,7 @@ const Experience = () => {
                   {/* Achievements */}
                   <div className="mb-4">
                     <h4 className="text-white font-semibold mb-2">
-                      Principais Realizações:
+                      {t.experience.achievements}
                     </h4>
                     <ul className="space-y-1">
                       {exp.achievements.map((achievement, idx) => (
@@ -82,7 +88,7 @@ const Experience = () => {
                   {/* Technologies */}
                   <div>
                     <h4 className="text-white font-semibold mb-3">
-                      Tecnologias utilizadas:
+                      {t.experience.technologies}
                     </h4>
                     <div className="flex flex-wrap gap-2">
                       {exp.technologies.map((tech, idx) => (
@@ -105,45 +111,28 @@ const Experience = () => {
         {/* Education Section */}
         <div className="mt-20">
           <h3 className="text-3xl font-bold text-center mb-12 text-white">
-            Formação Acadêmica
+            {t.experience.educationTitle}
           </h3>
 
           <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            <Card className="bg-gray-800/50 border-gray-700 hover:bg-gray-800 transition-all duration-300">
-              <CardHeader>
-                <CardTitle className="text-blue-400 text-lg">
-                  Universidade do Vale do Itajaí (UNIVALI)
-                </CardTitle>
-                <p className="text-white font-semibold">
-                  Análise e Desenvolvimento de Sistemas
-                </p>
-                <p className="text-gray-400">2021 - 2023 • Concluído</p>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-300">
-                  Graduação focada em desenvolvimento de software, análise de
-                  sistemas e metodologias de programação modernas.
-                </p>
-              </CardContent>
-            </Card>
-
-            <Card className="bg-gray-800/50 border-gray-700 hover:bg-gray-800 transition-all duration-300">
-              <CardHeader>
-                <CardTitle className="text-blue-400 text-lg">
-                  SENAI/SC
-                </CardTitle>
-                <p className="text-white font-semibold">
-                  Ensino Técnico em Programação
-                </p>
-                <p className="text-gray-400">2018 - 2020 • Concluído</p>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-300">
-                  Curso técnico com foco em programação de computadores e
-                  desenvolvimento de aplicações.
-                </p>
-              </CardContent>
-            </Card>
+            {t.experience.education.map((edu, index) => (
+              <Card key={index} className="bg-gray-800/50 border-gray-700 hover:bg-gray-800 transition-all duration-300">
+                <CardHeader>
+                  <CardTitle className="text-blue-400 text-lg">
+                    {edu.institution}
+                  </CardTitle>
+                  <p className="text-white font-semibold">
+                    {edu.degree}
+                  </p>
+                  <p className="text-gray-400">{edu.period}</p>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-300">
+                    {edu.description}
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </div>

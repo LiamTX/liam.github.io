@@ -1,44 +1,32 @@
 import React from "react";
 import { Code, Users, Award, Zap } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
-import { personalInfo } from "../data/mock";
+import { useLanguage } from "../context/LanguageContext";
+import { translations } from "../data/translations";
 
 const About = () => {
-  const highlights = [
-    {
-      icon: Code,
-      title: "7+ Anos de Experiência",
-      description:
-        "Desenvolvimento full stack com foco em tecnologias modernas e escaláveis",
-    },
-    {
-      icon: Users,
-      title: "Liderança Técnica",
-      description:
-        "Experiência liderando equipes e projetos de alta complexidade",
-    },
-    {
-      icon: Award,
-      title: "Sistemas Financeiros",
-      description: "Especialista em integrações bancárias e soluções fintech",
-    },
-    {
-      icon: Zap,
-      title: "Inovação",
-      description:
-        "Sempre buscando as melhores práticas e tecnologias emergentes",
-    },
-  ];
+  const { language } = useLanguage();
+  const t = translations[language];
+  const personalInfo = t.personalInfo;
+  
+  const highlights = t.about.highlights.map((highlight, index) => {
+    const icons = [Code, Users, Award, Zap];
+    return {
+      icon: icons[index],
+      title: highlight.title,
+      description: highlight.description,
+    };
+  });
 
   return (
     <section id="about" className="py-20 bg-gray-800">
       <div className="container mx-auto px-6">
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-            Sobre Mim
+            {t.about.title}
           </h2>
           <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto px-4 sm:px-0">
-            Conheça um pouco da minha jornada e expertise técnica
+            {t.about.subtitle}
           </p>
         </div>
 
@@ -52,20 +40,14 @@ const About = () => {
 
               <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-lg p-4 sm:p-6 mb-6">
                 <h3 className="text-lg sm:text-xl font-semibold text-blue-400 mb-3">
-                  🚀 Transição para Freelancer
+                  {t.about.transitionTitle}
                 </h3>
                 <p className="text-sm sm:text-base text-gray-300 mb-4">
-                  Após anos desenvolvendo soluções para grandes empresas como
-                  Personal Card, Globo e Logikee, agora estou focado em ajudar
-                  empresas e startups a alcançarem seus objetivos através de
-                  soluções tecnológicas inovadoras e escaláveis.
+                  {t.about.transitionText}
                 </p>
                 <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-3">
                   <p className="text-sm text-green-300">
-                    ✨ <strong>Projetos de todos os tamanhos:</strong> Desde
-                    landing pages e dashboards simples até sistemas complexos e
-                    aplicações enterprise. Cada projeto recebe a mesma dedicação
-                    e qualidade!
+                    {t.about.projectsNote}
                   </p>
                 </div>
               </div>
@@ -74,27 +56,25 @@ const About = () => {
                 <div className="flex items-center text-gray-300 text-sm sm:text-base">
                   <span className="w-2 h-2 bg-blue-400 rounded-full mr-3 flex-shrink-0"></span>
                   <span>
-                    <strong>Especialização:</strong> Backend com Node.js e
-                    NestJS
+                    <strong>{t.about.specialization}</strong> {t.about.specializationText}
                   </span>
                 </div>
                 <div className="flex items-center text-gray-300 text-sm sm:text-base">
                   <span className="w-2 h-2 bg-blue-400 rounded-full mr-3 flex-shrink-0"></span>
                   <span>
-                    <strong>Frontend:</strong> Angular com TypeScript e Angular
-                    Material
+                    <strong>{t.about.frontend}</strong> {t.about.frontendText}
                   </span>
                 </div>
                 <div className="flex items-center text-gray-300 text-sm sm:text-base">
                   <span className="w-2 h-2 bg-blue-400 rounded-full mr-3 flex-shrink-0"></span>
                   <span>
-                    <strong>Cloud:</strong> Microsoft Azure e AWS
+                    <strong>{t.about.cloud}</strong> {t.about.cloudText}
                   </span>
                 </div>
                 <div className="flex items-center text-gray-300 text-sm sm:text-base">
                   <span className="w-2 h-2 bg-blue-400 rounded-full mr-3 flex-shrink-0"></span>
                   <span>
-                    <strong>Banco de Dados:</strong> MongoDB, SQL, PostgreSQL
+                    <strong>{t.about.database}</strong> {t.about.databaseText}
                   </span>
                 </div>
               </div>
@@ -133,7 +113,7 @@ const About = () => {
               7+
             </div>
             <div className="text-gray-400 text-xs sm:text-sm">
-              Anos de Experiência
+              {t.about.stats.years}
             </div>
           </div>
           <div className="text-center">
@@ -141,7 +121,7 @@ const About = () => {
               50+
             </div>
             <div className="text-gray-400 text-xs sm:text-sm">
-              Projetos Desenvolvidos
+              {t.about.stats.projects}
             </div>
           </div>
           <div className="text-center">
@@ -149,14 +129,14 @@ const About = () => {
               4
             </div>
             <div className="text-gray-400 text-xs sm:text-sm">
-              Empresas Atendidas
+              {t.about.stats.companies}
             </div>
           </div>
           <div className="text-center">
             <div className="text-2xl sm:text-3xl md:text-4xl font-bold text-blue-400 mb-2">
               15+
             </div>
-            <div className="text-gray-400 text-xs sm:text-sm">Tecnologias</div>
+            <div className="text-gray-400 text-xs sm:text-sm">{t.about.stats.technologies}</div>
           </div>
         </div>
       </div>

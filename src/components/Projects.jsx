@@ -3,9 +3,14 @@ import { ExternalLink, Github, Filter } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { Button } from "./ui/button";
-import { projects } from "../data/mock";
+import { useLanguage } from "../context/LanguageContext";
+import { translations } from "../data/translations";
+import { getTranslatedProjects } from "../data/translatedData";
 
 const Projects = () => {
+  const { language } = useLanguage();
+  const t = translations[language];
+  const projects = getTranslatedProjects(language);
   const [filter, setFilter] = useState("all");
 
   const categories = ["all", "Fintech", "Automação", "Enterprise", "Gestão"];
@@ -32,10 +37,10 @@ const Projects = () => {
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-            Projetos em Destaque
+            {t.projects.title}
           </h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Soluções reais desenvolvidas para empresas de diferentes segmentos
+            {t.projects.subtitle}
           </p>
         </div>
 
@@ -43,7 +48,7 @@ const Projects = () => {
         <div className="flex flex-wrap justify-center gap-4 mb-12">
           <div className="flex items-center text-gray-400 mr-4">
             <Filter size={20} className="mr-2" />
-            <span>Filtrar por:</span>
+            <span>{t.projects.filterBy}</span>
           </div>
           {categories.map((category) => (
             <button
@@ -55,7 +60,7 @@ const Projects = () => {
                   : "bg-gray-800 text-gray-300 border-gray-600 hover:bg-gray-700 hover:text-white"
               }`}
             >
-              {category === "all" ? "Todos" : category}
+              {category === "all" ? t.projects.all : (t.projects.categories[category] || category)}
             </button>
           ))}
         </div>
@@ -100,7 +105,7 @@ const Projects = () => {
                 {/* Features */}
                 <div className="mb-4">
                   <h4 className="text-white font-semibold mb-2">
-                    Principais funcionalidades:
+                    {t.projects.mainFeatures}
                   </h4>
                   <ul className="space-y-1">
                     {project.features.map((feature, idx) => (
@@ -118,7 +123,7 @@ const Projects = () => {
                 {/* Technologies */}
                 <div className="mb-6">
                   <h4 className="text-white font-semibold mb-3">
-                    Tecnologias:
+                    {t.projects.technologies}
                   </h4>
                   <div className="flex flex-wrap gap-2">
                     {project.technologies.map((tech, idx) => (
@@ -146,11 +151,10 @@ const Projects = () => {
         <div className="text-center mt-16">
           <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-lg p-8 max-w-2xl mx-auto">
             <h3 className="text-2xl font-bold text-white mb-4">
-              Gostou dos projetos?
+              {t.projects.ctaTitle}
             </h3>
             <p className="text-gray-300 mb-6">
-              Posso desenvolver uma solução personalizada para sua empresa.
-              Vamos conversar sobre suas necessidades!
+              {t.projects.ctaText}
             </p>
             <Button
               size="lg"
@@ -160,7 +164,7 @@ const Projects = () => {
                 if (element) element.scrollIntoView({ behavior: "smooth" });
               }}
             >
-              Solicitar Orçamento
+              {t.projects.ctaButton}
             </Button>
           </div>
         </div>

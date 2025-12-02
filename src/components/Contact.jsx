@@ -13,9 +13,13 @@ import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Textarea } from "./ui/textarea";
 import { useToast } from "../hooks/use-toast";
-import { personalInfo } from "../data/mock";
+import { useLanguage } from "../context/LanguageContext";
+import { translations } from "../data/translations";
 
 const Contact = () => {
+  const { language } = useLanguage();
+  const t = translations[language];
+  const personalInfo = t.personalInfo;
   const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: "",
@@ -41,9 +45,8 @@ const Contact = () => {
     // Simular envio do formulário
     setTimeout(() => {
       toast({
-        title: "Mensagem enviada com sucesso!",
-        description:
-          "Entrarei em contato em até 24 horas. Obrigado pelo interesse!",
+        title: t.contact.successTitle,
+        description: t.contact.successMessage,
       });
 
       setFormData({
@@ -61,52 +64,38 @@ const Contact = () => {
   const contactInfo = [
     {
       icon: Mail,
-      title: "Email",
+      title: t.contact.contactTypes.email,
       info: personalInfo.email,
       link: `mailto:${personalInfo.email}`,
       color: "blue",
     },
     {
       icon: Phone,
-      title: "Telefone",
+      title: t.contact.contactTypes.phone,
       info: personalInfo.phone,
       link: `tel:${personalInfo.phone}`,
       color: "green",
     },
     {
       icon: MapPin,
-      title: "Localização",
+      title: t.contact.contactTypes.location,
       info: personalInfo.location,
       color: "purple",
     },
   ];
 
-  const budgetOptions = [
-    "R$ 5.000 - R$ 15.000",
-    "R$ 15.000 - R$ 30.000",
-    "R$ 30.000 - R$ 50.000",
-    "R$ 50.000+",
-    "Ainda não sei",
-  ];
-
-  const timelineOptions = [
-    "1-2 semanas",
-    "1 mês",
-    "2-3 meses",
-    "3+ meses",
-    "Flexível",
-  ];
+  const budgetOptions = t.contact.budgetOptions;
+  const timelineOptions = t.contact.timelineOptions;
 
   return (
     <section id="contact" className="py-20 bg-gray-800">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-            Vamos Trabalhar Juntos
+            {t.contact.title}
           </h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Pronto para transformar sua ideia em realidade? Entre em contato
-            comigo!
+            {t.contact.subtitle}
           </p>
         </div>
 
@@ -115,7 +104,7 @@ const Contact = () => {
           <div className="lg:col-span-1 space-y-8">
             <div>
               <h3 className="text-2xl font-bold text-white mb-6">
-                Informações de Contato
+                {t.contact.contactInfo}
               </h3>
 
               <div className="space-y-6">
@@ -154,7 +143,7 @@ const Contact = () => {
 
             {/* Social Links */}
             <div>
-              <h4 className="text-white font-semibold mb-4">Redes Sociais</h4>
+              <h4 className="text-white font-semibold mb-4">{t.contact.social}</h4>
               <div className="flex space-x-4">
                 <a
                   href={personalInfo.linkedin}
@@ -180,7 +169,7 @@ const Contact = () => {
               <div className="flex items-center mb-2">
                 <CheckCircle size={20} className="text-green-400 mr-2" />
                 <span className="text-green-400 font-semibold">
-                  Disponível para projetos
+                  {t.contact.available}
                 </span>
               </div>
             </div>
@@ -191,11 +180,10 @@ const Contact = () => {
             <Card className="bg-gray-700/50 border-gray-600">
               <CardHeader>
                 <CardTitle className="text-2xl text-white">
-                  Solicitar Orçamento
+                  {t.contact.formTitle}
                 </CardTitle>
                 <p className="text-gray-400">
-                  Preencha o formulário abaixo e entrarei em contato em até 24
-                  horas
+                  {t.contact.formSubtitle}
                 </p>
               </CardHeader>
 
@@ -204,7 +192,7 @@ const Contact = () => {
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-white font-semibold mb-2">
-                        Nome *
+                        {t.contact.formFields.name}
                       </label>
                       <Input
                         type="text"
@@ -213,13 +201,13 @@ const Contact = () => {
                         onChange={handleChange}
                         required
                         className="bg-gray-800 border-gray-600 text-white placeholder-gray-400 focus:border-blue-500"
-                        placeholder="Seu nome completo"
+                        placeholder={t.contact.formFields.namePlaceholder}
                       />
                     </div>
 
                     <div>
                       <label className="block text-white font-semibold mb-2">
-                        Email *
+                        {t.contact.formFields.email}
                       </label>
                       <Input
                         type="email"
@@ -228,14 +216,14 @@ const Contact = () => {
                         onChange={handleChange}
                         required
                         className="bg-gray-800 border-gray-600 text-white placeholder-gray-400 focus:border-blue-500"
-                        placeholder="seu@email.com"
+                        placeholder={t.contact.formFields.emailPlaceholder}
                       />
                     </div>
                   </div>
 
                   <div>
                     <label className="block text-white font-semibold mb-2">
-                      Assunto *
+                      {t.contact.formFields.subject}
                     </label>
                     <Input
                       type="text"
@@ -244,14 +232,14 @@ const Contact = () => {
                       onChange={handleChange}
                       required
                       className="bg-gray-800 border-gray-600 text-white placeholder-gray-400 focus:border-blue-500"
-                      placeholder="Desenvolvimento de aplicação web"
+                      placeholder={t.contact.formFields.subjectPlaceholder}
                     />
                   </div>
 
                   <div className="grid md:grid-cols-2 gap-6">
                     <div>
                       <label className="block text-white font-semibold mb-2">
-                        Orçamento estimado
+                        {t.contact.formFields.budget}
                       </label>
                       <select
                         name="budget"
@@ -259,7 +247,7 @@ const Contact = () => {
                         onChange={handleChange}
                         className="w-full p-3 bg-gray-800 border border-gray-600 text-white rounded-md focus:border-blue-500 focus:outline-none"
                       >
-                        <option value="">Selecione uma faixa</option>
+                        <option value="">{t.contact.formFields.budgetSelect}</option>
                         {budgetOptions.map((option, index) => (
                           <option key={index} value={option}>
                             {option}
@@ -270,7 +258,7 @@ const Contact = () => {
 
                     <div>
                       <label className="block text-white font-semibold mb-2">
-                        Prazo desejado
+                        {t.contact.formFields.timeline}
                       </label>
                       <select
                         name="timeline"
@@ -278,7 +266,7 @@ const Contact = () => {
                         onChange={handleChange}
                         className="w-full p-3 bg-gray-800 border border-gray-600 text-white rounded-md focus:border-blue-500 focus:outline-none"
                       >
-                        <option value="">Selecione um prazo</option>
+                        <option value="">{t.contact.formFields.timelineSelect}</option>
                         {timelineOptions.map((option, index) => (
                           <option key={index} value={option}>
                             {option}
@@ -290,7 +278,7 @@ const Contact = () => {
 
                   <div>
                     <label className="block text-white font-semibold mb-2">
-                      Mensagem *
+                      {t.contact.formFields.message}
                     </label>
                     <Textarea
                       name="message"
@@ -299,7 +287,7 @@ const Contact = () => {
                       required
                       rows={6}
                       className="bg-gray-800 border-gray-600 text-white placeholder-gray-400 focus:border-blue-500 resize-none"
-                      placeholder="Descreva seu projeto, principais funcionalidades, tecnologias preferidas, etc."
+                      placeholder={t.contact.formFields.messagePlaceholder}
                     />
                   </div>
 
@@ -311,12 +299,12 @@ const Contact = () => {
                     {isSubmitting ? (
                       <>
                         <div className="animate-spin w-5 h-5 border-2 border-white border-t-transparent rounded-full mr-2"></div>
-                        Enviando...
+                        {t.contact.sending}
                       </>
                     ) : (
                       <>
                         <Send size={20} className="mr-2" />
-                        Enviar Mensagem
+                        {t.contact.sendButton}
                       </>
                     )}
                   </Button>

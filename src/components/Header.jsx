@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Globe } from "lucide-react";
+import { useLanguage } from "../context/LanguageContext";
+import { translations } from "../data/translations";
 
 const Header = () => {
+  const { language, changeLanguage } = useLanguage();
+  const t = translations[language];
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -13,6 +18,17 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    // Close language menu when clicking outside
+    const handleClickOutside = (event) => {
+      if (isLanguageMenuOpen && !event.target.closest('.language-selector')) {
+        setIsLanguageMenuOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isLanguageMenuOpen]);
+
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -21,14 +37,19 @@ const Header = () => {
     }
   };
 
+  const handleLanguageChange = (lang) => {
+    changeLanguage(lang);
+    setIsLanguageMenuOpen(false);
+  };
+
   const navItems = [
-    { id: "home", label: "Início" },
-    { id: "about", label: "Sobre" },
-    { id: "experience", label: "Experiência" },
-    { id: "skills", label: "Habilidades" },
-    { id: "projects", label: "Projetos" },
-    { id: "services", label: "Serviços" },
-    { id: "contact", label: "Contato" },
+    { id: "home", label: t.nav.home },
+    { id: "about", label: t.nav.about },
+    { id: "experience", label: t.nav.experience },
+    { id: "skills", label: t.nav.skills },
+    { id: "projects", label: t.nav.projects },
+    { id: "services", label: t.nav.services },
+    { id: "contact", label: t.nav.contact },
   ];
 
   return (
@@ -46,7 +67,7 @@ const Header = () => {
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex space-x-6 lg:space-x-8">
+          <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
             {navItems.map((item) => (
               <button
                 key={item.id}
@@ -56,16 +77,83 @@ const Header = () => {
                 {item.label}
               </button>
             ))}
+            
+            {/* Language Selector */}
+            <div className="relative language-selector">
+              <button
+                onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
+                className="flex items-center space-x-2 text-gray-300 hover:text-blue-400 transition-colors duration-200 font-medium text-sm lg:text-base px-3 py-2 rounded-lg hover:bg-gray-800/50"
+                aria-label="Change language"
+              >
+                <Globe size={18} />
+                <span>{language === 'pt-BR' ? 'PT' : 'EN'}</span>
+              </button>
+              
+              {isLanguageMenuOpen && (
+                <div className="absolute right-0 mt-2 w-32 bg-gray-800 border border-gray-700 rounded-lg shadow-lg overflow-hidden z-50">
+                  <button
+                    onClick={() => handleLanguageChange('pt-BR')}
+                    className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-700 transition-colors ${
+                      language === 'pt-BR' ? 'text-blue-400 bg-gray-700/50' : 'text-gray-300'
+                    }`}
+                  >
+                    🇧🇷 Português
+                  </button>
+                  <button
+                    onClick={() => handleLanguageChange('en')}
+                    className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-700 transition-colors ${
+                      language === 'en' ? 'text-blue-400 bg-gray-700/50' : 'text-gray-300'
+                    }`}
+                  >
+                    🇺🇸 English
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Mobile Menu Button */}
-          <button
-            className="md:hidden text-gray-300 hover:text-blue-400 p-2"
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
+          <div className="md:hidden flex items-center space-x-2">
+            {/* Language Selector Mobile */}
+            <div className="relative language-selector">
+              <button
+                onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
+                className="text-gray-300 hover:text-blue-400 p-2"
+                aria-label="Change language"
+              >
+                <Globe size={20} />
+              </button>
+              
+              {isLanguageMenuOpen && (
+                <div className="absolute right-0 mt-2 w-32 bg-gray-800 border border-gray-700 rounded-lg shadow-lg overflow-hidden z-50">
+                  <button
+                    onClick={() => handleLanguageChange('pt-BR')}
+                    className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-700 transition-colors ${
+                      language === 'pt-BR' ? 'text-blue-400 bg-gray-700/50' : 'text-gray-300'
+                    }`}
+                  >
+                    🇧🇷 Português
+                  </button>
+                  <button
+                    onClick={() => handleLanguageChange('en')}
+                    className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-700 transition-colors ${
+                      language === 'en' ? 'text-blue-400 bg-gray-700/50' : 'text-gray-300'
+                    }`}
+                  >
+                    🇺🇸 English
+                  </button>
+                </div>
+              )}
+            </div>
+            
+            <button
+              className="text-gray-300 hover:text-blue-400 p-2"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Menu */}

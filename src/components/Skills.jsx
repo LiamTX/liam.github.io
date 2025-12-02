@@ -3,16 +3,20 @@ import { Code, Server, Database, Cloud, Settings } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { skills } from "../data/mock";
+import { useLanguage } from "../context/LanguageContext";
+import { translations } from "../data/translations";
 
 const Skills = () => {
+  const { language } = useLanguage();
+  const t = translations[language];
   const [activeCategory, setActiveCategory] = useState("frontend");
 
   const categories = [
-    { id: "frontend", label: "Frontend", icon: Code, color: "blue" },
-    { id: "backend", label: "Backend", icon: Server, color: "green" },
-    { id: "database", label: "Database", icon: Database, color: "purple" },
-    { id: "cloud", label: "Cloud & DevOps", icon: Cloud, color: "orange" },
-    { id: "tools", label: "Ferramentas", icon: Settings, color: "pink" },
+    { id: "frontend", label: t.skills.categories.frontend, icon: Code, color: "blue" },
+    { id: "backend", label: t.skills.categories.backend, icon: Server, color: "green" },
+    { id: "database", label: t.skills.categories.database, icon: Database, color: "purple" },
+    { id: "cloud", label: t.skills.categories.cloud, icon: Cloud, color: "orange" },
+    { id: "tools", label: t.skills.categories.tools, icon: Settings, color: "pink" },
   ];
 
   const getColorClasses = (color, isActive = false) => {
@@ -38,13 +42,13 @@ const Skills = () => {
 
   const SkillBar = ({ skill, color }) => (
     <div className="space-y-2">
-      <div className="flex justify-between items-center">
-        <span className="text-white font-medium">{skill.name}</span>
-        <div className="flex items-center space-x-2">
-          <span className="text-gray-400 text-sm">{skill.years} anos</span>
-          <span className="text-blue-400 font-semibold">{skill.level}%</span>
+        <div className="flex justify-between items-center">
+          <span className="text-white font-medium">{skill.name}</span>
+          <div className="flex items-center space-x-2">
+            <span className="text-gray-400 text-sm">{skill.years} {t.skills.years}</span>
+            <span className="text-blue-400 font-semibold">{skill.level}%</span>
+          </div>
         </div>
-      </div>
       <div className="w-full bg-gray-700 rounded-full h-2">
         <div
           className={`h-2 rounded-full bg-gradient-to-r from-${color}-400 to-${color}-600 transition-all duration-1000 ease-out`}
@@ -59,11 +63,10 @@ const Skills = () => {
       <div className="container mx-auto px-6">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-            Habilidades Técnicas
+            {t.skills.title}
           </h2>
           <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            Tecnologias e ferramentas que domino ao longo de 7+ anos de
-            experiência
+            {t.skills.subtitle}
           </p>
         </div>
 
@@ -139,7 +142,7 @@ const Skills = () => {
                     {category.label}
                   </h3>
                   <p className="text-gray-400 text-sm">
-                    {skillCount} tecnologias
+                    {skillCount} {t.skills.technologies}
                   </p>
                 </CardContent>
               </Card>

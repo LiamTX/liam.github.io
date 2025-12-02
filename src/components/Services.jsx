@@ -2,9 +2,15 @@ import React from "react";
 import { Code, Layers, Cloud, Users, ArrowRight } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Button } from "./ui/button";
-import { services } from "../data/mock";
+import { useLanguage } from "../context/LanguageContext";
+import { translations } from "../data/translations";
+import { getTranslatedServices } from "../data/translatedData";
 
 const Services = () => {
+  const { language } = useLanguage();
+  const t = translations[language];
+  const services = getTranslatedServices(language);
+  
   const getIcon = (iconName) => {
     const icons = {
       Code: Code,
@@ -27,16 +33,14 @@ const Services = () => {
       <div className="container mx-auto px-6">
         <div className="text-center mb-12 sm:mb-16">
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-            Serviços Freelancer
+            {t.services.title}
           </h2>
           <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto px-4 sm:px-0">
-            Soluções completas para transformar suas ideias em realidade digital
+            {t.services.subtitle}
           </p>
           <div className="mt-6 bg-gradient-to-r from-green-500/10 to-blue-500/10 border border-green-500/20 rounded-lg p-4 max-w-3xl mx-auto">
             <p className="text-green-300 text-sm sm:text-base">
-              ✨ <strong>Projetos de todos os tamanhos:</strong> Desde landing
-              pages simples até sistemas complexos. Cada projeto recebe
-              dedicação total e qualidade profissional!
+              {t.services.projectsNote}
             </p>
           </div>
         </div>
@@ -83,7 +87,7 @@ const Services = () => {
                     size="sm"
                     className="w-full border-gray-600 text-gray-300 hover:bg-blue-600 hover:text-white hover:border-blue-600 transition-all duration-300 text-xs sm:text-sm"
                   >
-                    Saiba mais
+                    {t.services.learnMore}
                     <ArrowRight size={14} className="ml-2" />
                   </Button>
                 </CardContent>
@@ -95,32 +99,11 @@ const Services = () => {
         {/* Process Section */}
         <div className="mt-16 sm:mt-20">
           <h3 className="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12 text-white px-4 sm:px-0">
-            Meu Processo de Trabalho
+            {t.services.processTitle}
           </h3>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 max-w-4xl mx-auto px-4 sm:px-0">
-            {[
-              {
-                step: "01",
-                title: "Análise",
-                desc: "Entendo suas necessidades e objetivos",
-              },
-              {
-                step: "02",
-                title: "Planejamento",
-                desc: "Defino a arquitetura e tecnologias",
-              },
-              {
-                step: "03",
-                title: "Desenvolvimento",
-                desc: "Codifico com qualidade e agilidade",
-              },
-              {
-                step: "04",
-                title: "Entrega",
-                desc: "Deploy e suporte pós-implementação",
-              },
-            ].map((item, index) => (
+            {t.services.process.map((item, index) => (
               <div key={index} className="text-center relative">
                 {index !== 3 && (
                   <div className="hidden md:block absolute top-6 sm:top-8 left-full w-full h-0.5 bg-gradient-to-r from-blue-500 to-transparent"></div>

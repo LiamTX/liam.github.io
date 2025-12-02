@@ -1,8 +1,12 @@
 import React from "react";
 import { Mail, Phone, MapPin, Linkedin, Github, Heart } from "lucide-react";
-import { personalInfo } from "../data/mock";
+import { useLanguage } from "../context/LanguageContext";
+import { translations } from "../data/translations";
 
 const Footer = () => {
+  const { language } = useLanguage();
+  const t = translations[language];
+  const personalInfo = t.personalInfo;
   const currentYear = new Date().getFullYear();
 
   const scrollToSection = (sectionId) => {
@@ -13,21 +17,16 @@ const Footer = () => {
   };
 
   const navigationLinks = [
-    { id: "home", label: "Início" },
-    { id: "about", label: "Sobre" },
-    { id: "experience", label: "Experiência" },
-    { id: "skills", label: "Habilidades" },
-    { id: "projects", label: "Projetos" },
-    { id: "services", label: "Serviços" },
-    { id: "contact", label: "Contato" },
+    { id: "home", label: t.nav.home },
+    { id: "about", label: t.nav.about },
+    { id: "experience", label: t.nav.experience },
+    { id: "skills", label: t.nav.skills },
+    { id: "projects", label: t.nav.projects },
+    { id: "services", label: t.nav.services },
+    { id: "contact", label: t.nav.contact },
   ];
 
-  const services = [
-    "Desenvolvimento Full Stack",
-    "Landing Pages & Dashboards",
-    "Integração de Sistemas",
-    "Consultoria Técnica",
-  ];
+  const services = t.footer.serviceList;
 
   return (
     <footer className="bg-gray-900 border-t border-gray-700">
@@ -36,12 +35,10 @@ const Footer = () => {
           {/* Brand & Description */}
           <div className="md:col-span-1">
             <div className="text-2xl font-bold text-blue-400 mb-4">
-              Liam Cabral
+              {personalInfo.name}
             </div>
             <p className="text-gray-400 leading-relaxed mb-6">
-              Especialista em Desenvolvimento de Sistemas especializado em Node.js, Angular e
-              sistemas escaláveis. Transformando ideias em soluções digitais
-              inovadoras.
+              {t.footer.description}
             </p>
 
             {/* Social Links */}
@@ -73,7 +70,7 @@ const Footer = () => {
 
           {/* Navigation */}
           <div>
-            <h3 className="text-white font-semibold text-lg mb-4">Navegação</h3>
+            <h3 className="text-white font-semibold text-lg mb-4">{t.footer.navigation}</h3>
             <ul className="space-y-2">
               {navigationLinks.map((link) => (
                 <li key={link.id}>
@@ -90,7 +87,7 @@ const Footer = () => {
 
           {/* Services */}
           <div>
-            <h3 className="text-white font-semibold text-lg mb-4">Serviços</h3>
+            <h3 className="text-white font-semibold text-lg mb-4">{t.footer.services}</h3>
             <ul className="space-y-2">
               {services.map((service, index) => (
                 <li key={index}>
@@ -104,7 +101,7 @@ const Footer = () => {
 
           {/* Contact Info */}
           <div>
-            <h3 className="text-white font-semibold text-lg mb-4">Contato</h3>
+            <h3 className="text-white font-semibold text-lg mb-4">{t.footer.contact}</h3>
             <div className="space-y-4">
               <div className="flex items-center text-gray-400">
                 <Mail size={16} className="mr-3 text-blue-400" />
@@ -135,7 +132,7 @@ const Footer = () => {
               <div className="flex items-center">
                 <div className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></div>
                 <span className="text-green-400 text-sm font-semibold">
-                  Disponível para projetos
+                  {t.footer.available}
                 </span>
               </div>
             </div>
@@ -146,25 +143,24 @@ const Footer = () => {
         <div className="border-t border-gray-700 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="text-gray-400 text-sm mb-4 md:mb-0">
-              © {currentYear} Liam Cabral. Todos os direitos reservados.
+              © {currentYear} {personalInfo.name}. {t.footer.copyright}
             </div>
 
             <div className="flex items-center text-gray-400 text-sm">
-              <span>Desenvolvido com</span>
+              <span>{t.footer.madeWith}</span>
               <Heart
                 className="text-red-400 mx-2"
                 size={16}
                 fill="currentColor"
               />
-              <span>usando React, Node.js e MongoDB</span>
+              <span>{t.footer.madeUsing}</span>
             </div>
           </div>
 
           {/* Technologies */}
           <div className="mt-6 text-center">
             <div className="text-gray-500 text-xs">
-              Principais tecnologias: Node.js • Angular • TypeScript • MongoDB •
-              Azure • AWS
+              {t.footer.mainTechnologies}
             </div>
           </div>
         </div>
