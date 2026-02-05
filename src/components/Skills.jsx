@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Code, Server, Database, Cloud, Settings } from "lucide-react";
+import { Code, Server, Database, Cloud, Settings, Brain } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 import { Badge } from "./ui/badge";
 import { skills } from "../data/mock";
@@ -16,6 +16,7 @@ const Skills = () => {
     { id: "backend", label: t.skills.categories.backend, icon: Server, color: "green" },
     { id: "database", label: t.skills.categories.database, icon: Database, color: "purple" },
     { id: "cloud", label: t.skills.categories.cloud, icon: Cloud, color: "orange" },
+    { id: "ai", label: t.skills.categories.ai || "AI", icon: Brain, color: "cyan" },
     { id: "tools", label: t.skills.categories.tools, icon: Settings, color: "pink" },
   ];
 
@@ -33,6 +34,9 @@ const Skills = () => {
       orange: isActive
         ? "bg-orange-500 text-white"
         : "bg-orange-500/20 text-orange-300 border-orange-500/30",
+      cyan: isActive
+        ? "bg-cyan-500 text-white"
+        : "bg-cyan-500/20 text-cyan-300 border-cyan-500/30",
       pink: isActive
         ? "bg-pink-500 text-white"
         : "bg-pink-500/20 text-pink-300 border-pink-500/30",
@@ -119,7 +123,7 @@ const Skills = () => {
         </div>
 
         {/* Skills Summary */}
-        <div className="mt-16 grid grid-cols-2 md:grid-cols-5 gap-6">
+        <div className="mt-16 grid grid-cols-2 md:grid-cols-6 gap-6">
           {categories.map((category, index) => {
             const IconComponent = category.icon;
             const skillCount = skills[category.id]?.length || 0;

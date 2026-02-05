@@ -16,15 +16,15 @@ export const translations = {
     // Personal Info
     personalInfo: {
       name: 'Liam Cabral',
-      title: 'Especialista em Desenvolvimento de Sistemas',
+      title: 'Senior Full Stack Developer | AI Engineering',
       location: 'Florianópolis, Santa Catarina, Brasil',
       yearsExperience: '7+',
       email: 'liamcabral88@gmail.com',
       phone: '+55 (48) 98839-6929',
       linkedin: 'https://www.linkedin.com/in/liamcabralteixeira/',
       github: 'https://github.com/liamcabral',
-      bio: 'Especialista em Desenvolvimento de Sistemas com quase 7 anos de experiência, focado em backend e especialista em tecnologias modernas como Node.js e TypeScript. Busco aplicar minha expertise em projetos escaláveis e inovadores, com habilidade em liderança técnica, integração de sistemas financeiros, e automatização de processos.',
-      freelancerNote: 'Após anos desenvolvendo soluções para grandes empresas, agora estou disponível como freelancer para ajudar sua empresa a alcançar seus objetivos tecnológicos.',
+      bio: 'Desenvolvedor com 7 anos de experiência e histórico comprovado em projetos de alta escala. Especialista em ecossistema JavaScript (Node.js/NestJS/TypeScript) com foco em arquiteturas de microserviços e soluções em Nuvem (Azure/AWS). Atualmente focado em AI Engineering, integrando LLMs e Bancos Vetoriais a aplicações corporativas.',
+      freelancerNote: 'Busco oportunidades onde possa unir minha solidez técnica com as novas fronteiras da Inteligência Artificial Aplicada para gerar impacto real no negócio.',
     },
     
     // Hero Section
@@ -39,8 +39,8 @@ export const translations = {
     about: {
       title: 'Sobre Mim',
       subtitle: 'Conheça um pouco da minha jornada e expertise técnica',
-      transitionTitle: '🚀 Transição para Freelancer',
-      transitionText: 'Após anos desenvolvendo soluções para grandes empresas como Personal Card, Globo e Logikee, agora estou focado em ajudar empresas e startups a alcançarem seus objetivos através de soluções tecnológicas inovadoras e escaláveis.',
+      transitionTitle: '🚀 Experiência Comprovada',
+      transitionText: 'Após anos desenvolvendo soluções para grandes empresas como PayTech, Globo e Logikee, agora estou focado em AI Engineering, integrando LLMs e Bancos Vetoriais a aplicações corporativas para criar soluções inteligentes e eficientes.',
       projectsNote: '✨ Projetos de todos os tamanhos: Desde landing pages e dashboards simples até sistemas complexos e aplicações enterprise. Cada projeto recebe a mesma dedicação e qualidade!',
       specialization: 'Especialização:',
       specializationText: 'Backend com Node.js e NestJS',
@@ -108,6 +108,7 @@ export const translations = {
         backend: 'Backend',
         database: 'Database',
         cloud: 'Cloud & DevOps',
+        ai: 'AI & LLMs',
         tools: 'Ferramentas',
       },
       years: 'anos',
@@ -218,7 +219,7 @@ export const translations = {
     
     // Footer
     footer: {
-      description: 'Especialista em Desenvolvimento de Sistemas especializado em Node.js, Angular e sistemas escaláveis. Transformando ideias em soluções digitais inovadoras.',
+      description: 'Senior Full Stack Developer especializado em Node.js, Angular, AI Engineering e sistemas escaláveis. Transformando ideias em soluções digitais inteligentes.',
       navigation: 'Navegação',
       services: 'Serviços',
       contact: 'Contato',
@@ -251,15 +252,15 @@ export const translations = {
     // Personal Info
     personalInfo: {
       name: 'Liam Cabral',
-      title: 'Systems Development Specialist',
+      title: 'Senior Full Stack Developer | AI Engineering',
       location: 'Florianópolis, Santa Catarina, Brazil',
       yearsExperience: '7+',
       email: 'liamcabral88@gmail.com',
       phone: '+55 (48) 98839-6929',
       linkedin: 'https://www.linkedin.com/in/liamcabralteixeira/',
       github: 'https://github.com/liamcabral',
-      bio: 'Systems Development Specialist with almost 7 years of experience, focused on backend and expert in modern technologies like Node.js and TypeScript. I seek to apply my expertise in scalable and innovative projects, with skills in technical leadership, financial systems integration, and process automation.',
-      freelancerNote: 'After years developing solutions for large companies, I am now available as a freelancer to help your company achieve its technological goals.',
+      bio: 'Developer with 7 years of experience and proven track record in large-scale projects. Specialist in JavaScript ecosystem (Node.js/NestJS/TypeScript) focused on microservices architectures and Cloud solutions (Azure/AWS). Currently focused on AI Engineering, integrating LLMs and Vector Databases into enterprise applications.',
+      freelancerNote: 'Seeking opportunities to combine my technical expertise with the new frontiers of Applied Artificial Intelligence to generate real business impact.',
     },
     
     // Hero Section
@@ -274,8 +275,8 @@ export const translations = {
     about: {
       title: 'About Me',
       subtitle: 'Learn a bit about my journey and technical expertise',
-      transitionTitle: '🚀 Transition to Freelancer',
-      transitionText: 'After years developing solutions for large companies like Personal Card, Globo, and Logikee, I am now focused on helping companies and startups achieve their goals through innovative and scalable technological solutions.',
+      transitionTitle: '🚀 Proven Experience',
+      transitionText: 'After years developing solutions for large companies like PayTech, Globo, and Logikee, I am now focused on AI Engineering, integrating LLMs and Vector Databases into enterprise applications to create intelligent and efficient solutions.',
       projectsNote: '✨ Projects of all sizes: From simple landing pages and dashboards to complex systems and enterprise applications. Each project receives the same dedication and quality!',
       specialization: 'Specialization:',
       specializationText: 'Backend with Node.js and NestJS',
@@ -343,6 +344,7 @@ export const translations = {
         backend: 'Backend',
         database: 'Database',
         cloud: 'Cloud & DevOps',
+        ai: 'AI & LLMs',
         tools: 'Tools',
       },
       years: 'years',
@@ -454,7 +456,7 @@ export const translations = {
     
     // Footer
     footer: {
-      description: 'Systems Development Specialist specialized in Node.js, Angular, and scalable systems. Transforming ideas into innovative digital solutions.',
+      description: 'Senior Full Stack Developer specialized in Node.js, Angular, AI Engineering, and scalable systems. Transforming ideas into intelligent digital solutions.',
       navigation: 'Navigation',
       services: 'Services',
       contact: 'Contact',
