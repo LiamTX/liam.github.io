@@ -43,35 +43,41 @@ module.exports = {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
-        chart: {
-          1: "hsl(var(--chart-1))",
-          2: "hsl(var(--chart-2))",
-          3: "hsl(var(--chart-3))",
-          4: "hsl(var(--chart-4))",
-          5: "hsl(var(--chart-5))",
+        cl: {
+          bg: "var(--cl-bg)",
+          "bg-secondary": "var(--cl-bg-secondary)",
+          "bg-elevated": "var(--cl-bg-elevated)",
+          text: "var(--cl-text)",
+          "text-muted": "var(--cl-text-muted)",
+          accent: "var(--cl-accent)",
+          "accent-glow": "var(--cl-accent-glow)",
+          "accent-secondary": "var(--cl-accent-secondary)",
+          success: "var(--cl-success)",
+          border: "var(--cl-border)",
         },
+      },
+      fontFamily: {
+        satoshi: ["Satoshi", "Plus Jakarta Sans", "sans-serif"],
+        jakarta: ["Plus Jakarta Sans", "sans-serif"],
       },
       keyframes: {
         "accordion-down": {
-          from: {
-            height: "0",
-          },
-          to: {
-            height: "var(--radix-accordion-content-height)",
-          },
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
         },
         "accordion-up": {
-          from: {
-            height: "var(--radix-accordion-content-height)",
-          },
-          to: {
-            height: "0",
-          },
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+        "slide-down": {
+          from: { opacity: "0", transform: "translateY(-8px)" },
+          to: { opacity: "1", transform: "translateY(0)" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "slide-down": "slide-down 0.2s ease-out",
       },
     },
   },

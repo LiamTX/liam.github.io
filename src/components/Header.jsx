@@ -1,173 +1,100 @@
 import React, { useState, useEffect } from "react";
-import { Menu, X, Globe } from "lucide-react";
-import { useLanguage } from "../context/LanguageContext";
-import { translations } from "../data/translations";
+import { Menu, X } from "lucide-react";
+
+const navItems = [
+  { id: "servicos", label: "Serviços" },
+  { id: "cases", label: "Cases" },
+  { id: "processo", label: "Processo" },
+  { id: "sobre", label: "Sobre" },
+  { id: "contato", label: "Contato" },
+];
 
 const Header = () => {
-  const { language, changeLanguage } = useLanguage();
-  const t = translations[language];
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isLanguageMenuOpen, setIsLanguageMenuOpen] = useState(false);
+  const logoSrc = `${process.env.PUBLIC_URL}/logo.png`;
 
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
+    const handleScroll = () => setIsScrolled(window.scrollY > 20);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    // Close language menu when clicking outside
-    const handleClickOutside = (event) => {
-      if (isLanguageMenuOpen && !event.target.closest('.language-selector')) {
-        setIsLanguageMenuOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [isLanguageMenuOpen]);
-
-  const scrollToSection = (sectionId) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-      setIsMenuOpen(false);
-    }
-  };
-
-  const handleLanguageChange = (lang) => {
-    changeLanguage(lang);
-    setIsLanguageMenuOpen(false);
-  };
-
-  const navItems = [
-    { id: "home", label: t.nav.home },
-    { id: "about", label: t.nav.about },
-    { id: "experience", label: t.nav.experience },
-    { id: "skills", label: t.nav.skills },
-    { id: "projects", label: t.nav.projects },
-    { id: "services", label: t.nav.services },
-    { id: "contact", label: t.nav.contact },
-  ];
+  const closeMenu = () => setIsMenuOpen(false);
 
   return (
     <header
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-gray-900/95 backdrop-blur-sm shadow-lg"
-          : "bg-transparent"
+          ? "bg-cl-bg/80 backdrop-blur-md border-b border-cl-border"
+          : "bg-transparent border-b border-transparent"
       }`}
     >
-      <nav className="container mx-auto px-4 sm:px-6 py-3 sm:py-4">
-        <div className="flex items-center justify-between">
-          <div className="text-xl sm:text-2xl font-bold text-blue-400">
-            Liam Cabral
-          </div>
+      <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          <a
+            href="#top"
+            className="flex items-center gap-3 text-cl-text tracking-tight"
+          >
+            <img
+              src={logoSrc}
+              alt="Cabral Labs"
+              className="h-10 w-10 shrink-0 object-contain sm:h-11 sm:w-11"
+            />
+            <span className="font-satoshi font-bold text-lg sm:text-xl">
+              Cabral Labs
+            </span>
+          </a>
 
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
+          <div className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
-              <button
+              <a
                 key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className="text-gray-300 hover:text-blue-400 transition-colors duration-200 font-medium text-sm lg:text-base"
+                href={`#${item.id}`}
+                className="text-sm text-cl-text-muted hover:text-cl-text transition-colors duration-200"
               >
                 {item.label}
-              </button>
+              </a>
             ))}
-            
-            {/* Language Selector */}
-            <div className="relative language-selector">
-              <button
-                onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
-                className="flex items-center space-x-2 text-gray-300 hover:text-blue-400 transition-colors duration-200 font-medium text-sm lg:text-base px-3 py-2 rounded-lg hover:bg-gray-800/50"
-                aria-label="Change language"
-              >
-                <Globe size={18} />
-                <span>{language === 'pt-BR' ? 'PT' : 'EN'}</span>
-              </button>
-              
-              {isLanguageMenuOpen && (
-                <div className="absolute right-0 mt-2 w-32 bg-gray-800 border border-gray-700 rounded-lg shadow-lg overflow-hidden z-50">
-                  <button
-                    onClick={() => handleLanguageChange('pt-BR')}
-                    className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-700 transition-colors ${
-                      language === 'pt-BR' ? 'text-blue-400 bg-gray-700/50' : 'text-gray-300'
-                    }`}
-                  >
-                    🇧🇷 Português
-                  </button>
-                  <button
-                    onClick={() => handleLanguageChange('en')}
-                    className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-700 transition-colors ${
-                      language === 'en' ? 'text-blue-400 bg-gray-700/50' : 'text-gray-300'
-                    }`}
-                  >
-                    🇺🇸 English
-                  </button>
-                </div>
-              )}
-            </div>
+            <a
+              href="#contato"
+              className="inline-flex items-center justify-center rounded-md bg-cl-accent px-4 py-2 text-sm font-medium text-white hover:bg-cl-accent-glow transition-colors duration-200"
+            >
+              Solicitar orçamento
+            </a>
           </div>
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center space-x-2">
-            {/* Language Selector Mobile */}
-            <div className="relative language-selector">
-              <button
-                onClick={() => setIsLanguageMenuOpen(!isLanguageMenuOpen)}
-                className="text-gray-300 hover:text-blue-400 p-2"
-                aria-label="Change language"
-              >
-                <Globe size={20} />
-              </button>
-              
-              {isLanguageMenuOpen && (
-                <div className="absolute right-0 mt-2 w-32 bg-gray-800 border border-gray-700 rounded-lg shadow-lg overflow-hidden z-50">
-                  <button
-                    onClick={() => handleLanguageChange('pt-BR')}
-                    className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-700 transition-colors ${
-                      language === 'pt-BR' ? 'text-blue-400 bg-gray-700/50' : 'text-gray-300'
-                    }`}
-                  >
-                    🇧🇷 Português
-                  </button>
-                  <button
-                    onClick={() => handleLanguageChange('en')}
-                    className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-700 transition-colors ${
-                      language === 'en' ? 'text-blue-400 bg-gray-700/50' : 'text-gray-300'
-                    }`}
-                  >
-                    🇺🇸 English
-                  </button>
-                </div>
-              )}
-            </div>
-            
-            <button
-              className="text-gray-300 hover:text-blue-400 p-2"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-label="Toggle menu"
-            >
-              {isMenuOpen ? <X size={20} /> : <Menu size={20} />}
-            </button>
-          </div>
+          <button
+            className="md:hidden text-cl-text p-2 -mr-2"
+            onClick={() => setIsMenuOpen((v) => !v)}
+            aria-label="Abrir menu"
+          >
+            {isMenuOpen ? <X size={22} /> : <Menu size={22} />}
+          </button>
         </div>
 
-        {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden mt-4 py-4 bg-gray-800/95 rounded-lg backdrop-blur-sm animate-in slide-in-from-top-2 duration-200">
-            {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className="block w-full text-left px-4 py-3 text-gray-300 hover:text-blue-400 hover:bg-gray-700/50 transition-all duration-200 text-sm"
+          <div className="md:hidden pb-4 animate-slide-down">
+            <div className="flex flex-col gap-1 rounded-lg border border-cl-border bg-cl-bg-secondary p-2">
+              {navItems.map((item) => (
+                <a
+                  key={item.id}
+                  href={`#${item.id}`}
+                  onClick={closeMenu}
+                  className="block px-3 py-2 text-sm text-cl-text-muted hover:text-cl-text hover:bg-cl-bg-elevated rounded-md transition-colors"
+                >
+                  {item.label}
+                </a>
+              ))}
+              <a
+                href="#contato"
+                onClick={closeMenu}
+                className="mt-2 inline-flex items-center justify-center rounded-md bg-cl-accent px-4 py-2 text-sm font-medium text-white hover:bg-cl-accent-glow transition-colors"
               >
-                {item.label}
-              </button>
-            ))}
+                Solicitar orçamento
+              </a>
+            </div>
           </div>
         )}
       </nav>

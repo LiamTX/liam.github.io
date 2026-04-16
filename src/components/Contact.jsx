@@ -3,314 +3,220 @@ import {
   Mail,
   Phone,
   MapPin,
-  Send,
-  CheckCircle,
   Linkedin,
   Github,
+  MessageCircle,
+  Send,
+  CheckCircle2,
 } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
-import { Textarea } from "./ui/textarea";
-import { useToast } from "../hooks/use-toast";
-import { useLanguage } from "../context/LanguageContext";
-import { translations } from "../data/translations";
+import { contact } from "../data/mock";
+import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
 
 const Contact = () => {
-  const { language } = useLanguage();
-  const t = translations[language];
-  const personalInfo = t.personalInfo;
-  const { toast } = useToast();
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: "",
-    budget: "",
-    timeline: "",
-  });
-  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [leftRef, leftVisible] = useIntersectionObserver();
+  const [rightRef, rightVisible] = useIntersectionObserver();
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [submitted, setSubmitted] = useState(false);
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setIsSubmitting(true);
-
-    // Simular envio do formulário
-    setTimeout(() => {
-      toast({
-        title: t.contact.successTitle,
-        description: t.contact.successMessage,
-      });
-
-      setFormData({
-        name: "",
-        email: "",
-        subject: "",
-        message: "",
-        budget: "",
-        timeline: "",
-      });
-      setIsSubmitting(false);
-    }, 2000);
+    setSubmitted(true);
   };
-
-  const contactInfo = [
-    {
-      icon: Mail,
-      title: t.contact.contactTypes.email,
-      info: personalInfo.email,
-      link: `mailto:${personalInfo.email}`,
-      color: "blue",
-    },
-    {
-      icon: Phone,
-      title: t.contact.contactTypes.phone,
-      info: personalInfo.phone,
-      link: `tel:${personalInfo.phone}`,
-      color: "green",
-    },
-    {
-      icon: MapPin,
-      title: t.contact.contactTypes.location,
-      info: personalInfo.location,
-      color: "purple",
-    },
-  ];
-
-  const budgetOptions = t.contact.budgetOptions;
-  const timelineOptions = t.contact.timelineOptions;
 
   return (
-    <section id="contact" className="py-20 bg-gray-800">
-      <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-            {t.contact.title}
-          </h2>
-          <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-            {t.contact.subtitle}
-          </p>
-        </div>
+    <section id="contato" className="py-24 sm:py-32 relative overflow-hidden">
+      <div
+        aria-hidden="true"
+        className="absolute -bottom-32 left-1/4 h-[500px] w-[500px] rounded-full bg-blue-600/10 blur-[120px]"
+      />
 
-        <div className="grid lg:grid-cols-3 gap-12 max-w-6xl mx-auto">
-          {/* Contact Info */}
-          <div className="lg:col-span-1 space-y-8">
-            <div>
-              <h3 className="text-2xl font-bold text-white mb-6">
-                {t.contact.contactInfo}
-              </h3>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+          <div
+            ref={leftRef}
+            className={`fade-up ${leftVisible ? "visible" : ""}`}
+          >
+            <p className="text-xs uppercase tracking-widest text-cl-accent-glow font-medium">
+              Contato
+            </p>
+            <h2 className="mt-3 font-satoshi font-extrabold text-3xl sm:text-4xl md:text-5xl text-cl-text">
+              Vamos conversar sobre o seu cenário?
+            </h2>
+            <p className="mt-4 text-cl-text-muted text-base sm:text-lg leading-relaxed max-w-xl">
+              Para propostas e projetos, use o formulário. Se preferir começar
+              de forma mais rápida, fale no WhatsApp.
+            </p>
 
-              <div className="space-y-6">
-                {contactInfo.map((item, index) => (
-                  <div key={index} className="flex items-start space-x-4">
-                    <div
-                      className={`w-12 h-12 rounded-lg flex items-center justify-center ${
-                        item.color === "blue"
-                          ? "bg-blue-500/20 text-blue-400"
-                          : item.color === "green"
-                          ? "bg-green-500/20 text-green-400"
-                          : "bg-purple-500/20 text-purple-400"
-                      }`}
-                    >
-                      <item.icon size={20} />
-                    </div>
-                    <div>
-                      <h4 className="text-white font-semibold mb-1">
-                        {item.title}
-                      </h4>
-                      {item.link ? (
-                        <a
-                          href={item.link}
-                          className="text-gray-400 hover:text-blue-400 transition-colors"
-                        >
-                          {item.info}
-                        </a>
-                      ) : (
-                        <p className="text-gray-400">{item.info}</p>
-                      )}
-                    </div>
-                  </div>
-                ))}
-              </div>
+            <div className="mt-8 flex flex-col sm:flex-row gap-3">
+              <a
+                href={contact.whatsappUrl}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="inline-flex items-center justify-center gap-2 rounded-md border border-cl-border bg-cl-bg-secondary px-5 py-3 text-sm font-medium text-cl-text hover:border-cl-accent/40 hover:text-cl-accent-glow transition-colors"
+              >
+                Falar no WhatsApp
+                <MessageCircle size={16} />
+              </a>
             </div>
 
-            {/* Social Links */}
-            <div>
-              <h4 className="text-white font-semibold mb-4">{t.contact.social}</h4>
-              <div className="flex space-x-4">
-                <a
-                  href={personalInfo.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 bg-blue-600 hover:bg-blue-700 rounded-lg flex items-center justify-center text-white transition-colors"
-                >
-                  <Linkedin size={20} />
-                </a>
-                <a
-                  href={personalInfo.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-10 h-10 bg-gray-700 hover:bg-gray-600 rounded-lg flex items-center justify-center text-white transition-colors"
-                >
-                  <Github size={20} />
-                </a>
-              </div>
-            </div>
-
-            {/* Availability */}
-            <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
-              <div className="flex items-center mb-2">
-                <CheckCircle size={20} className="text-green-400 mr-2" />
-                <span className="text-green-400 font-semibold">
-                  {t.contact.available}
+            <div className="mt-10 space-y-5">
+              <a
+                href={`mailto:${contact.email}`}
+                className="flex items-center gap-4 group"
+              >
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-cl-bg-elevated border border-cl-border text-cl-accent-glow group-hover:border-cl-accent/50 transition-colors">
+                  <Mail size={18} />
                 </span>
+                <div>
+                  <div className="text-xs uppercase tracking-widest text-cl-text-muted/70">
+                    Email
+                  </div>
+                  <div className="text-sm text-cl-text group-hover:text-cl-accent-glow transition-colors">
+                    {contact.email}
+                  </div>
+                </div>
+              </a>
+
+              <a
+                href={`tel:${contact.phone.replace(/\D/g, "")}`}
+                className="flex items-center gap-4 group"
+              >
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-cl-bg-elevated border border-cl-border text-cl-accent-glow group-hover:border-cl-accent/50 transition-colors">
+                  <Phone size={18} />
+                </span>
+                <div>
+                  <div className="text-xs uppercase tracking-widest text-cl-text-muted/70">
+                    Telefone
+                  </div>
+                  <div className="text-sm text-cl-text group-hover:text-cl-accent-glow transition-colors">
+                    {contact.phone}
+                  </div>
+                </div>
+              </a>
+
+              <div className="flex items-center gap-4">
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-cl-bg-elevated border border-cl-border text-cl-accent-glow">
+                  <MapPin size={18} />
+                </span>
+                <div>
+                  <div className="text-xs uppercase tracking-widest text-cl-text-muted/70">
+                    Localização
+                  </div>
+                  <div className="text-sm text-cl-text">{contact.location}</div>
+                </div>
               </div>
+            </div>
+
+            <div className="mt-10 flex items-center gap-3">
+              <a
+                href={contact.linkedin}
+                target="_blank"
+                rel="noreferrer noopener"
+                aria-label="LinkedIn"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-cl-border bg-cl-bg-secondary text-cl-text-muted hover:text-cl-text hover:border-cl-accent/40 transition-colors"
+              >
+                <Linkedin size={18} />
+              </a>
+              <a
+                href={contact.github}
+                target="_blank"
+                rel="noreferrer noopener"
+                aria-label="GitHub"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-lg border border-cl-border bg-cl-bg-secondary text-cl-text-muted hover:text-cl-text hover:border-cl-accent/40 transition-colors"
+              >
+                <Github size={18} />
+              </a>
             </div>
           </div>
 
-          {/* Contact Form */}
-          <div className="lg:col-span-2">
-            <Card className="bg-gray-700/50 border-gray-600">
-              <CardHeader>
-                <CardTitle className="text-2xl text-white">
-                  {t.contact.formTitle}
-                </CardTitle>
-                <p className="text-gray-400">
-                  {t.contact.formSubtitle}
+          <div
+            ref={rightRef}
+            className={`fade-up ${rightVisible ? "visible" : ""} rounded-xl border border-cl-border bg-cl-bg-secondary p-6 sm:p-8`}
+          >
+            {submitted ? (
+              <div className="flex flex-col items-center justify-center text-center py-12">
+                <span className="inline-flex h-14 w-14 items-center justify-center rounded-full bg-cl-success/15 text-cl-success">
+                  <CheckCircle2 size={28} />
+                </span>
+                <h3 className="mt-5 font-satoshi font-bold text-xl text-cl-text">
+                  Recebi sua mensagem.
+                </h3>
+                <p className="mt-2 text-sm text-cl-text-muted max-w-xs">
+                  Vou responder no email informado com os próximos passos.
                 </p>
-              </CardHeader>
-
-              <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-white font-semibold mb-2">
-                        {t.contact.formFields.name}
-                      </label>
-                      <Input
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleChange}
-                        required
-                        className="bg-gray-800 border-gray-600 text-white placeholder-gray-400 focus:border-blue-500"
-                        placeholder={t.contact.formFields.namePlaceholder}
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-white font-semibold mb-2">
-                        {t.contact.formFields.email}
-                      </label>
-                      <Input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                        className="bg-gray-800 border-gray-600 text-white placeholder-gray-400 focus:border-blue-500"
-                        placeholder={t.contact.formFields.emailPlaceholder}
-                      />
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-white font-semibold mb-2">
-                      {t.contact.formFields.subject}
-                    </label>
-                    <Input
-                      type="text"
-                      name="subject"
-                      value={formData.subject}
-                      onChange={handleChange}
-                      required
-                      className="bg-gray-800 border-gray-600 text-white placeholder-gray-400 focus:border-blue-500"
-                      placeholder={t.contact.formFields.subjectPlaceholder}
-                    />
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div>
-                      <label className="block text-white font-semibold mb-2">
-                        {t.contact.formFields.budget}
-                      </label>
-                      <select
-                        name="budget"
-                        value={formData.budget}
-                        onChange={handleChange}
-                        className="w-full p-3 bg-gray-800 border border-gray-600 text-white rounded-md focus:border-blue-500 focus:outline-none"
-                      >
-                        <option value="">{t.contact.formFields.budgetSelect}</option>
-                        {budgetOptions.map((option, index) => (
-                          <option key={index} value={option}>
-                            {option}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block text-white font-semibold mb-2">
-                        {t.contact.formFields.timeline}
-                      </label>
-                      <select
-                        name="timeline"
-                        value={formData.timeline}
-                        onChange={handleChange}
-                        className="w-full p-3 bg-gray-800 border border-gray-600 text-white rounded-md focus:border-blue-500 focus:outline-none"
-                      >
-                        <option value="">{t.contact.formFields.timelineSelect}</option>
-                        {timelineOptions.map((option, index) => (
-                          <option key={index} value={option}>
-                            {option}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-white font-semibold mb-2">
-                      {t.contact.formFields.message}
-                    </label>
-                    <Textarea
-                      name="message"
-                      value={formData.message}
-                      onChange={handleChange}
-                      required
-                      rows={6}
-                      className="bg-gray-800 border-gray-600 text-white placeholder-gray-400 focus:border-blue-500 resize-none"
-                      placeholder={t.contact.formFields.messagePlaceholder}
-                    />
-                  </div>
-
-                  <Button
-                    type="submit"
-                    disabled={isSubmitting}
-                    className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 text-lg font-semibold transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:transform-none"
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="space-y-5">
+                <div>
+                  <label
+                    htmlFor="name"
+                    className="block text-sm font-medium text-cl-text mb-2"
                   >
-                    {isSubmitting ? (
-                      <>
-                        <div className="animate-spin w-5 h-5 border-2 border-white border-t-transparent rounded-full mr-2"></div>
-                        {t.contact.sending}
-                      </>
-                    ) : (
-                      <>
-                        <Send size={20} className="mr-2" />
-                        {t.contact.sendButton}
-                      </>
-                    )}
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
+                    Nome
+                  </label>
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    required
+                    value={form.name}
+                    onChange={handleChange}
+                    placeholder="Seu nome ou nome da empresa"
+                    className="w-full rounded-md border border-cl-border bg-cl-bg-elevated px-3.5 py-2.5 text-sm text-cl-text placeholder:text-cl-text-muted/60 focus:outline-none focus:border-cl-accent focus:ring-1 focus:ring-cl-accent transition-colors"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="block text-sm font-medium text-cl-text mb-2"
+                  >
+                    Email
+                  </label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    value={form.email}
+                    onChange={handleChange}
+                    placeholder="voce@empresa.com"
+                    className="w-full rounded-md border border-cl-border bg-cl-bg-elevated px-3.5 py-2.5 text-sm text-cl-text placeholder:text-cl-text-muted/60 focus:outline-none focus:border-cl-accent focus:ring-1 focus:ring-cl-accent transition-colors"
+                  />
+                </div>
+
+                <div>
+                  <label
+                    htmlFor="message"
+                    className="block text-sm font-medium text-cl-text mb-2"
+                  >
+                    Mensagem
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    required
+                    rows={5}
+                    value={form.message}
+                    onChange={handleChange}
+                    placeholder="Conta brevemente o problema, contexto e prazo desejado."
+                    className="w-full rounded-md border border-cl-border bg-cl-bg-elevated px-3.5 py-2.5 text-sm text-cl-text placeholder:text-cl-text-muted/60 focus:outline-none focus:border-cl-accent focus:ring-1 focus:ring-cl-accent transition-colors resize-none"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  className="w-full inline-flex items-center justify-center gap-2 rounded-md bg-cl-accent px-5 py-3 text-sm font-medium text-white hover:bg-cl-accent-glow transition-colors duration-200"
+                >
+                  Enviar resumo do projeto
+                  <Send size={16} />
+                </button>
+              </form>
+            )}
           </div>
         </div>
       </div>
