@@ -9,32 +9,57 @@ const navItems = [
 ];
 
 const Footer = () => {
+  const logoSrc = `${process.env.PUBLIC_URL}/logo.png`;
+
   return (
-    <footer className="bg-[var(--cl-bg-secondary)] border-t border-cl-border">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
-          <div className="text-center lg:text-left">
-            <div className="font-satoshi font-bold text-cl-text">Cabral Labs</div>
-            <p className="mt-2 text-sm text-cl-text-muted">
+    <footer className="relative bg-black text-white overflow-hidden">
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-grid-pattern opacity-50"
+      />
+      <div
+        aria-hidden="true"
+        className="absolute inset-0 bg-curves-decoration opacity-70"
+      />
+
+      <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 py-14">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+          <div>
+            <a
+              href="#top"
+              className="inline-flex items-center gap-3 text-white tracking-tight"
+            >
+              <img
+                src={logoSrc}
+                alt="Cabral Labs"
+                className="h-10 w-10 shrink-0 object-contain"
+              />
+              <span className="font-satoshi font-bold text-lg">
+                Cabral Labs
+              </span>
+            </a>
+            <p className="mt-4 text-sm text-white/60 max-w-sm">
               Engenharia para sistemas que precisam funcionar no mundo real.
             </p>
           </div>
 
-          <nav className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
-            {navItems.map((item) => (
-              <a
-                key={item.id}
-                href={`#${item.id}`}
-                className="text-sm text-cl-text-muted hover:text-cl-text transition-colors"
-              >
-                {item.label}
-              </a>
-            ))}
-          </nav>
-
-          <div className="text-xs text-cl-text-muted text-center sm:text-right">
-            © 2026 Cabral Labs
+          <div className="lg:justify-self-end">
+            <nav className="flex flex-col gap-2 lg:items-end">
+              {navItems.map((item) => (
+                <a
+                  key={item.id}
+                  href={`#${item.id}`}
+                  className="text-sm text-white/80 hover:text-white transition-colors"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </nav>
           </div>
+        </div>
+
+        <div className="mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3">
+          <div className="text-xs text-white/50">© 2026 Cabral Labs</div>
         </div>
       </div>
     </footer>

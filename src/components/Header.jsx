@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
+import PillButton from "./ui/PillButton";
 
 const navItems = [
   { id: "servicos", label: "Serviços" },
@@ -25,17 +26,15 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-cl-bg/80 backdrop-blur-md border-b border-cl-border"
-          : "bg-transparent border-b border-transparent"
+      className={`fixed top-0 left-0 right-0 z-50 bg-black transition-shadow duration-300 ${
+        isScrolled ? "shadow-[0_1px_0_rgba(255,255,255,0.06)]" : ""
       }`}
     >
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-20">
           <a
             href="#top"
-            className="flex items-center gap-3 text-cl-text tracking-tight"
+            className="flex items-center gap-3 text-white tracking-tight"
           >
             <img
               src={logoSrc}
@@ -47,26 +46,31 @@ const Header = () => {
             </span>
           </a>
 
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-10">
             {navItems.map((item) => (
               <a
                 key={item.id}
                 href={`#${item.id}`}
-                className="text-sm text-cl-text-muted hover:text-cl-text transition-colors duration-200"
+                className="text-sm text-white/80 hover:text-white transition-colors duration-200"
               >
                 {item.label}
               </a>
             ))}
-            <a
+          </div>
+
+          <div className="hidden md:block">
+            <PillButton
               href="#contato"
-              className="inline-flex items-center justify-center rounded-md bg-cl-accent px-4 py-2 text-sm font-medium text-white hover:bg-cl-accent-glow transition-colors duration-200"
+              variant="light"
+              showIcon={false}
+              className="px-5 py-2.5 border border-white/20"
             >
               Solicitar orçamento
-            </a>
+            </PillButton>
           </div>
 
           <button
-            className="md:hidden text-cl-text p-2 -mr-2"
+            className="md:hidden text-white p-2 -mr-2"
             onClick={() => setIsMenuOpen((v) => !v)}
             aria-label="Abrir menu"
           >
@@ -76,13 +80,13 @@ const Header = () => {
 
         {isMenuOpen && (
           <div className="md:hidden pb-4 animate-slide-down">
-            <div className="flex flex-col gap-1 rounded-lg border border-cl-border bg-cl-bg-secondary p-2">
+            <div className="flex flex-col gap-1 rounded-lg border border-white/10 bg-neutral-900 p-2">
               {navItems.map((item) => (
                 <a
                   key={item.id}
                   href={`#${item.id}`}
                   onClick={closeMenu}
-                  className="block px-3 py-2 text-sm text-cl-text-muted hover:text-cl-text hover:bg-cl-bg-elevated rounded-md transition-colors"
+                  className="block px-3 py-2 text-sm text-white/80 hover:text-white hover:bg-white/5 rounded-md transition-colors"
                 >
                   {item.label}
                 </a>
@@ -90,7 +94,7 @@ const Header = () => {
               <a
                 href="#contato"
                 onClick={closeMenu}
-                className="mt-2 inline-flex items-center justify-center rounded-md bg-cl-accent px-4 py-2 text-sm font-medium text-white hover:bg-cl-accent-glow transition-colors"
+                className="mt-2 inline-flex items-center justify-center rounded-full bg-white px-4 py-2 text-sm font-medium text-black hover:bg-neutral-200 transition-colors"
               >
                 Solicitar orçamento
               </a>

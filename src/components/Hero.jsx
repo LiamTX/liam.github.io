@@ -1,78 +1,92 @@
 import React from "react";
-import { ArrowRight } from "lucide-react";
 import { clientLogos } from "../data/mock";
+import PillButton from "./ui/PillButton";
+import HeroGrid from "./HeroGrid";
 
 const Hero = () => {
   return (
-    <section
-      id="top"
-      className="relative min-h-screen flex items-center overflow-hidden pt-24 pb-16"
-    >
-      <div
-        aria-hidden="true"
-        className="absolute -top-32 left-1/2 -translate-x-1/2 h-[600px] w-[600px] rounded-full bg-blue-600/10 blur-[120px]"
-      />
-      <div
-        aria-hidden="true"
-        className="absolute bottom-0 right-0 h-[400px] w-[400px] rounded-full bg-cyan-500/5 blur-[120px]"
-      />
+    <>
+      <section
+        id="top"
+        className="relative bg-black text-white overflow-hidden pt-32 pb-20 sm:pt-40 sm:pb-24"
+      >
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-grid-pattern opacity-60"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 bg-curves-decoration"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute -top-32 left-1/2 -translate-x-1/2 h-[600px] w-[600px] rounded-full bg-[var(--cl-accent-royal)]/10 blur-[140px]"
+        />
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div className="max-w-4xl">
-          <div className="inline-flex items-center gap-2 rounded-full border border-cl-border bg-cl-bg-secondary/60 px-3 py-1.5 text-xs sm:text-sm text-cl-text-muted">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cl-success opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-cl-success" />
-            </span>
-            Disponível para novos projetos
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+          <div className="grid grid-cols-1 lg:grid-cols-[1.2fr,1fr] gap-12 lg:gap-16 items-center">
+            <div>
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs sm:text-sm text-white/70 backdrop-blur">
+                <span className="relative flex h-2 w-2">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cl-success opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-cl-success" />
+                </span>
+                Disponível para novos projetos
+              </div>
+
+              <h1 className="mt-8 font-satoshi font-extrabold uppercase text-4xl sm:text-5xl md:text-6xl lg:text-[4.25rem] leading-[1.02] tracking-tight text-white">
+                Software que funciona em produção.{" "}
+                <span className="text-white/60">Sem atalhos.</span>
+              </h1>
+
+              <p className="mt-6 text-white/70 text-base md:text-lg max-w-2xl leading-relaxed">
+                A Cabral Labs é a consultoria técnica por trás de sistemas
+                bancários, automações corporativas e soluções de IA que operam
+                no mundo real. Sete anos de engenharia com responsabilidade
+                sobre o que vai pro ar.
+              </p>
+
+              <div className="mt-10 flex flex-col sm:flex-row gap-3">
+                <PillButton href="#contato" variant="light">
+                  Solicitar orçamento
+                </PillButton>
+                <PillButton href="#cases" variant="outline-light">
+                  Ver cases
+                </PillButton>
+              </div>
+
+              <div className="mt-12 lg:hidden">
+                <HeroGrid />
+              </div>
+            </div>
+
+            <div className="hidden lg:flex justify-center lg:justify-end">
+              <HeroGrid />
+            </div>
           </div>
+        </div>
+      </section>
 
-          <h1 className="mt-6 font-satoshi font-extrabold text-4xl md:text-6xl lg:text-7xl leading-[1.05] text-cl-text">
-            Software que funciona em produção.{" "}
-            <span className="text-gradient-accent">Sem atalhos.</span>
-          </h1>
-
-          <p className="mt-6 text-cl-text-muted text-lg md:text-xl max-w-2xl leading-relaxed">
-            A Cabral Labs é a consultoria técnica por trás de sistemas
-            bancários, automações corporativas e soluções de IA que operam no
-            mundo real. Sete anos de engenharia com responsabilidade sobre o
-            que vai pro ar.
-          </p>
-
-          <div className="mt-10 flex flex-col sm:flex-row gap-3">
-            <a
-              href="#contato"
-              className="inline-flex items-center justify-center gap-2 rounded-md bg-cl-accent px-6 py-3 text-sm font-medium text-white hover:bg-cl-accent-glow transition-colors duration-200"
-            >
-              Solicitar orçamento
-              <ArrowRight size={16} />
-            </a>
-            <a
-              href="#cases"
-              className="inline-flex items-center justify-center rounded-md border border-cl-border bg-transparent px-6 py-3 text-sm font-medium text-cl-text hover:bg-cl-bg-secondary transition-colors duration-200"
-            >
-              Ver cases
-            </a>
-          </div>
-
-          <div className="mt-16 pt-8 border-t border-cl-border/50">
-            <p className="text-xs uppercase tracking-widest text-cl-text-muted/70 mb-4">
+      <section className="bg-cl-light-bg pt-6 pb-6 sm:pt-10 sm:pb-10">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="rounded-3xl bg-cl-light-bg-soft px-6 py-8 sm:px-10 sm:py-10">
+            <p className="text-xs uppercase tracking-[0.2em] text-cl-text-on-light-muted mb-6">
               Construído com e para
             </p>
-            <div className="flex flex-wrap items-center gap-x-4 gap-y-2 text-cl-text-muted/60 text-sm">
-              {clientLogos.map((logo, i) => (
-                <React.Fragment key={logo}>
-                  <span className="font-medium">{logo}</span>
-                  {i < clientLogos.length - 1 && (
-                    <span className="text-cl-text-muted/30">|</span>
-                  )}
-                </React.Fragment>
+            <div className="flex flex-wrap items-center gap-3 sm:gap-4">
+              {clientLogos.map((logo) => (
+                <div
+                  key={logo}
+                  className="flex items-center justify-center rounded-xl bg-white px-6 py-4 text-sm font-semibold text-cl-text-on-light shadow-[0_1px_2px_rgba(10,10,15,0.04)] border border-black/5 min-w-[140px]"
+                >
+                  {logo}
+                </div>
               ))}
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 
