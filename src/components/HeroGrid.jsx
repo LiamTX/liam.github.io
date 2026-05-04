@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
-const AUTO_CYCLE_MS = 3650;
-const EXIT_MS = 1180;
+const AUTO_CYCLE_MS = 4500;
+const EXIT_MS = 80;
+const GRID_CELL_COUNT = 20;
 
 const NetsuiteMark = () => (
   <svg viewBox="0 0 28 28" className="h-full w-full" aria-hidden="true">
@@ -24,42 +25,51 @@ const SalesforceMark = () => (
 const serviceTiles = [
   {
     id: "netsuite",
-    top: 0.56,
-    left: 0.06,
+    top: 1,
+    left: 1,
     label: "NETSUITE",
     theme: "royal",
     Logo: NetsuiteMark,
     haloStrength: 1,
-    ghostCells: [
-      { top: 0, left: 1, strength: 0.2 },
-      { top: 1, left: 0, strength: 0.22 },
-      { top: 1, left: 1, strength: 0.36 },
+    focusRgb: "44 67 166",
+    spillCells: [
+      { top: -1, left: 0, strength: 0.24 },
+      { top: 0, left: -1, strength: 0.22 },
+      { top: 0, left: 1, strength: 0.16 },
+      { top: 1, left: 0, strength: 0.28 },
+      { top: 1, left: 1, strength: 0.16 },
     ],
   },
   {
     id: "salesforce",
-    top: 1.64,
-    left: 1.02,
+    top: 2,
+    left: 2,
     label: "salesforce",
     theme: "sky",
     Logo: SalesforceMark,
     haloStrength: 0.96,
-    ghostCells: [
-      { top: -1, left: 0, strength: 0.18 },
-      { top: 1, left: 0, strength: 0.26 },
-      { top: 0, left: -1, strength: 0.14 },
+    focusRgb: "63 193 242",
+    spillCells: [
+      { top: -1, left: 0, strength: 0.2 },
+      { top: 0, left: -1, strength: 0.24 },
+      { top: 0, left: 1, strength: 0.16 },
+      { top: 1, left: 0, strength: 0.22 },
+      { top: -1, left: -1, strength: 0.14 },
     ],
   },
   {
     id: "ai-services",
-    top: 2.72,
-    left: 0.06,
+    top: 3,
+    left: 1,
     label: "AI services",
     theme: "green",
     haloStrength: 0.92,
-    ghostCells: [
-      { top: -1, left: 0, strength: 0.24 },
-      { top: 0, left: 1, strength: 0.21 },
+    focusRgb: "142 239 85",
+    spillCells: [
+      { top: -1, left: 0, strength: 0.26 },
+      { top: 0, left: -1, strength: 0.16 },
+      { top: 0, left: 1, strength: 0.2 },
+      { top: 1, left: 0, strength: 0.16 },
       { top: -1, left: 1, strength: 0.16 },
     ],
   },
@@ -68,7 +78,7 @@ const serviceTiles = [
 const HeroGrid = () => {
   const [activeTileId, setActiveTileId] = useState(serviceTiles[0].id);
   const [exitingTileId, setExitingTileId] = useState(null);
-  const [isHovering, setIsHovering] = useState(false);
+  const [hoveredTileId, setHoveredTileId] = useState(null);
   const activeTileIdRef = useRef(serviceTiles[0].id);
   const exitTimerRef = useRef(null);
 
@@ -103,7 +113,7 @@ const HeroGrid = () => {
   );
 
   useEffect(() => {
-    if (isHovering) {
+    if (hoveredTileId !== null) {
       return undefined;
     }
 
@@ -116,7 +126,7 @@ const HeroGrid = () => {
     }, AUTO_CYCLE_MS);
 
     return () => window.clearInterval(intervalId);
-  }, [focusTile, isHovering]);
+  }, [focusTile, hoveredTileId]);
 
   useEffect(() => () => clearExitTimer(), [clearExitTimer]);
 
@@ -138,14 +148,20 @@ const HeroGrid = () => {
   return (
     <div
       aria-hidden="true"
-      className="hero-grid-shell relative mx-auto flex w-full justify-center"
+      className="hero-grid-shell relative mx-auto flex justify-center lg:mx-0"
     >
       <div className="hero-grid-stage">
         <div
           className="hero-grid-panel"
-          onPointerLeave={() => setIsHovering(false)}
+          data-active-tile={activeTileId}
+          onPointerLeave={() => setHoveredTileId(null)}
         >
-          <div className="hero-grid-lines" />
+          <div className="hero-grid-cells">
+            {Array.from({ length: GRID_CELL_COUNT }, (_, index) => (
+              <span key={index} className="hero-grid-cell" />
+            ))}
+          </div>
+
           <div className="hero-grid-ambient">
             {serviceTiles.map((tile) => {
               const tileState = getTileState(tile.id);
@@ -153,22 +169,33 @@ const HeroGrid = () => {
               return (
                 <React.Fragment key={`${tile.id}-ambient`}>
                   <span
-                    className={`hero-grid-halo hero-grid-halo--${tile.theme} ${tileState}`}
+                    className={`hero-grid-halo ${tileState}`}
                     style={{
-                      top: `calc((${tile.top} - 0.74) * var(--hero-grid-cell))`,
-                      left: `calc((${tile.left} - 0.58) * var(--hero-grid-cell))`,
+                      top: `calc((${tile.top} - 0.72) * var(--hero-grid-cell))`,
+                      left: `calc((${tile.left} - 0.72) * var(--hero-grid-cell))`,
+                      "--hero-grid-tile-rgb": tile.focusRgb,
                       "--hero-grid-halo-strength": `${tile.haloStrength}`,
                     }}
                   />
+                  <span
+                    className={`hero-grid-core ${tileState}`}
+                    style={{
+                      top: `calc(${tile.top} * var(--hero-grid-cell))`,
+                      left: `calc(${tile.left} * var(--hero-grid-cell))`,
+                      "--hero-grid-tile-rgb": tile.focusRgb,
+                      "--hero-grid-core-strength": `${tile.haloStrength}`,
+                    }}
+                  />
 
-                  {tile.ghostCells.map((ghost, index) => (
+                  {tile.spillCells.map((spillCell, index) => (
                     <span
-                      key={`${tile.id}-ghost-${index}`}
-                      className={`hero-grid-ghost hero-grid-ghost--${tile.theme} ${tileState}`}
+                      key={`${tile.id}-spill-${index}`}
+                      className={`hero-grid-spill ${tileState}`}
                       style={{
-                        top: `calc(${tile.top + ghost.top} * var(--hero-grid-cell))`,
-                        left: `calc(${tile.left + ghost.left} * var(--hero-grid-cell))`,
-                        "--hero-grid-ghost-strength": `${ghost.strength}`,
+                        top: `calc(${tile.top + spillCell.top} * var(--hero-grid-cell))`,
+                        left: `calc(${tile.left + spillCell.left} * var(--hero-grid-cell))`,
+                        "--hero-grid-tile-rgb": tile.focusRgb,
+                        "--hero-grid-spill-strength": `${spillCell.strength}`,
                       }}
                     />
                   ))}
@@ -176,10 +203,6 @@ const HeroGrid = () => {
               );
             })}
           </div>
-          <div className="hero-grid-fade hero-grid-fade-top" />
-          <div className="hero-grid-fade hero-grid-fade-bottom" />
-          <div className="hero-grid-fade hero-grid-fade-left" />
-          <div className="hero-grid-fade hero-grid-fade-right" />
 
           <div className="hero-grid-cards">
             {serviceTiles.map((tile) => {
@@ -195,8 +218,13 @@ const HeroGrid = () => {
                     left: `calc(${tile.left} * var(--hero-grid-cell))`,
                   }}
                   onPointerEnter={() => {
-                    setIsHovering(true);
+                    setHoveredTileId(tile.id);
                     focusTile(tile.id);
+                  }}
+                  onPointerLeave={() => {
+                    setHoveredTileId((currentTileId) =>
+                      currentTileId === tile.id ? null : currentTileId
+                    );
                   }}
                 >
                   <span className="hero-grid-tile-bloom" />

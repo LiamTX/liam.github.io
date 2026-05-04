@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@property --hero-glow-radius {
+  syntax: "<percentage>";
+  inherits: true;
+  initial-value: 0%;
+}
+
 @layer base {
   :root {
     --background: 240 30% 4%;
@@ -122,33 +128,147 @@
       );
   }
 
+  .hero-page-grid {
+    background-image:
+      linear-gradient(rgba(255, 255, 255, 0.026) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.026) 1px, transparent 1px);
+    background-position: center top;
+    background-size: 96px 96px;
+    opacity: 0.52;
+    mask-image: linear-gradient(
+      90deg,
+      rgba(0, 0, 0, 0.08) 0%,
+      rgba(0, 0, 0, 0.3) 30%,
+      rgba(0, 0, 0, 0.58) 55%,
+      rgba(0, 0, 0, 0.76) 100%
+    );
+  }
+
+  .hero-page-curves {
+    background-image:
+      repeating-radial-gradient(
+        ellipse 108% 86% at -20% 2%,
+        transparent 0,
+        transparent 46px,
+        rgba(255, 255, 255, 0.042) 47px,
+        rgba(255, 255, 255, 0.042) 48px,
+        transparent 49px,
+        transparent 94px
+      ),
+      repeating-radial-gradient(
+        ellipse 92% 74% at -22% 8%,
+        transparent 0,
+        transparent 64px,
+        rgba(255, 255, 255, 0.022) 65px,
+        rgba(255, 255, 255, 0.022) 66px,
+        transparent 67px,
+        transparent 128px
+      );
+    opacity: 0.64;
+    mask-image: linear-gradient(
+      100deg,
+      #000 0%,
+      rgba(0, 0, 0, 0.74) 20%,
+      rgba(0, 0, 0, 0.16) 44%,
+      transparent 64%
+    );
+  }
+
+  .hero-page-orbital-detail {
+    top: clamp(-19rem, -18vw, -8rem);
+    right: clamp(-26rem, -24vw, -8rem);
+    width: min(78rem, 92vw);
+    height: 64rem;
+    opacity: 0.7;
+    pointer-events: none;
+    background:
+      radial-gradient(
+        ellipse 46% 54% at 34% 45%,
+        rgba(35, 64, 216, 0.12) 0%,
+        rgba(35, 64, 216, 0.055) 34%,
+        transparent 68%
+      ),
+      repeating-radial-gradient(
+        ellipse 94% 78% at 20% 34%,
+        transparent 0,
+        transparent 72px,
+        rgba(255, 255, 255, 0.03) 73px,
+        rgba(255, 255, 255, 0.03) 74px,
+        transparent 75px,
+        transparent 148px
+      ),
+      linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(17, 25, 52, 0.22) 46%,
+        transparent 82%
+      );
+    mask-image: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba(0, 0, 0, 0.74) 20%,
+      #000 60%,
+      transparent 100%
+    );
+  }
+
+  .hero-page-glow {
+    background:
+      radial-gradient(
+        ellipse 34% 46% at 74% 38%,
+        rgba(43, 70, 177, 0.16) 0%,
+        rgba(27, 46, 126, 0.08) 36%,
+        transparent 72%
+      ),
+      radial-gradient(
+        ellipse 28% 46% at 79% 60%,
+        rgba(30, 82, 138, 0.1) 0%,
+        transparent 68%
+      ),
+      linear-gradient(180deg, rgba(11, 13, 17, 0) 0%, #0b0d11 100%);
+    pointer-events: none;
+  }
+
+  .hero-grid-desktop-layer {
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .hero-grid-desktop-position {
+    position: absolute;
+    top: 5.125rem;
+    right: 1.5rem;
+    pointer-events: auto;
+  }
+
   .hero-grid-shell {
-    --hero-grid-cell: clamp(4.3rem, 16vw, 5rem);
-    --hero-grid-stage-width: calc(var(--hero-grid-cell) * 4.15);
-    --hero-grid-panel-width: calc(var(--hero-grid-cell) * 3.06);
-    --hero-grid-panel-height: calc(var(--hero-grid-cell) * 4.65);
+    --hero-grid-cell: clamp(5rem, 22vw, 6.1rem);
+    --hero-grid-stage-width: calc(var(--hero-grid-cell) * 4);
+    --hero-grid-stage-height: calc(var(--hero-grid-cell) * 5);
+    width: var(--hero-grid-stage-width);
+    overflow: visible;
   }
 
   .hero-grid-stage {
     position: relative;
-    display: flex;
-    width: min(100%, var(--hero-grid-stage-width));
-    height: var(--hero-grid-panel-height);
-    justify-content: flex-end;
-    overflow: hidden;
+    width: var(--hero-grid-stage-width);
+    height: var(--hero-grid-stage-height);
+    overflow: visible;
     isolation: isolate;
   }
 
   .hero-grid-stage::before {
     content: "";
     position: absolute;
-    inset: -10% -8% -16% -22%;
+    width: calc(var(--hero-grid-cell) * 2.38);
+    height: calc(var(--hero-grid-cell) * 2.38);
+    left: calc(var(--hero-grid-cell) * 0.31);
+    top: calc(var(--hero-grid-cell) * 0.31);
     background:
-      radial-gradient(circle at 68% 18%, rgba(66, 90, 232, 0.16) 0%, transparent 28%),
-      radial-gradient(circle at 71% 56%, rgba(62, 168, 229, 0.12) 0%, transparent 26%),
-      radial-gradient(circle at 56% 84%, rgba(133, 223, 76, 0.09) 0%, transparent 22%);
-    filter: blur(34px);
-    opacity: 0.92;
+      radial-gradient(circle, rgba(44, 67, 166, 0.56) 0%, rgba(44, 67, 166, 0.22) 42%, transparent 72%);
+    border-radius: 999px;
+    filter: blur(calc(var(--hero-grid-cell) * 0.71));
+    opacity: 0.12;
     pointer-events: none;
     z-index: 0;
   }
@@ -156,18 +276,13 @@
   .hero-grid-stage::after {
     content: "";
     position: absolute;
-    inset: -8% -10% -12% -12%;
+    inset: calc(var(--hero-grid-cell) * -0.8);
     background:
-      radial-gradient(circle at 74% 34%, rgba(98, 122, 255, 0.08) 0%, transparent 34%),
-      radial-gradient(circle at 66% 62%, rgba(92, 208, 246, 0.06) 0%, transparent 30%),
-      linear-gradient(
-        90deg,
-        rgba(4, 5, 7, 0) 0%,
-        rgba(4, 5, 7, 0.05) 44%,
-        rgba(4, 5, 7, 0.18) 100%
-      );
-    filter: blur(48px);
-    opacity: 0.88;
+      radial-gradient(circle at 48% 34%, rgba(44, 67, 166, 0.14) 0%, transparent 32%),
+      radial-gradient(circle at 60% 50%, rgba(63, 193, 242, 0.08) 0%, transparent 28%),
+      radial-gradient(circle at 42% 72%, rgba(142, 239, 85, 0.06) 0%, transparent 24%);
+    filter: blur(calc(var(--hero-grid-cell) * 0.38));
+    opacity: 0.72;
     pointer-events: none;
     z-index: 0;
   }
@@ -175,145 +290,220 @@
   .hero-grid-panel {
     position: relative;
     z-index: 1;
-    width: var(--hero-grid-panel-width);
+    width: 100%;
     height: 100%;
     overflow: visible;
   }
 
-  .hero-grid-lines {
+  .hero-grid-cells {
+    --hero-grid-line: rgba(255, 255, 255, 0.07);
     position: absolute;
-    inset:
-      calc(var(--hero-grid-cell) * -0.72)
-      calc(var(--hero-grid-cell) * -0.62)
-      calc(var(--hero-grid-cell) * -1.22)
-      calc(var(--hero-grid-cell) * -0.46);
-    background-image:
-      linear-gradient(rgba(255, 255, 255, 0.052) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.052) 1px, transparent 1px);
-    background-size: var(--hero-grid-cell) var(--hero-grid-cell);
-    background-position: 0 0;
-    opacity: 0.74;
+    inset: 0;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-rows: repeat(5, minmax(0, 1fr));
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    -webkit-mask-image: radial-gradient(
+      ellipse 74% 80% at 52% 48%,
+      #000 36%,
+      rgba(0, 0, 0, 0.78) 58%,
+      rgba(0, 0, 0, 0.24) 78%,
+      transparent 100%
+    );
+    mask-image: radial-gradient(
+      ellipse 74% 80% at 52% 48%,
+      #000 36%,
+      rgba(0, 0, 0, 0.78) 58%,
+      rgba(0, 0, 0, 0.24) 78%,
+      transparent 100%
+    );
+  }
+
+  .hero-grid-cells::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(
+        to right,
+        transparent calc(25% - 0.5px),
+        var(--hero-grid-line) calc(25% - 0.5px),
+        var(--hero-grid-line) calc(25% + 0.5px),
+        transparent calc(25% + 0.5px)
+      ),
+      linear-gradient(
+        to right,
+        transparent calc(50% - 0.5px),
+        var(--hero-grid-line) calc(50% - 0.5px),
+        var(--hero-grid-line) calc(50% + 0.5px),
+        transparent calc(50% + 0.5px)
+      ),
+      linear-gradient(
+        to right,
+        transparent calc(75% - 0.5px),
+        var(--hero-grid-line) calc(75% - 0.5px),
+        var(--hero-grid-line) calc(75% + 0.5px),
+        transparent calc(75% + 0.5px)
+      ),
+      linear-gradient(
+        to bottom,
+        transparent calc(20% - 0.5px),
+        var(--hero-grid-line) calc(20% - 0.5px),
+        var(--hero-grid-line) calc(20% + 0.5px),
+        transparent calc(20% + 0.5px)
+      ),
+      linear-gradient(
+        to bottom,
+        transparent calc(40% - 0.5px),
+        var(--hero-grid-line) calc(40% - 0.5px),
+        var(--hero-grid-line) calc(40% + 0.5px),
+        transparent calc(40% + 0.5px)
+      ),
+      linear-gradient(
+        to bottom,
+        transparent calc(60% - 0.5px),
+        var(--hero-grid-line) calc(60% - 0.5px),
+        var(--hero-grid-line) calc(60% + 0.5px),
+        transparent calc(60% + 0.5px)
+      ),
+      linear-gradient(
+        to bottom,
+        transparent calc(80% - 0.5px),
+        var(--hero-grid-line) calc(80% - 0.5px),
+        var(--hero-grid-line) calc(80% + 0.5px),
+        transparent calc(80% + 0.5px)
+      );
+    pointer-events: none;
+  }
+
+  .hero-grid-cell {
+    position: relative;
+    min-width: 0;
+    min-height: 0;
+    border: 0;
+    background: rgba(255, 255, 255, 0);
   }
 
   .hero-grid-ambient {
     position: absolute;
-    inset:
-      calc(var(--hero-grid-cell) * -0.9)
-      calc(var(--hero-grid-cell) * -0.9)
-      calc(var(--hero-grid-cell) * -1.5)
-      calc(var(--hero-grid-cell) * -0.9);
+    inset: 0;
     z-index: 1;
     pointer-events: none;
   }
 
   .hero-grid-halo {
     position: absolute;
-    width: calc(var(--hero-grid-cell) * 2.42);
-    height: calc(var(--hero-grid-cell) * 2.9);
+    width: calc(var(--hero-grid-cell) * 2.44);
+    height: calc(var(--hero-grid-cell) * 2.44);
     border-radius: 999px;
-    opacity: 0;
-    filter: blur(38px);
-    transform: scale(0.78);
-    transition:
-      opacity 780ms ease,
-      transform 1080ms cubic-bezier(0.19, 1, 0.22, 1);
-  }
-
-  .hero-grid-halo--royal {
     background: radial-gradient(
       circle at 42% 40%,
-      rgba(94, 115, 255, 0.54) 0%,
-      rgba(72, 95, 226, 0.28) 44%,
-      rgba(72, 95, 226, 0) 82%
+      rgb(var(--hero-grid-tile-rgb) / 0.78) 0%,
+      rgb(var(--hero-grid-tile-rgb) / 0.35) 42%,
+      rgb(var(--hero-grid-tile-rgb) / 0) 76%
     );
-  }
-
-  .hero-grid-halo--sky {
-    background: radial-gradient(
-      circle at 44% 44%,
-      rgba(78, 195, 255, 0.48) 0%,
-      rgba(57, 157, 214, 0.22) 46%,
-      rgba(57, 157, 214, 0) 82%
-    );
-  }
-
-  .hero-grid-halo--green {
-    background: radial-gradient(
-      circle at 42% 42%,
-      rgba(141, 232, 82, 0.5) 0%,
-      rgba(102, 188, 59, 0.22) 46%,
-      rgba(102, 188, 59, 0) 82%
-    );
+    opacity: calc(var(--hero-grid-halo-strength, 1) * 0.035);
+    filter: blur(calc(var(--hero-grid-cell) * 0.74)) saturate(0.76);
+    transform: scale(0.84);
+    transition:
+      opacity 2000ms ease-in-out,
+      transform 2000ms ease-in-out,
+      filter 2000ms ease-in-out;
+    will-change: transform, opacity, filter;
   }
 
   .hero-grid-halo.is-active {
-    opacity: calc(var(--hero-grid-halo-strength, 1) * 0.92);
-    transform: scale(1);
+    transition-duration: 1500ms;
+    opacity: calc(var(--hero-grid-halo-strength, 1) * 0.94);
+    filter: blur(calc(var(--hero-grid-cell) * 0.6)) saturate(1.28);
+    transform: scale(1.04);
   }
 
   .hero-grid-halo.is-exiting {
-    opacity: calc(var(--hero-grid-halo-strength, 1) * 0.58);
+    opacity: calc(var(--hero-grid-halo-strength, 1) * 0.46);
+    filter: blur(calc(var(--hero-grid-cell) * 0.78)) saturate(1.02);
     transform: scale(1.14);
   }
 
-  .hero-grid-halo.is-idle {
-    opacity: calc(var(--hero-grid-halo-strength, 1) * 0.08);
-    transform: scale(0.9);
-  }
-
-  .hero-grid-ghost {
+  .hero-grid-core {
     position: absolute;
     width: var(--hero-grid-cell);
     height: var(--hero-grid-cell);
-    border: 1px solid rgba(255, 255, 255, 0.035);
-    opacity: 0;
-    filter: saturate(0.9) blur(0.2px);
-    transform: scale(0.98);
+    border: 1px solid rgb(var(--hero-grid-tile-rgb) / 0.04);
+    background:
+      linear-gradient(180deg, rgb(255 255 255 / 0.04), rgb(255 255 255 / 0)),
+      rgb(var(--hero-grid-tile-rgb) / 0.018);
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.035);
+    opacity: calc(var(--hero-grid-core-strength, 1) * 0.08);
+    filter: saturate(0.72) brightness(0.78);
     transition:
-      opacity 720ms ease,
-      transform 920ms cubic-bezier(0.19, 1, 0.22, 1),
-      filter 920ms ease;
+      background 2000ms ease-in-out,
+      border-color 2000ms ease-in-out,
+      box-shadow 2000ms ease-in-out,
+      opacity 2000ms ease-in-out,
+      filter 2000ms ease-in-out;
+    will-change: background, box-shadow, filter, opacity;
   }
 
-  .hero-grid-ghost--royal {
-    background: linear-gradient(
-      180deg,
-      rgba(51, 69, 153, 0.4) 0%,
-      rgba(16, 22, 48, 0.14) 100%
-    );
+  .hero-grid-core.is-active {
+    transition-duration: 1500ms;
+    border-color: rgb(var(--hero-grid-tile-rgb) / 0.28);
+    background:
+      linear-gradient(180deg, rgb(255 255 255 / 0.13), rgb(255 255 255 / 0.02)),
+      rgb(var(--hero-grid-tile-rgb) / 0.32);
+    box-shadow:
+      0 0 20px rgb(var(--hero-grid-tile-rgb) / 0.38),
+      0 0 58px rgb(var(--hero-grid-tile-rgb) / 0.2),
+      inset 0 1px 0 rgb(255 255 255 / 0.12);
+    opacity: calc(var(--hero-grid-core-strength, 1) * 0.7);
+    filter: saturate(1.22) brightness(1.08);
   }
 
-  .hero-grid-ghost--sky {
-    background: linear-gradient(
-      180deg,
-      rgba(34, 122, 173, 0.34) 0%,
-      rgba(14, 31, 49, 0.12) 100%
-    );
+  .hero-grid-core.is-exiting {
+    border-color: rgb(var(--hero-grid-tile-rgb) / 0.18);
+    background:
+      linear-gradient(180deg, rgb(255 255 255 / 0.08), rgb(255 255 255 / 0)),
+      rgb(var(--hero-grid-tile-rgb) / 0.16);
+    box-shadow:
+      0 0 18px rgb(var(--hero-grid-tile-rgb) / 0.22),
+      0 0 42px rgb(var(--hero-grid-tile-rgb) / 0.12),
+      inset 0 1px 0 rgb(255 255 255 / 0.08);
+    opacity: calc(var(--hero-grid-core-strength, 1) * 0.4);
+    filter: saturate(1) brightness(0.96);
   }
 
-  .hero-grid-ghost--green {
-    background: linear-gradient(
-      180deg,
-      rgba(87, 150, 54, 0.34) 0%,
-      rgba(18, 31, 16, 0.12) 100%
-    );
+  .hero-grid-spill {
+    position: absolute;
+    width: var(--hero-grid-cell);
+    height: var(--hero-grid-cell);
+    border: 1px solid rgb(var(--hero-grid-tile-rgb) / 0.04);
+    background:
+      radial-gradient(
+        circle at 50% 50%,
+        rgb(var(--hero-grid-tile-rgb) / 0.22) 0%,
+        rgb(var(--hero-grid-tile-rgb) / 0.08) 52%,
+        rgb(var(--hero-grid-tile-rgb) / 0) 100%
+      );
+    opacity: calc(var(--hero-grid-spill-strength, 0.18) * 0.12);
+    filter: saturate(0.72) brightness(0.82);
+    transition:
+      border-color 2000ms ease-in-out,
+      opacity 2000ms ease-in-out,
+      filter 2000ms ease-in-out;
   }
 
-  .hero-grid-ghost.is-active {
-    opacity: var(--hero-grid-ghost-strength, 0.24);
-    filter: saturate(1.02) blur(0.12px);
-    transform: scale(1.01);
+  .hero-grid-spill.is-active {
+    transition-duration: 1500ms;
+    border-color: rgb(var(--hero-grid-tile-rgb) / 0.14);
+    opacity: calc(var(--hero-grid-spill-strength, 0.18) * 1.18);
+    filter: saturate(1.24) brightness(1.08);
   }
 
-  .hero-grid-ghost.is-exiting {
-    opacity: calc(var(--hero-grid-ghost-strength, 0.24) * 0.64);
-    filter: saturate(0.88) blur(0.14px);
-    transform: scale(1);
-  }
-
-  .hero-grid-ghost.is-idle {
-    opacity: calc(var(--hero-grid-ghost-strength, 0.24) * 0.14);
-    filter: saturate(0.68) brightness(0.72);
+  .hero-grid-spill.is-exiting {
+    opacity: calc(var(--hero-grid-spill-strength, 0.18) * 0.62);
+    filter: saturate(1) brightness(0.96);
   }
 
   .hero-grid-cards {
@@ -326,208 +516,247 @@
     position: absolute;
     width: var(--hero-grid-cell);
     height: var(--hero-grid-cell);
-    cursor: default;
+    cursor: pointer;
     transform-origin: center;
     transition:
-      opacity 760ms ease,
-      transform 960ms cubic-bezier(0.19, 1, 0.22, 1),
-      filter 920ms ease;
+      opacity 2000ms ease-in-out,
+      transform 2000ms ease-in-out,
+      filter 2000ms ease-in-out;
   }
 
   .hero-grid-tile--royal {
-    --tile-bg-idle: linear-gradient(
-      180deg,
-      rgba(16, 21, 42, 0.82) 0%,
-      rgba(10, 14, 28, 0.74) 100%
-    );
-    --tile-bg-exit: linear-gradient(
-      180deg,
-      rgba(33, 47, 106, 0.92) 0%,
-      rgba(21, 31, 73, 0.88) 100%
-    );
-    --tile-bg-active: linear-gradient(
-      180deg,
-      rgba(57, 79, 197, 0.98) 0%,
-      rgba(45, 63, 160, 0.96) 100%
-    );
-    --tile-border: rgba(166, 180, 255, 0.08);
-    --tile-border-active: rgba(197, 208, 255, 0.2);
-    --tile-glow: rgba(93, 120, 255, 0.5);
-    --tile-halo: rgba(93, 120, 255, 0.42);
-    --tile-label: rgba(222, 231, 255, 0.82);
-    --tile-logo: rgba(223, 231, 255, 0.76);
+    --tile-bg-idle: rgba(44, 67, 166, 0.075);
+    --tile-bg-exit: rgb(50 76 205 / 0.42);
+    --tile-bg-active: rgb(52 80 226 / 0.92);
+    --tile-border-idle: rgb(134 154 255 / 0.08);
+    --tile-border-exit: rgb(165 181 255 / 0.24);
+    --tile-border-active: rgb(194 205 255 / 0.52);
+    --tile-glow: rgb(78 107 255 / 0.38);
+    --tile-glow-tight: rgb(92 118 255 / 0.76);
+    --tile-glow-mid: rgb(78 107 255 / 0.44);
+    --tile-glow-wide: rgb(78 107 255 / 0.24);
+    --tile-glow-exit: rgb(78 107 255 / 0.24);
+    --tile-glow-exit-wide: rgb(78 107 255 / 0.13);
+    --tile-halo: rgb(78 107 255 / 0.58);
+    --tile-label: rgba(255, 255, 255, 0.45);
+    --tile-logo: rgba(255, 255, 255, 0.45);
+    --tile-label-active: rgba(255, 255, 255, 0.92);
+    --tile-logo-active: rgba(255, 255, 255, 0.92);
   }
 
   .hero-grid-tile--sky {
-    --tile-bg-idle: linear-gradient(
-      180deg,
-      rgba(12, 25, 36, 0.72) 0%,
-      rgba(8, 16, 27, 0.68) 100%
-    );
-    --tile-bg-exit: linear-gradient(
-      180deg,
-      rgba(34, 102, 140, 0.9) 0%,
-      rgba(22, 66, 97, 0.84) 100%
-    );
-    --tile-bg-active: linear-gradient(
-      180deg,
-      rgba(65, 177, 232, 0.98) 0%,
-      rgba(47, 152, 208, 0.96) 100%
-    );
-    --tile-border: rgba(145, 223, 255, 0.06);
-    --tile-border-active: rgba(195, 240, 255, 0.16);
-    --tile-glow: rgba(83, 195, 244, 0.36);
-    --tile-halo: rgba(83, 195, 244, 0.26);
-    --tile-label: rgba(208, 231, 244, 0.74);
-    --tile-logo: rgba(216, 238, 250, 0.7);
+    --tile-bg-idle: rgba(63, 193, 242, 0.07);
+    --tile-bg-exit: rgb(56 184 236 / 0.38);
+    --tile-bg-active: rgb(48 201 255 / 0.84);
+    --tile-border-idle: rgb(136 228 255 / 0.08);
+    --tile-border-exit: rgb(168 238 255 / 0.22);
+    --tile-border-active: rgb(202 247 255 / 0.52);
+    --tile-glow: rgb(66 210 255 / 0.34);
+    --tile-glow-tight: rgb(70 214 255 / 0.7);
+    --tile-glow-mid: rgb(66 210 255 / 0.4);
+    --tile-glow-wide: rgb(66 210 255 / 0.22);
+    --tile-glow-exit: rgb(66 210 255 / 0.22);
+    --tile-glow-exit-wide: rgb(66 210 255 / 0.12);
+    --tile-halo: rgb(66 210 255 / 0.54);
+    --tile-label: rgba(255, 255, 255, 0.45);
+    --tile-logo: rgba(255, 255, 255, 0.45);
+    --tile-label-active: rgba(255, 255, 255, 0.95);
+    --tile-logo-active: rgba(255, 255, 255, 0.94);
   }
 
   .hero-grid-tile--green {
-    --tile-bg-idle: linear-gradient(
-      180deg,
-      rgba(16, 24, 15, 0.72) 0%,
-      rgba(11, 17, 11, 0.68) 100%
-    );
-    --tile-bg-exit: linear-gradient(
-      180deg,
-      rgba(85, 144, 52, 0.88) 0%,
-      rgba(52, 96, 30, 0.82) 100%
-    );
-    --tile-bg-active: linear-gradient(
-      180deg,
-      rgba(135, 226, 78, 0.98) 0%,
-      rgba(110, 203, 59, 0.96) 100%
-    );
-    --tile-border: rgba(160, 216, 135, 0.06);
-    --tile-border-active: rgba(207, 243, 185, 0.14);
-    --tile-glow: rgba(114, 204, 62, 0.3);
-    --tile-halo: rgba(114, 204, 62, 0.24);
-    --tile-label: rgba(226, 242, 217, 0.76);
-    --tile-logo: rgba(225, 241, 214, 0.56);
+    --tile-bg-idle: rgba(142, 239, 85, 0.065);
+    --tile-bg-exit: rgb(140 231 80 / 0.34);
+    --tile-bg-active: rgb(148 247 80 / 0.76);
+    --tile-border-idle: rgb(183 255 142 / 0.08);
+    --tile-border-exit: rgb(202 255 168 / 0.2);
+    --tile-border-active: rgb(224 255 204 / 0.48);
+    --tile-glow: rgb(148 247 80 / 0.32);
+    --tile-glow-tight: rgb(156 255 86 / 0.64);
+    --tile-glow-mid: rgb(148 247 80 / 0.36);
+    --tile-glow-wide: rgb(148 247 80 / 0.2);
+    --tile-glow-exit: rgb(148 247 80 / 0.2);
+    --tile-glow-exit-wide: rgb(148 247 80 / 0.11);
+    --tile-halo: rgb(148 247 80 / 0.52);
+    --tile-label: rgba(255, 255, 255, 0.5);
+    --tile-logo: rgba(255, 255, 255, 0.46);
+    --tile-label-active: rgba(10, 22, 8, 0.86);
+    --tile-logo-active: rgba(10, 22, 8, 0.8);
   }
 
   .hero-grid-tile-surface {
+    --hero-glow-radius: 0%;
     position: relative;
     z-index: 1;
-    display: flex;
+    display: block;
     height: 100%;
-    flex-direction: column;
-    justify-content: flex-end;
-    gap: 0.45rem;
     overflow: hidden;
-    border: 1px solid var(--tile-border);
-    background: var(--tile-bg-idle);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
-    padding: 0.82rem 0.74rem;
+    border: 1px solid var(--tile-border-idle);
+    background:
+      radial-gradient(
+        circle at 50% 50%,
+        var(--tile-bg-active) 0%,
+        transparent var(--hero-glow-radius)
+      ),
+      var(--tile-bg-idle);
+    box-shadow: none;
+    padding: 0;
     transition:
-      background 860ms ease,
-      border-color 820ms ease,
-      box-shadow 820ms ease,
-      color 820ms ease;
+      --hero-glow-radius 2000ms ease-in-out,
+      border-color 2000ms ease-in-out,
+      box-shadow 2000ms ease-in-out;
   }
 
   .hero-grid-tile-surface::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      180deg,
-      rgba(255, 255, 255, 0.1) 0%,
-      rgba(255, 255, 255, 0.035) 36%,
-      rgba(255, 255, 255, 0) 66%
-    );
-    opacity: 0.22;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0));
+    opacity: 0;
     pointer-events: none;
-    transition: opacity 820ms ease;
+    transition: opacity 2000ms ease-in-out;
   }
 
   .hero-grid-tile-bloom {
     position: absolute;
-    inset: -58%;
+    inset: -62%;
     z-index: 0;
     border-radius: 999px;
-    background: radial-gradient(circle, var(--tile-halo) 0%, rgba(0, 0, 0, 0) 68%);
-    filter: blur(42px);
+    background: radial-gradient(circle, var(--tile-halo) 0%, rgba(0, 0, 0, 0) 72%);
+    filter: blur(calc(var(--hero-grid-cell) * 0.38)) saturate(0.8);
     opacity: 0;
-    transform: scale(0.7);
+    transform: scale(0.82);
     transition:
-      opacity 820ms ease,
-      transform 980ms cubic-bezier(0.19, 1, 0.22, 1);
+      opacity 2000ms ease-in-out,
+      transform 2000ms ease-in-out,
+      filter 2000ms ease-in-out;
     pointer-events: none;
   }
 
   .hero-grid-tile.is-active {
+    transition-duration: 1500ms;
     opacity: 1;
-    filter: saturate(1.04) brightness(1.02);
+    filter: saturate(1.18) brightness(1.08);
     transform: scale(1);
   }
 
   .hero-grid-tile.is-active .hero-grid-tile-surface {
-    background: var(--tile-bg-active);
+    transition-duration: 1500ms;
+    --hero-glow-radius: 150%;
     border-color: var(--tile-border-active);
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.12),
-      0 22px 42px -30px var(--tile-glow);
+      0 0 20px var(--tile-glow-tight),
+      0 0 60px var(--tile-glow-mid),
+      0 0 100px var(--tile-glow-wide),
+      0 26px 86px -32px var(--tile-glow-mid),
+      inset 0 1px 0 rgba(255, 255, 255, 0.18),
+      inset 0 0 34px rgba(255, 255, 255, 0.08);
   }
 
   .hero-grid-tile.is-active .hero-grid-tile-surface::before {
-    opacity: 0.36;
+    transition-duration: 1500ms;
+    opacity: 0.34;
   }
 
   .hero-grid-tile.is-active .hero-grid-tile-bloom {
-    opacity: 0.72;
-    transform: scale(1.02);
-  }
-
-  .hero-grid-tile.is-exiting {
-    opacity: 1;
-    filter: saturate(0.88) brightness(0.88);
-    transform: scale(0.996);
-  }
-
-  .hero-grid-tile.is-exiting .hero-grid-tile-surface {
-    background: var(--tile-bg-exit);
-    border-color: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 18px 32px -28px var(--tile-glow);
-  }
-
-  .hero-grid-tile.is-exiting .hero-grid-tile-bloom {
-    opacity: 0.34;
+    transition-duration: 1500ms;
+    opacity: 0.88;
+    filter: blur(calc(var(--hero-grid-cell) * 0.42)) saturate(1.22);
     transform: scale(1.16);
   }
 
-  .hero-grid-tile.is-idle {
+  .hero-grid-tile.is-exiting {
     opacity: 0.96;
-    filter: saturate(0.64) brightness(0.7);
-    transform: scale(0.988);
+    filter: saturate(0.92) brightness(0.9);
+    transform: scale(1);
+  }
+
+  .hero-grid-tile.is-exiting .hero-grid-tile-surface {
+    --hero-glow-radius: 60%;
+    border-color: var(--tile-border-exit);
+    box-shadow:
+      0 0 18px var(--tile-glow),
+      0 0 46px var(--tile-glow-exit),
+      0 0 84px var(--tile-glow-exit-wide),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  .hero-grid-tile.is-exiting .hero-grid-tile-bloom {
+    opacity: 0.42;
+    filter: blur(calc(var(--hero-grid-cell) * 0.42)) saturate(1);
+    transform: scale(1.18);
+  }
+
+  .hero-grid-tile.is-exiting .hero-grid-logo,
+  .hero-grid-tile.is-exiting .hero-grid-label {
+    opacity: 0.68;
+  }
+
+  .hero-grid-tile.is-idle {
+    opacity: 0.82;
+    filter: saturate(0.5) brightness(0.64);
+    transform: scale(1);
+  }
+
+  .hero-grid-tile.is-idle .hero-grid-tile-surface {
+    box-shadow: none;
+  }
+
+  .hero-grid-tile.is-idle .hero-grid-logo,
+  .hero-grid-tile.is-idle .hero-grid-label {
+    opacity: 0.76;
   }
 
   .hero-grid-logo {
     display: inline-flex;
-    width: 1.7rem;
-    height: 1.7rem;
+    position: absolute;
+    top: calc(var(--hero-grid-cell) * 0.49);
+    left: calc(var(--hero-grid-cell) * 0.087);
+    width: calc(var(--hero-grid-cell) * 0.19);
+    height: calc(var(--hero-grid-cell) * 0.19);
     align-items: center;
     color: var(--tile-logo);
+    opacity: 1;
+    transition:
+      color 840ms ease,
+      opacity 820ms ease;
   }
 
   .hero-grid-tile--sky .hero-grid-logo {
-    width: 2.2rem;
-    height: 1.35rem;
+    width: calc(var(--hero-grid-cell) * 0.238);
+    height: calc(var(--hero-grid-cell) * 0.23);
   }
 
   .hero-grid-label {
     max-width: 100%;
     white-space: nowrap;
+    position: absolute;
+    top: calc(var(--hero-grid-cell) * 0.75);
+    left: calc(var(--hero-grid-cell) * 0.087);
     color: var(--tile-label);
     font-family: "Satoshi", "Plus Jakarta Sans", sans-serif;
-    font-size: clamp(0.78rem, 1.5vw, 0.92rem);
+    font-size: calc(var(--hero-grid-cell) * 0.143);
     font-weight: 700;
-    letter-spacing: -0.035em;
-    line-height: 1;
+    letter-spacing: -0.04em;
+    line-height: 1.4;
+    opacity: 1;
+    transition:
+      color 840ms ease,
+      opacity 820ms ease;
+  }
+
+  .hero-grid-tile.is-active .hero-grid-logo {
+    color: var(--tile-logo-active);
+    opacity: 1;
+  }
+
+  .hero-grid-tile.is-active .hero-grid-label {
+    color: var(--tile-label-active);
+    opacity: 1;
   }
 
   .hero-grid-label--netsuite {
-    font-size: clamp(0.68rem, 1.15vw, 0.8rem);
+    font-size: calc(var(--hero-grid-cell) * 0.111);
     letter-spacing: 0.08em;
   }
 
@@ -541,77 +770,34 @@
     letter-spacing: -0.024em;
   }
 
-  .hero-grid-fade {
-    position: absolute;
-    pointer-events: none;
-    z-index: 4;
-  }
-
-  .hero-grid-fade-top {
-    inset: 0 0 auto;
-    height: 18%;
-    background: linear-gradient(
-      to bottom,
-      #040507 0%,
-      rgba(4, 5, 7, 0.96) 24%,
-      rgba(4, 5, 7, 0.36) 62%,
-      rgba(4, 5, 7, 0) 100%
-    );
-  }
-
-  .hero-grid-fade-bottom {
-    inset: auto 0 0;
-    height: 28%;
-    background: linear-gradient(
-      to top,
-      #040507 8%,
-      rgba(4, 5, 7, 0.94) 32%,
-      rgba(4, 5, 7, 0.42) 64%,
-      rgba(4, 5, 7, 0) 100%
-    );
-  }
-
-  .hero-grid-fade-left {
-    inset: 0 auto 0 0;
-    width: 24%;
-    background: linear-gradient(
-      to right,
-      #040507 0%,
-      rgba(4, 5, 7, 0.72) 54%,
-      rgba(4, 5, 7, 0) 100%
-    );
-  }
-
-  .hero-grid-fade-right {
-    inset: 0 0 0 auto;
-    width: 18%;
-    background: linear-gradient(
-      to left,
-      #040507 0%,
-      rgba(4, 5, 7, 0.7) 44%,
-      rgba(4, 5, 7, 0) 100%
-    );
-  }
-
   @media (min-width: 640px) {
     .hero-grid-shell {
-      --hero-grid-cell: clamp(4.65rem, 12vw, 5.4rem);
+      --hero-grid-cell: clamp(5.7rem, 14vw, 6.75rem);
     }
   }
 
   @media (min-width: 1024px) {
     .hero-grid-shell {
-      --hero-grid-cell: clamp(4.85rem, 6.2vw, 5.5rem);
+      --hero-grid-cell: clamp(6.1rem, 6.65vw, 7.875rem);
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .hero-grid-desktop-position {
+      right: 0;
     }
   }
 
   @media (prefers-reduced-motion: reduce) {
     .hero-grid-tile,
     .hero-grid-halo,
-    .hero-grid-ghost,
+    .hero-grid-core,
+    .hero-grid-spill,
     .hero-grid-tile-bloom,
     .hero-grid-tile-surface,
-    .hero-grid-tile-surface::before {
+    .hero-grid-tile-surface::before,
+    .hero-grid-logo,
+    .hero-grid-label {
       transition: none;
     }
   }

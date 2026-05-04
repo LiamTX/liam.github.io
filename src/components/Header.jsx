@@ -26,12 +26,12 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 bg-black transition-shadow duration-300 ${
-        isScrolled ? "shadow-[0_1px_0_rgba(255,255,255,0.06)]" : ""
+      className={`fixed top-0 left-0 right-0 z-50 border-b border-white/[0.08] bg-[#0b0c12]/95 backdrop-blur-md transition-shadow duration-300 ${
+        isScrolled ? "shadow-[0_12px_40px_rgba(0,0,0,0.28)]" : ""
       }`}
     >
-      <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+      <nav className="mx-auto max-w-[1312px] px-4 sm:px-6 xl:px-0">
+        <div className="flex h-[82px] items-center justify-between">
           <a
             href="#top"
             className="flex items-center gap-3 text-white tracking-tight"
@@ -39,19 +39,19 @@ const Header = () => {
             <img
               src={logoSrc}
               alt="Cabral Labs"
-              className="h-10 w-10 shrink-0 object-contain sm:h-11 sm:w-11"
+              className="h-9 w-9 shrink-0 object-contain sm:h-10 sm:w-10"
             />
-            <span className="font-satoshi font-bold text-lg sm:text-xl">
+            <span className="font-satoshi text-lg font-bold sm:text-xl">
               Cabral Labs
             </span>
           </a>
 
-          <div className="hidden md:flex items-center gap-10">
+          <div className="hidden md:flex items-center gap-10 lg:gap-11">
             {navItems.map((item) => (
               <a
                 key={item.id}
                 href={`#${item.id}`}
-                className="text-sm text-white/80 hover:text-white transition-colors duration-200"
+                className="text-sm font-medium text-white/[0.82] transition-colors duration-200 hover:text-white"
               >
                 {item.label}
               </a>
@@ -61,9 +61,9 @@ const Header = () => {
           <div className="hidden md:block">
             <PillButton
               href="#contato"
-              variant="light"
+              variant="outline-light"
               showIcon={false}
-              className="px-5 py-2.5 border border-white/20"
+              className="border-white/70 bg-transparent px-6 py-2.5 text-white hover:bg-white/10"
             >
               Solicitar orçamento
             </PillButton>
@@ -80,7 +80,7 @@ const Header = () => {
 
         {isMenuOpen && (
           <div className="md:hidden pb-4 animate-slide-down">
-            <div className="flex flex-col gap-1 rounded-lg border border-white/10 bg-neutral-900 p-2">
+            <div className="flex flex-col gap-1 rounded-2xl border border-white/10 bg-[#0f1118] p-2 shadow-2xl">
               {navItems.map((item) => (
                 <a
                   key={item.id}

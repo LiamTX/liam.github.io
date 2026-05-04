@@ -8,59 +8,67 @@ const Hero = () => {
     <>
       <section
         id="top"
-        className="relative bg-black text-white overflow-hidden pt-32 pb-20 sm:pt-40 sm:pb-24"
+        className="relative isolate overflow-hidden bg-[#0b0d11] pt-32 pb-20 text-white sm:pt-40 sm:pb-24 lg:min-h-[770px] lg:pt-[9.75rem]"
       >
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-grid-pattern opacity-60"
+          className="hero-page-grid absolute inset-0"
         />
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-curves-decoration"
+          className="hero-page-curves absolute inset-0"
         />
         <div
           aria-hidden="true"
-          className="absolute -top-32 left-1/2 -translate-x-1/2 h-[600px] w-[600px] rounded-full bg-[var(--cl-accent-royal)]/10 blur-[140px]"
+          className="hero-page-orbital-detail absolute"
         />
+        <div
+          aria-hidden="true"
+          className="hero-page-glow absolute inset-0"
+        />
+        <div
+          aria-hidden="true"
+          className="hero-grid-desktop-layer absolute inset-x-0 top-0 bottom-0 hidden lg:block"
+        >
+          <div className="relative mx-auto h-full max-w-[1312px] px-6 xl:px-0">
+            <div className="hero-grid-desktop-position">
+              <HeroGrid />
+            </div>
+          </div>
+        </div>
 
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="grid grid-cols-1 lg:grid-cols-[1.2fr,1fr] gap-12 lg:gap-16 items-center">
-            <div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs sm:text-sm text-white/70 backdrop-blur">
-                <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-cl-success opacity-75" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-cl-success" />
-                </span>
-                Disponível para novos projetos
-              </div>
-
-              <h1 className="mt-8 font-satoshi font-extrabold uppercase text-4xl sm:text-5xl md:text-6xl lg:text-[4.25rem] leading-[1.02] tracking-tight text-white">
-                Software que funciona em produção.{" "}
-                <span className="text-white/60">Sem atalhos.</span>
-              </h1>
-
-              <p className="mt-6 text-white/70 text-base md:text-lg max-w-2xl leading-relaxed">
-                A Cabral Labs é a consultoria técnica por trás de sistemas
-                bancários, automações corporativas e soluções de IA que operam
-                no mundo real. Sete anos de engenharia com responsabilidade
-                sobre o que vai pro ar.
-              </p>
-
-              <div className="mt-10 flex flex-col sm:flex-row gap-3">
-                <PillButton href="#contato" variant="light">
-                  Solicitar orçamento
-                </PillButton>
-                <PillButton href="#cases" variant="outline-light">
-                  Ver cases
-                </PillButton>
-              </div>
-
-              <div className="mt-12 lg:hidden">
-                <HeroGrid />
-              </div>
+        <div className="relative z-10 mx-auto max-w-[1312px] px-4 sm:px-6 xl:px-0">
+          <div className="max-w-[720px]">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.045] px-3.5 py-1.5 text-xs text-white/70 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] backdrop-blur sm:text-sm">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full rounded-full bg-cl-success opacity-75 motion-safe:animate-ping" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-cl-success" />
+              </span>
+              Disponível para novos projetos
             </div>
 
-            <div className="hidden lg:flex justify-center lg:justify-end">
+            <h1 className="mt-8 font-satoshi text-4xl font-extrabold uppercase leading-[1.04] tracking-[-0.055em] text-white sm:text-5xl md:text-6xl lg:text-[4.35rem]">
+              Software que funciona em produção.{" "}
+              <span className="text-white/[0.58]">Sem atalhos.</span>
+            </h1>
+
+            <p className="mt-7 max-w-[680px] text-base leading-[1.62] text-white/[0.68] md:text-lg">
+              A Cabral Labs é a consultoria técnica por trás de sistemas
+              bancários, automações corporativas e soluções de IA que operam no
+              mundo real. Sete anos de engenharia com responsabilidade sobre o
+              que vai pro ar.
+            </p>
+
+            <div className="mt-10 flex flex-col sm:flex-row gap-3">
+              <PillButton href="#contato" variant="light">
+                Solicitar orçamento
+              </PillButton>
+              <PillButton href="#cases" variant="outline-light">
+                Ver cases
+              </PillButton>
+            </div>
+
+            <div className="mt-12 lg:hidden">
               <HeroGrid />
             </div>
           </div>
