@@ -34,10 +34,15 @@ const Contact = () => {
 
     try {
       const formData = new FormData(e.currentTarget);
-      const response = await fetch("/", {
+      const response = await fetch("/api/contact", {
         method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(formData).toString(),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          message: form.message,
+          botField: formData.get("botField") || "",
+        }),
       });
 
       if (!response.ok) {
@@ -186,13 +191,16 @@ const Contact = () => {
                 <form
                   name="contact"
                   method="POST"
-                  data-netlify="true"
-                  netlify-honeypot="bot-field"
                   onSubmit={handleSubmit}
                   className="space-y-5"
                 >
-                  <input type="hidden" name="form-name" value="contact" />
-                  <input type="hidden" name="bot-field" />
+                  <input
+                    type="text"
+                    name="botField"
+                    tabIndex="-1"
+                    autoComplete="off"
+                    className="hidden"
+                  />
                   <div>
                     <label
                       htmlFor="name"
