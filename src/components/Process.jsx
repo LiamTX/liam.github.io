@@ -46,7 +46,7 @@ const Process = () => {
               className={`fade-up ${headerVisible ? "visible" : ""}`}
             >
               <SectionTag>Processo</SectionTag>
-              <h2 className="mt-4 font-satoshi font-extrabold uppercase text-3xl sm:text-4xl md:text-5xl text-cl-text-on-light leading-[1.05] tracking-tight">
+              <h2 className="mt-4 font-satoshi font-extrabold uppercase text-3xl sm:text-4xl md:text-5xl text-cl-text-on-light leading-[1.05] tracking-normal">
                 Como o projeto acontece.
               </h2>
               <p className="mt-5 text-cl-text-on-light-muted text-base sm:text-lg leading-relaxed">
@@ -57,7 +57,7 @@ const Process = () => {
 
               <div className="mt-8">
                 <PillButton href="#contato" variant="dark">
-                  Solicitar orçamento
+                  Conversar sobre um projeto
                 </PillButton>
               </div>
             </div>
@@ -75,7 +75,7 @@ const Process = () => {
           </div>
 
           <div className="mt-8 flex justify-center">
-            <div className="inline-flex items-center gap-2 rounded-full border border-black/15 bg-white/60 px-4 py-2 text-sm text-cl-text-on-light-muted text-center">
+            <div className="inline-flex max-w-3xl items-center gap-2 rounded-full border border-black/15 bg-white/60 px-4 py-2 text-center text-sm leading-relaxed text-cl-text-on-light-muted">
               O objetivo não é complicar o projeto com etapas demais. É dar
               previsibilidade sem tirar velocidade.
             </div>

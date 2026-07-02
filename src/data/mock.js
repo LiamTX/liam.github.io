@@ -1,61 +1,62 @@
 export const services = [
   {
     id: "fintech",
-    title: "Sistemas Robustos & Fintech",
+    title: "Sistemas sob medida e plataformas críticas",
     badge: "Especialidade principal",
     description:
-      "Desenvolvemos sistemas que não podem falhar — de plataformas de pagamento com PIX e TED a aplicações de missão crítica com alta disponibilidade. Já construímos core bancário completo em produção.",
-    metric: "99.9% de disponibilidade em produção",
+      "Para empresas que precisam de sistemas confiáveis, integrações complexas, operação segura e escala. Experiência com fintech, pagamentos, onboarding, crédito e rotinas administrativas.",
+    metric:
+      "Arquitetura preparada para produção, rastreabilidade e evolução contínua.",
     icon: "Shield",
   },
   {
     id: "automacao",
-    title: "Automação Corporativa",
+    title: "Automação de processos internos",
     description:
-      "Eliminamos trabalho manual que custa tempo e dinheiro. Automações sob medida que conectam seus sistemas, com governança, rastreabilidade e ROI mensurável desde o primeiro mês.",
-    metric: "Até R$ 1M/ano em redução de custo operacional",
+      "Reduzimos tarefas manuais, retrabalho, planilhas e fluxos operacionais difíceis de rastrear, conectando sistemas e criando governança desde o início.",
+    metric: "Menos custo operacional, mais controle e decisões baseadas em dados.",
     icon: "Zap",
   },
   {
     id: "ai",
-    title: "AI Engineering",
+    title: "IA aplicada à operação",
     description:
-      "Integramos inteligência artificial onde ela gera resultado real — em produtos, operações e fluxos internos. LLMs, RAG e agentes em produção, com custo controlado e métricas de impacto.",
-    metric: "Soluções de IA em produção, não em demo",
+      "Criamos automações, assistentes e fluxos inteligentes conectados ao contexto real da empresa, com foco em produtividade, rastreabilidade e resultado mensurável.",
+    metric: "Soluções com IA em produção, não apenas demos.",
     icon: "Brain",
   },
 ];
 
 export const cases = [
   {
-    id: "paytech",
-    title: "Core bancário PayTech",
+    id: "banking-platform",
+    title: "Plataforma bancária digital em produção",
     description:
-      "Arquitetura de microserviços para sistema bancário com PIX, TED, pagamentos e onboarding digital ponta a ponta.",
+      "Desenvolvimento e evolução de uma operação financeira completa, com módulos para PIX, TED, pagamento de boletos, onboarding digital, pagamentos em lote, cadastro de beneficiários, antecipações, linhas de crédito e painel administrativo, em arquitetura preparada para operação crítica, integrações financeiras, rastreabilidade e evolução para modelo white label.",
     stack: ["Node.js", "NestJS", "Angular", "RabbitMQ", "Azure"],
     results: [
-      { metric: "99.9%", label: "disponibilidade" },
+      { metric: "99.9%", label: "disponibilidade em produção" },
       { metric: "99%", label: "aprovação automática no onboarding" },
       { metric: "-95%", label: "bugs críticos em produção" },
     ],
   },
   {
-    id: "globo",
-    title: "Automação interna Globo",
+    id: "license-governance",
+    title: "Automação de governança de licenças corporativas",
     description:
-      "Squad de Intelligent Process Automation com gestão automatizada de licenças e processos operacionais corporativos.",
-    stack: ["Azure Functions", "Node.js", "NestJS", "SPFx", "SharePoint"],
+      "Sistema interno para identificar licenças corporativas sem uso, notificar colaboradores, aplicar regras de validação e automatizar o corte de custos recorrentes que antes ficavam invisíveis na operação. Dashboards de economia, licenças cortadas, valores recuperados e acompanhamento do ciclo de decisão antes do cancelamento.",
+    stack: ["Azure Functions", "Node.js", "SPFx", "SharePoint"],
     results: [
-      { metric: "~R$ 1M/ano", label: "em redução de custo" },
-      { metric: "1 squad", label: "de inovação liderada" },
-      { metric: "100%", label: "de processos rastreáveis" },
+      { metric: "~R$ 1M/ano", label: "em redução de custo operacional" },
+      { metric: "Dashboards", label: "de economia e licenças cortadas" },
+      { metric: "Ciclo", label: "de decisão antes do cancelamento" },
     ],
   },
   {
     id: "soon",
-    title: "Próximo case",
+    title: "Próximo case: IA aplicada à operação",
     description:
-      "Estamos finalizando a documentação de um novo projeto de IA aplicada. Em breve por aqui.",
+      "Estamos documentando automações com IA aplicadas a processos internos, análise de informação e produtividade operacional.",
     soon: true,
   },
 ];
@@ -87,7 +88,13 @@ export const processSteps = [
   },
 ];
 
-export const clientLogos = ["PayTech", "Globo", "Logikee", "ZG Soluções"];
+export const clientLogos = [
+  { name: "PayTech", logo: "/paytechh_logo.jfif" },
+  { name: "Globo", logo: "/globo_logo.svg" },
+  { name: "Logikee", logo: "/logikee_logo.jfif" },
+  { name: "ZG Soluções", logo: "/zg_solucoes_logo.jfif" },
+  { name: "Personal Card", logo: "/personal_card_logo.jfif" },
+];
 
 export const contact = {
   email: "liamcabral88@gmail.com",
@@ -100,6 +107,9 @@ export const contact = {
 
 export const stats = [
   { value: "7+", label: "anos em engenharia de software" },
-  { value: "Fintech, automação e IA", label: "projetos em produção" },
+  {
+    value: "Sistemas financeiros, automação e IA",
+    label: "projetos em produção",
+  },
   { value: "Florianópolis, SC", label: "base com atendimento remoto" },
 ];

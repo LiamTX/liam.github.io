@@ -27,7 +27,7 @@ const Footer = () => {
           <div>
             <a
               href="#top"
-              className="inline-flex items-center gap-3 text-white tracking-tight"
+              className="inline-flex items-center gap-3 text-white"
             >
               <img
                 src={logoSrc}

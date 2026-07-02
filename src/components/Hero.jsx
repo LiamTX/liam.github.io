@@ -38,8 +38,8 @@ const Hero = () => {
         </div>
 
         <div className="relative z-10 mx-auto max-w-[1312px] px-4 sm:px-6 xl:px-0">
-          <div className="max-w-[720px]">
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.045] px-3.5 py-1.5 text-xs text-white/70 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] backdrop-blur sm:text-sm">
+          <div className="max-w-[720px] lg:max-w-[760px]">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.045] px-3.5 py-1.5 text-xs text-white/75 shadow-[inset_0_1px_0_rgba(255,255,255,0.05)] backdrop-blur sm:text-sm">
               <span className="relative flex h-2 w-2">
                 <span className="absolute inline-flex h-full w-full rounded-full bg-cl-success opacity-75 motion-safe:animate-ping" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-cl-success" />
@@ -47,23 +47,24 @@ const Hero = () => {
               Disponível para novos projetos
             </div>
 
-            <h1 className="mt-8 font-satoshi text-4xl font-extrabold uppercase leading-[1.04] tracking-[-0.055em] text-white sm:text-5xl md:text-6xl lg:text-[4.35rem]">
+            <h1 className="mt-7 text-balance font-satoshi text-[2.55rem] font-extrabold uppercase leading-[1.03] tracking-normal text-white sm:mt-8 sm:text-5xl md:text-6xl lg:text-[4.15rem] xl:text-[4.35rem]">
               Software que funciona em produção.{" "}
-              <span className="text-white/[0.58]">Sem atalhos.</span>
+              <span className="inline-block text-white/[0.64]">
+                Sem atalhos.
+              </span>
             </h1>
 
-            <p className="mt-7 max-w-[680px] text-base leading-[1.62] text-white/[0.68] md:text-lg">
-              A Cabral Labs é a consultoria técnica por trás de sistemas
-              bancários, automações corporativas e soluções de IA que operam no
-              mundo real. Sete anos de engenharia com responsabilidade sobre o
-              que vai pro ar.
+            <p className="mt-6 max-w-[680px] text-pretty text-base leading-[1.65] text-white/[0.74] md:mt-7 md:text-lg">
+              Sistemas financeiros, automações corporativas e soluções com IA
+              aplicada para empresas que precisam operar com segurança,
+              rastreabilidade e escala.
             </p>
 
             <div className="mt-10 flex flex-col sm:flex-row gap-3">
-              <PillButton href="#contato" variant="light">
-                Solicitar orçamento
+              <PillButton href="#contato" variant="light" className="w-full sm:w-auto">
+                Conversar sobre um projeto
               </PillButton>
-              <PillButton href="#cases" variant="outline-light">
+              <PillButton href="#cases" variant="outline-light" className="w-full sm:w-auto">
                 Ver cases
               </PillButton>
             </div>
@@ -81,13 +82,18 @@ const Hero = () => {
             <p className="text-xs uppercase tracking-[0.2em] text-cl-text-on-light-muted mb-6">
               Construído com e para
             </p>
-            <div className="flex flex-wrap items-center gap-3 sm:gap-4">
-              {clientLogos.map((logo) => (
+            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+              {clientLogos.map((client) => (
                 <div
-                  key={logo}
-                  className="flex items-center justify-center rounded-xl bg-white px-6 py-4 text-sm font-semibold text-cl-text-on-light shadow-[0_1px_2px_rgba(10,10,15,0.04)] border border-black/5 min-w-[140px]"
+                  key={client.name}
+                  className="flex items-center justify-center gap-3 rounded-xl bg-white px-6 py-4 text-sm font-semibold text-cl-text-on-light shadow-[0_1px_2px_rgba(10,10,15,0.04)] border border-black/5 min-w-[140px]"
                 >
-                  {logo}
+                  <img
+                    src={client.logo}
+                    alt={`${client.name} logo`}
+                    className="h-6 w-6 object-contain"
+                  />
+                  {client.name}
                 </div>
               ))}
             </div>

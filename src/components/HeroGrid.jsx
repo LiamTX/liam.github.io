@@ -1,35 +1,18 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
+import { BrainCircuit, ShieldCheck, Workflow } from "lucide-react";
 
 const AUTO_CYCLE_MS = 4500;
 const EXIT_MS = 80;
 const GRID_CELL_COUNT = 20;
 
-const NetsuiteMark = () => (
-  <svg viewBox="0 0 28 28" className="h-full w-full" aria-hidden="true">
-    <path
-      fill="currentColor"
-      d="M5 23V5h4.6L18.4 14V5H23v18h-4.6L9.6 14v9H5Z"
-    />
-  </svg>
-);
-
-const SalesforceMark = () => (
-  <svg viewBox="0 0 54 34" className="h-full w-full" aria-hidden="true">
-    <path
-      fill="currentColor"
-      d="M14.6 30c-5.9 0-10.6-4.8-10.6-10.7 0-5.9 4.7-10.6 10.6-10.6 1.4 0 2.7.2 3.9.7C20.4 4.7 25.6 2 31.3 2c7.6 0 13.7 6.1 13.7 13.7 3 1 5 3.8 5 7.1 0 4.2-3.3 7.2-7.7 7.2H14.6Z"
-    />
-  </svg>
-);
-
 const serviceTiles = [
   {
-    id: "netsuite",
+    id: "plataformas",
     top: 1,
     left: 1,
-    label: "NETSUITE",
+    label: "Plataformas",
     theme: "royal",
-    Logo: NetsuiteMark,
+    Logo: ShieldCheck,
     haloStrength: 1,
     focusRgb: "44 67 166",
     spillCells: [
@@ -41,12 +24,12 @@ const serviceTiles = [
     ],
   },
   {
-    id: "salesforce",
+    id: "automacao",
     top: 2,
     left: 2,
-    label: "salesforce",
+    label: "Automação",
     theme: "sky",
-    Logo: SalesforceMark,
+    Logo: Workflow,
     haloStrength: 0.96,
     focusRgb: "63 193 242",
     spillCells: [
@@ -58,11 +41,12 @@ const serviceTiles = [
     ],
   },
   {
-    id: "ai-services",
+    id: "ia-aplicada",
     top: 3,
     left: 1,
-    label: "AI services",
+    label: "IA aplicada",
     theme: "green",
+    Logo: BrainCircuit,
     haloStrength: 0.92,
     focusRgb: "142 239 85",
     spillCells: [
@@ -232,7 +216,11 @@ const HeroGrid = () => {
                   <div className="hero-grid-tile-surface">
                     {Logo ? (
                       <span className="hero-grid-logo">
-                        <Logo />
+                        <Logo
+                          className="h-full w-full"
+                          aria-hidden="true"
+                          strokeWidth={1.8}
+                        />
                       </span>
                     ) : null}
 

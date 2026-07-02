@@ -48,7 +48,7 @@
     --cl-dark-card-border: #1a1a22;
     --cl-accent-royal: #2340d8;
     --cl-text-on-light: #0a0a0f;
-    --cl-text-on-light-muted: #6b6b78;
+    --cl-text-on-light-muted: #565865;
   }
 }
 
@@ -712,19 +712,14 @@
     position: absolute;
     top: calc(var(--hero-grid-cell) * 0.49);
     left: calc(var(--hero-grid-cell) * 0.087);
-    width: calc(var(--hero-grid-cell) * 0.19);
-    height: calc(var(--hero-grid-cell) * 0.19);
+    width: calc(var(--hero-grid-cell) * 0.22);
+    height: calc(var(--hero-grid-cell) * 0.22);
     align-items: center;
     color: var(--tile-logo);
     opacity: 1;
     transition:
       color 840ms ease,
       opacity 820ms ease;
-  }
-
-  .hero-grid-tile--sky .hero-grid-logo {
-    width: calc(var(--hero-grid-cell) * 0.238);
-    height: calc(var(--hero-grid-cell) * 0.23);
   }
 
   .hero-grid-label {
@@ -755,19 +750,19 @@
     opacity: 1;
   }
 
-  .hero-grid-label--netsuite {
-    font-size: calc(var(--hero-grid-cell) * 0.111);
-    letter-spacing: 0.08em;
-  }
-
-  .hero-grid-label--salesforce {
-    font-weight: 600;
-    letter-spacing: -0.03em;
-    text-transform: lowercase;
-  }
-
-  .hero-grid-label--ai-services {
+  .hero-grid-label--plataformas {
+    font-size: calc(var(--hero-grid-cell) * 0.125);
     letter-spacing: -0.024em;
+  }
+
+  .hero-grid-label--automacao {
+    font-size: calc(var(--hero-grid-cell) * 0.133);
+    letter-spacing: -0.026em;
+  }
+
+  .hero-grid-label--ia-aplicada {
+    font-size: calc(var(--hero-grid-cell) * 0.13);
+    letter-spacing: -0.026em;
   }
 
   @media (min-width: 640px) {

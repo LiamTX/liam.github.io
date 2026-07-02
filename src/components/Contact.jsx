@@ -19,14 +19,39 @@ const Contact = () => {
   const [rightRef, rightVisible] = useIntersectionObserver();
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
 
   const handleChange = (e) => {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setSubmitError("");
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
+    setSubmitError("");
+    setIsSubmitting(true);
+
+    try {
+      const formData = new FormData(e.currentTarget);
+      const response = await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData).toString(),
+      });
+
+      if (!response.ok) {
+        throw new Error("Form submission failed");
+      }
+
+      setSubmitted(true);
+    } catch (error) {
+      setSubmitError(
+        "Nao foi possivel enviar sua mensagem agora. Tente novamente em alguns instantes."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -39,7 +64,7 @@ const Contact = () => {
               className={`fade-up ${leftVisible ? "visible" : ""}`}
             >
               <SectionTag>Contato</SectionTag>
-              <h2 className="mt-4 font-satoshi font-extrabold uppercase text-3xl sm:text-4xl md:text-5xl text-cl-text-on-light leading-[1.05] tracking-tight">
+              <h2 className="mt-4 font-satoshi font-extrabold uppercase text-3xl sm:text-4xl md:text-5xl text-cl-text-on-light leading-[1.05] tracking-normal">
                 Vamos conversar sobre o seu cenário?
               </h2>
               <p className="mt-5 text-cl-text-on-light-muted text-base sm:text-lg leading-relaxed max-w-xl">
@@ -71,16 +96,16 @@ const Contact = () => {
                 <div className="relative space-y-5">
                   <a
                     href={`mailto:${contact.email}`}
-                    className="flex items-center gap-4 group"
+                    className="group flex items-center gap-4 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
                   >
                     <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-white/5 border border-white/10 text-white group-hover:border-white/30 transition-colors">
                       <Mail size={18} />
                     </span>
-                    <div>
-                      <div className="text-[10px] uppercase tracking-[0.2em] text-white/50">
+                    <div className="min-w-0">
+                      <div className="text-[10px] uppercase tracking-[0.2em] text-white/60">
                         Email
                       </div>
-                      <div className="text-sm text-white/90 group-hover:text-white transition-colors">
+                      <div className="break-words text-sm text-white/90 transition-colors group-hover:text-white">
                         {contact.email}
                       </div>
                     </div>
@@ -88,16 +113,16 @@ const Contact = () => {
 
                   <a
                     href={`tel:${contact.phone.replace(/\D/g, "")}`}
-                    className="flex items-center gap-4 group"
+                    className="group flex items-center gap-4 rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
                   >
                     <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-white/5 border border-white/10 text-white group-hover:border-white/30 transition-colors">
                       <Phone size={18} />
                     </span>
-                    <div>
-                      <div className="text-[10px] uppercase tracking-[0.2em] text-white/50">
+                    <div className="min-w-0">
+                      <div className="text-[10px] uppercase tracking-[0.2em] text-white/60">
                         Telefone
                       </div>
-                      <div className="text-sm text-white/90 group-hover:text-white transition-colors">
+                      <div className="text-sm text-white/90 transition-colors group-hover:text-white">
                         {contact.phone}
                       </div>
                     </div>
@@ -107,8 +132,8 @@ const Contact = () => {
                     <span className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-white/5 border border-white/10 text-white">
                       <MapPin size={18} />
                     </span>
-                    <div>
-                      <div className="text-[10px] uppercase tracking-[0.2em] text-white/50">
+                    <div className="min-w-0">
+                      <div className="text-[10px] uppercase tracking-[0.2em] text-white/60">
                         Localização
                       </div>
                       <div className="text-sm text-white/90">
@@ -125,7 +150,7 @@ const Contact = () => {
                   target="_blank"
                   rel="noreferrer noopener"
                   aria-label="LinkedIn"
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-black/15 bg-white text-cl-text-on-light hover:border-black/40 transition-colors"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-black/15 bg-white text-cl-text-on-light transition-colors hover:border-black/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--cl-accent-royal)] focus-visible:ring-offset-2"
                 >
                   <Linkedin size={18} />
                 </a>
@@ -134,7 +159,7 @@ const Contact = () => {
                   target="_blank"
                   rel="noreferrer noopener"
                   aria-label="GitHub"
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-black/15 bg-white text-cl-text-on-light hover:border-black/40 transition-colors"
+                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-black/15 bg-white text-cl-text-on-light transition-colors hover:border-black/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--cl-accent-royal)] focus-visible:ring-offset-2"
                 >
                   <Github size={18} />
                 </a>
@@ -158,7 +183,16 @@ const Contact = () => {
                   </p>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-5">
+                <form
+                  name="contact"
+                  method="POST"
+                  data-netlify="true"
+                  netlify-honeypot="bot-field"
+                  onSubmit={handleSubmit}
+                  className="space-y-5"
+                >
+                  <input type="hidden" name="form-name" value="contact" />
+                  <input type="hidden" name="bot-field" />
                   <div>
                     <label
                       htmlFor="name"
@@ -173,6 +207,7 @@ const Contact = () => {
                       required
                       value={form.name}
                       onChange={handleChange}
+                      disabled={isSubmitting}
                       placeholder="Seu nome ou nome da empresa"
                       className="w-full rounded-lg border border-black/10 bg-cl-light-bg px-3.5 py-2.5 text-sm text-cl-text-on-light placeholder:text-cl-text-on-light-muted/70 focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-colors"
                     />
@@ -192,6 +227,7 @@ const Contact = () => {
                       required
                       value={form.email}
                       onChange={handleChange}
+                      disabled={isSubmitting}
                       placeholder="voce@empresa.com"
                       className="w-full rounded-lg border border-black/10 bg-cl-light-bg px-3.5 py-2.5 text-sm text-cl-text-on-light placeholder:text-cl-text-on-light-muted/70 focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-colors"
                     />
@@ -211,18 +247,28 @@ const Contact = () => {
                       rows={5}
                       value={form.message}
                       onChange={handleChange}
+                      disabled={isSubmitting}
                       placeholder="Conta brevemente o problema, contexto e prazo desejado."
                       className="w-full rounded-lg border border-black/10 bg-cl-light-bg px-3.5 py-2.5 text-sm text-cl-text-on-light placeholder:text-cl-text-on-light-muted/70 focus:outline-none focus:border-black focus:ring-1 focus:ring-black transition-colors resize-none"
                     />
                   </div>
 
+                  {submitError && (
+                    <p className="text-sm text-red-600" role="alert">
+                      {submitError}
+                    </p>
+                  )}
+
                   <PillButton
                     type="submit"
                     variant="dark"
                     icon={Send}
-                    className="w-full"
+                    disabled={isSubmitting}
+                    className="w-full disabled:cursor-not-allowed disabled:opacity-70"
                   >
-                    Enviar resumo do projeto
+                    {isSubmitting
+                      ? "Enviando..."
+                      : "Enviar resumo do projeto"}
                   </PillButton>
                 </form>
               )}

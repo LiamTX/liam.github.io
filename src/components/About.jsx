@@ -17,27 +17,38 @@ const About = () => {
               className={`fade-up ${leftVisible ? "visible" : ""}`}
             >
               <SectionTag>Sobre</SectionTag>
-              <h2 className="mt-4 font-satoshi font-extrabold uppercase text-3xl sm:text-4xl md:text-5xl text-cl-text-on-light leading-[1.05] tracking-tight">
+              <h2 className="mt-4 font-satoshi font-extrabold uppercase text-3xl sm:text-4xl md:text-5xl text-cl-text-on-light leading-[1.05] tracking-normal">
                 Quem vai tocar o seu projeto.
               </h2>
 
-              <div className="mt-6 space-y-4 text-cl-text-on-light-muted text-base sm:text-lg leading-relaxed">
+              <div className="mt-6 max-w-xl space-y-4 text-base leading-relaxed text-cl-text-on-light-muted sm:text-lg">
                 <p>
-                  A Cabral Labs nasceu da prática de construir software em
-                  produção para operações que exigem responsabilidade técnica
-                  de verdade.
+                  A Cabral Labs é conduzida por Liam Cabral, engenheiro de
+                  software com mais de 7 anos de experiência criando sistemas em
+                  produção para operações financeiras e automações corporativas.
                 </p>
                 <p>
-                  Aqui, quem conversa com você também participa das decisões
-                  técnicas e da execução. Isso reduz ruído, acelera
-                  alinhamentos e evita a distância comum entre comercial e
-                  entrega.
+                  Aqui, você conversa direto com quem entende o problema, define
+                  a arquitetura e acompanha a execução. Sem camadas
+                  desnecessárias entre decisão técnica e entrega.
                 </p>
-                <p>
-                  O foco está em projetos onde arquitetura, integração e
-                  qualidade de implementação fazem diferença no resultado
-                  final.
-                </p>
+                <ul className="space-y-2.5 text-sm text-cl-text-on-light sm:text-base">
+                  <li className="flex gap-3">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--cl-accent-royal)]" />
+                    <span>
+                      Experiência com sistemas financeiros, integrações e
+                      automações
+                    </span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--cl-accent-royal)]" />
+                    <span>Atuação em produtos reais, não apenas protótipos</span>
+                  </li>
+                  <li className="flex gap-3">
+                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--cl-accent-royal)]" />
+                    <span>Entrega próxima, técnica e orientada ao resultado</span>
+                  </li>
+                </ul>
               </div>
 
               <div className="mt-8 inline-flex items-center gap-2 rounded-full border border-cl-success/40 bg-cl-success/10 px-3 py-1.5 text-sm text-cl-success">
@@ -66,10 +77,26 @@ const About = () => {
                 <p className="text-[10px] uppercase tracking-[0.2em] text-white/55">
                   Cabral Labs em contexto
                 </p>
-                <div className="mt-6 space-y-6 divide-y divide-white/10">
+                <div className="mx-auto mt-6 w-full max-w-[360px] overflow-hidden rounded-2xl border border-white/10 bg-white/[0.04] p-1.5 shadow-[0_24px_80px_rgba(0,0,0,0.28)]">
+                  <div className="aspect-square overflow-hidden rounded-[1rem] bg-white/5">
+                    <img
+                      src="/perfil.png"
+                      alt="Liam Cabral, responsável técnico pela Cabral Labs"
+                      className="h-full w-full object-cover object-center"
+                      loading="lazy"
+                    />
+                  </div>
+                </div>
+                <div className="mt-7 space-y-6 divide-y divide-white/10">
                   {stats.map((s, i) => (
                     <div key={s.label} className={i === 0 ? "" : "pt-6"}>
-                      <div className="font-satoshi font-semibold text-3xl sm:text-4xl text-white">
+                      <div
+                        className={`font-satoshi font-semibold leading-tight text-white ${
+                          s.value.length > 18
+                            ? "text-2xl sm:text-3xl"
+                            : "text-3xl sm:text-4xl"
+                        }`}
+                      >
                         {s.value}
                       </div>
                       <div className="mt-2 text-[10px] uppercase tracking-[0.2em] text-white/55">

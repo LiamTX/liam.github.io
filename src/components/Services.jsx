@@ -18,7 +18,7 @@ const ServiceCard = ({ service, index }) => {
     <div
       ref={ref}
       style={{ transitionDelay: `${index * 120}ms` }}
-      className={`fade-up ${isVisible ? "visible" : ""} group relative overflow-hidden rounded-2xl bg-cl-dark-card border border-cl-dark-card-border p-7 sm:p-8 transition-colors duration-300 hover:border-white/20 min-h-[360px] flex flex-col`}
+      className={`fade-up ${isVisible ? "visible" : ""} group relative overflow-hidden rounded-2xl bg-cl-dark-card border border-cl-dark-card-border p-6 transition-colors duration-300 hover:border-white/20 sm:p-7 lg:p-8 min-h-[340px] lg:min-h-[380px] flex flex-col`}
     >
       <div
         aria-hidden="true"
@@ -30,28 +30,30 @@ const ServiceCard = ({ service, index }) => {
       />
 
       <div className="relative flex-1 flex flex-col">
-        {service.badge && (
-          <div className="absolute -top-1 right-0 rounded-full border border-[var(--cl-accent-royal)]/50 bg-[var(--cl-accent-royal)]/15 px-3 py-1 text-[10px] uppercase tracking-widest font-medium text-white">
-            {service.badge}
+        <div className="flex items-start justify-between gap-4">
+          <div className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white">
+            <Icon size={22} strokeWidth={1.75} />
           </div>
-        )}
 
-        <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white">
-          <Icon size={22} strokeWidth={1.75} />
+          {service.badge && (
+            <div className="rounded-full border border-[var(--cl-accent-royal)]/50 bg-[var(--cl-accent-royal)]/15 px-3 py-1 text-[10px] uppercase tracking-widest font-medium text-white/90">
+              {service.badge}
+            </div>
+          )}
         </div>
 
-        <h3 className="mt-8 font-satoshi font-bold text-2xl text-white">
+        <h3 className="mt-8 font-satoshi font-bold text-xl leading-tight text-white sm:text-2xl">
           {service.title}
         </h3>
-        <p className="mt-3 text-sm text-white/65 leading-relaxed">
+        <p className="mt-3 text-sm leading-relaxed text-white/[0.72]">
           {service.description}
         </p>
 
         <div className="mt-auto pt-6 border-t border-white/10">
-          <p className="text-[10px] uppercase tracking-[0.2em] text-white/45">
+          <p className="text-[10px] uppercase tracking-[0.2em] text-white/[0.58]">
             Resultado
           </p>
-          <p className="mt-1.5 text-sm font-medium text-white">
+          <p className="mt-1.5 text-sm font-medium leading-relaxed text-white/95">
             {service.metric}
           </p>
         </div>
@@ -72,7 +74,7 @@ const Services = () => {
             className={`fade-up ${headerVisible ? "visible" : ""} max-w-2xl`}
           >
             <SectionTag>Serviços</SectionTag>
-            <h2 className="mt-4 font-satoshi font-extrabold uppercase text-3xl sm:text-4xl md:text-5xl text-cl-text-on-light leading-[1.05] tracking-tight">
+            <h2 className="mt-4 font-satoshi font-extrabold uppercase text-3xl sm:text-4xl md:text-5xl text-cl-text-on-light leading-[1.05] tracking-normal">
               O que construímos.
             </h2>
             <p className="mt-5 text-cl-text-on-light-muted text-base sm:text-lg leading-relaxed">
@@ -81,7 +83,7 @@ const Services = () => {
             </p>
           </div>
 
-          <div className="mt-12 grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3 xl:gap-6">
             {services.map((service, i) => (
               <ServiceCard key={service.id} service={service} index={i} />
             ))}
