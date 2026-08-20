@@ -1,5 +1,5 @@
 import React from "react";
-import { Shield, Zap, Brain } from "lucide-react";
+import { Shield, Zap, RefreshCw } from "lucide-react";
 import { services } from "../data/mock";
 import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
 import SectionTag from "./ui/SectionTag";
@@ -7,7 +7,7 @@ import SectionTag from "./ui/SectionTag";
 const iconMap = {
   Shield,
   Zap,
-  Brain,
+  RefreshCw,
 };
 
 const ServiceCard = ({ service, index }) => {
@@ -75,11 +75,12 @@ const Services = () => {
           >
             <SectionTag>Serviços</SectionTag>
             <h2 className="mt-4 font-satoshi font-extrabold uppercase text-3xl sm:text-4xl md:text-5xl text-cl-text-on-light leading-[1.05] tracking-normal">
-              O que construímos.
+              Onde a Cabral Labs entra.
             </h2>
             <p className="mt-5 text-cl-text-on-light-muted text-base sm:text-lg leading-relaxed">
-              Cada projeto que aceitamos tem uma coisa em comum: precisa
-              funcionar em produção, com escala e sem surpresas.
+              Os projetos podem pertencer a diferentes setores, desde que
+              envolvam sistemas, integrações ou processos relevantes para a
+              operação.
             </p>
           </div>
 

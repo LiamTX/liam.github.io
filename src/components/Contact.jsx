@@ -4,7 +4,6 @@ import {
   Phone,
   MapPin,
   Linkedin,
-  Github,
   MessageCircle,
   Send,
   CheckCircle2,
@@ -70,11 +69,12 @@ const Contact = () => {
             >
               <SectionTag>Contato</SectionTag>
               <h2 className="mt-4 font-satoshi font-extrabold uppercase text-3xl sm:text-4xl md:text-5xl text-cl-text-on-light leading-[1.05] tracking-normal">
-                Vamos conversar sobre o seu cenário?
+                Vamos entender o seu cenário?
               </h2>
               <p className="mt-5 text-cl-text-on-light-muted text-base sm:text-lg leading-relaxed max-w-xl">
-                Para propostas e projetos, use o formulário. Se preferir
-                começar de forma mais rápida, fale no WhatsApp.
+                Envie um resumo do problema, contexto e urgência. A Cabral Labs
+                responderá com os próximos passos e, quando houver aderência,
+                combinará uma conversa inicial de 30 minutos.
               </p>
 
               <div className="mt-8">
@@ -85,7 +85,7 @@ const Contact = () => {
                   target="_blank"
                   rel="noreferrer noopener"
                 >
-                  Falar no WhatsApp
+                  Conversar pelo WhatsApp
                 </PillButton>
               </div>
 
@@ -159,15 +159,6 @@ const Contact = () => {
                 >
                   <Linkedin size={18} />
                 </a>
-                <a
-                  href={contact.github}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  aria-label="GitHub"
-                  className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-black/15 bg-white text-cl-text-on-light transition-colors hover:border-black/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--cl-accent-royal)] focus-visible:ring-offset-2"
-                >
-                  <Github size={18} />
-                </a>
               </div>
             </div>
 
@@ -181,10 +172,11 @@ const Contact = () => {
                     <CheckCircle2 size={28} />
                   </span>
                   <h3 className="mt-5 font-satoshi font-bold text-xl text-cl-text-on-light">
-                    Recebi sua mensagem.
+                    Recebemos seu cenário.
                   </h3>
                   <p className="mt-2 text-sm text-cl-text-on-light-muted max-w-xs">
-                    Vou responder no email informado com os próximos passos.
+                    A Cabral Labs responderá no e-mail informado com os próximos
+                    passos.
                   </p>
                 </div>
               ) : (
@@ -276,7 +268,7 @@ const Contact = () => {
                   >
                     {isSubmitting
                       ? "Enviando..."
-                      : "Enviar resumo do projeto"}
+                      : "Solicitar conversa inicial"}
                   </PillButton>
                 </form>
               )}

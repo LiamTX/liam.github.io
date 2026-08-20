@@ -57,7 +57,7 @@ const Process = () => {
 
               <div className="mt-8">
                 <PillButton href="#contato" variant="dark">
-                  Conversar sobre um projeto
+                  Solicitar conversa inicial
                 </PillButton>
               </div>
             </div>

@@ -55,14 +55,14 @@ const Hero = () => {
             </h1>
 
             <p className="mt-6 max-w-[680px] text-pretty text-base leading-[1.65] text-white/[0.74] md:mt-7 md:text-lg">
-              Sistemas financeiros, automações corporativas e soluções com IA
-              aplicada para empresas que precisam operar com segurança,
-              rastreabilidade e escala.
+              Da descoberta à entrega, a Cabral Labs constrói, integra e evolui
+              sistemas para transformar processos complexos em operações mais
+              eficientes, rastreáveis e previsíveis.
             </p>
 
             <div className="mt-10 flex flex-col sm:flex-row gap-3">
               <PillButton href="#contato" variant="light" className="w-full sm:w-auto">
-                Conversar sobre um projeto
+                Solicitar conversa inicial
               </PillButton>
               <PillButton href="#cases" variant="outline-light" className="w-full sm:w-auto">
                 Ver cases
@@ -80,7 +80,7 @@ const Hero = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="rounded-3xl bg-cl-light-bg-soft px-6 py-8 sm:px-10 sm:py-10">
             <p className="text-xs uppercase tracking-[0.2em] text-cl-text-on-light-muted mb-6">
-              Construído com e para
+              Projetos desenvolvidos para empresas como
             </p>
             <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
               {clientLogos.map((client) => (

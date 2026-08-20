@@ -65,7 +65,7 @@ const Header = () => {
               showIcon={false}
               className="border-white/70 bg-transparent px-6 py-2.5 text-white hover:bg-white/10"
             >
-              Conversar sobre um projeto
+              Solicitar conversa inicial
             </PillButton>
           </div>
 
@@ -97,7 +97,7 @@ const Header = () => {
                 onClick={closeMenu}
                 className="mt-2 inline-flex items-center justify-center rounded-full bg-white px-4 py-2 text-sm font-medium text-black transition-colors hover:bg-neutral-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
               >
-                Conversar sobre um projeto
+                Solicitar conversa inicial
               </a>
             </div>
           </div>

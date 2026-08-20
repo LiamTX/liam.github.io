@@ -1,46 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { cases } from "../data/mock";
 import { useIntersectionObserver } from "../hooks/useIntersectionObserver";
+import FintechShowcase from "./FintechShowcase";
 import SectionTag from "./ui/SectionTag";
 
-const CaseCard = ({ item, index }) => {
+const CaseCard = ({ item, index, expanded, onToggle }) => {
   const [ref, isVisible] = useIntersectionObserver();
-  const isLicenseCase = item.id === "license-governance";
-
-  if (item.soon) {
-    return (
-      <div
-        ref={ref}
-        style={{ transitionDelay: `${index * 120}ms` }}
-        className={`fade-up ${isVisible ? "visible" : ""} relative flex h-full min-h-[380px] flex-col overflow-hidden rounded-2xl border border-dashed border-white/20 bg-cl-dark-card p-7 text-center transition-colors duration-300 hover:border-white/30 sm:p-8`}
-      >
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 bg-grid-pattern opacity-40"
-        />
-        <div
-          aria-hidden="true"
-          className="absolute inset-0 bg-curves-decoration opacity-60"
-        />
-
-        <div className="relative flex flex-1 flex-col items-center justify-center">
-          <p className="mb-6 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[10px] font-medium uppercase tracking-[0.2em] text-white/60">
-            Case em documentação
-          </p>
-          <span className="relative mb-5 flex h-3 w-3">
-            <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-[var(--cl-accent-royal)] opacity-60" />
-            <span className="relative inline-flex h-3 w-3 rounded-full bg-[var(--cl-accent-royal)]" />
-          </span>
-          <h3 className="max-w-xs font-satoshi text-xl font-bold leading-tight text-white sm:text-2xl">
-            {item.title}
-          </h3>
-          <p className="mt-3 max-w-xs text-sm leading-relaxed text-white/[0.72]">
-            {item.description}
-          </p>
-        </div>
-      </div>
-    );
-  }
+  const isFinanceCase = item.id === "banking-platform";
+  const galleryId = `${item.id}-gallery`;
 
   return (
     <div
@@ -61,24 +28,42 @@ const CaseCard = ({ item, index }) => {
         <h3 className="font-satoshi text-xl font-bold leading-tight text-white sm:text-2xl">
           {item.title}
         </h3>
-        <p className="mt-3 text-sm leading-relaxed text-white/[0.72]">
-          {item.description}
-        </p>
+
+        <div className="mt-5 space-y-4">
+          <div>
+            <p className="text-[10px] uppercase tracking-[0.2em] text-white/[0.58]">
+              Contexto
+            </p>
+            <p className="mt-1 text-sm leading-relaxed text-white/[0.72]">
+              {item.context}
+            </p>
+          </div>
+          <div>
+            <p className="text-[10px] uppercase tracking-[0.2em] text-white/[0.58]">
+              Atuação da Cabral Labs
+            </p>
+            <p className="mt-1 text-sm leading-relaxed text-white/[0.72]">
+              {item.role}
+            </p>
+          </div>
+          <div>
+            <p className="text-[10px] uppercase tracking-[0.2em] text-white/[0.58]">
+              Colaboração
+            </p>
+            <p className="mt-1 text-sm leading-relaxed text-white/[0.72]">
+              {item.collaboration}
+            </p>
+          </div>
+        </div>
 
         <div className="mt-auto border-t border-white/10 pt-6">
           <p className="text-[10px] uppercase tracking-[0.2em] text-white/[0.58]">
-            Resultado
+            Resultados
           </p>
           <div className="mt-4 grid grid-cols-3 gap-4">
-            {item.results.map((r, resultIndex) => (
+            {item.results.map((r) => (
               <div key={r.label}>
-                <div
-                  className={`font-satoshi text-xl font-semibold leading-tight sm:text-2xl ${
-                    isLicenseCase && resultIndex === 0
-                      ? "text-cl-success"
-                      : "text-white"
-                  }`}
-                >
+                <div className="font-satoshi text-xl font-semibold leading-tight text-white sm:text-2xl">
                   {r.metric}
                 </div>
                 <div className="mt-1 text-[10px] uppercase tracking-[0.15em] text-white/60 leading-tight">
@@ -88,13 +73,36 @@ const CaseCard = ({ item, index }) => {
             ))}
           </div>
         </div>
+
+        {isFinanceCase && (
+          <button
+            type="button"
+            onClick={onToggle}
+            aria-expanded={expanded}
+            aria-controls={galleryId}
+            className="mt-6 inline-flex items-center justify-center gap-2 self-start rounded-full border border-white/20 bg-white/5 px-5 py-2.5 text-sm font-medium text-white transition-colors hover:border-white/40 hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--cl-accent-royal)] focus-visible:ring-offset-2 focus-visible:ring-offset-cl-dark-card"
+          >
+            {expanded ? "Recolher detalhes" : "Ver projeto em detalhes"}
+          </button>
+        )}
+
+        {isFinanceCase && expanded && (
+          <div id={galleryId} className="mt-6">
+            <FintechShowcase />
+          </div>
+        )}
       </div>
     </div>
   );
 };
 
 const Cases = () => {
+  const [expandedCase, setExpandedCase] = useState(null);
   const [headerRef, headerVisible] = useIntersectionObserver();
+
+  const toggleCase = (id) => {
+    setExpandedCase((prev) => (prev === id ? null : id));
+  };
 
   return (
     <section id="cases" className="bg-cl-light-bg py-6 sm:py-8">
@@ -109,14 +117,21 @@ const Cases = () => {
               O que já entregamos.
             </h2>
             <p className="mt-5 text-cl-text-on-light-muted text-base sm:text-lg leading-relaxed">
-              Não vendemos promessa. Os números abaixo vêm de projetos reais
-              colocados em produção.
+              Projetos reais colocados em produção, com atribuição clara entre
+              o que foi desenvolvido pela Cabral Labs e o que foi construído em
+              colaboração.
             </p>
           </div>
 
-          <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3 xl:gap-6">
+          <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2">
             {cases.map((c, i) => (
-              <CaseCard key={c.id} item={c} index={i} />
+              <CaseCard
+                key={c.id}
+                item={c}
+                index={i}
+                expanded={expandedCase === c.id}
+                onToggle={() => toggleCase(c.id)}
+              />
             ))}
           </div>
         </div>

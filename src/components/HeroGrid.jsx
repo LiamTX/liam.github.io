@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { BrainCircuit, ShieldCheck, Workflow } from "lucide-react";
+import { Link2, ShieldCheck, Workflow } from "lucide-react";
 
 const AUTO_CYCLE_MS = 4500;
 const EXIT_MS = 80;
@@ -7,10 +7,10 @@ const GRID_CELL_COUNT = 20;
 
 const serviceTiles = [
   {
-    id: "plataformas",
+    id: "sistemas",
     top: 1,
     left: 1,
-    label: "Plataformas",
+    label: "Sistemas",
     theme: "royal",
     Logo: ShieldCheck,
     haloStrength: 1,
@@ -24,12 +24,12 @@ const serviceTiles = [
     ],
   },
   {
-    id: "automacao",
+    id: "integracoes",
     top: 2,
     left: 2,
-    label: "Automação",
+    label: "Integrações",
     theme: "sky",
-    Logo: Workflow,
+    Logo: Link2,
     haloStrength: 0.96,
     focusRgb: "63 193 242",
     spillCells: [
@@ -41,12 +41,12 @@ const serviceTiles = [
     ],
   },
   {
-    id: "ia-aplicada",
+    id: "automacao",
     top: 3,
     left: 1,
-    label: "IA aplicada",
+    label: "Automação",
     theme: "green",
-    Logo: BrainCircuit,
+    Logo: Workflow,
     haloStrength: 0.92,
     focusRgb: "142 239 85",
     spillCells: [

@@ -24,29 +24,27 @@ const About = () => {
               <div className="mt-6 max-w-xl space-y-4 text-base leading-relaxed text-cl-text-on-light-muted sm:text-lg">
                 <p>
                   A Cabral Labs é conduzida por Liam Cabral, engenheiro de
-                  software com mais de 7 anos de experiência criando sistemas em
-                  produção para operações financeiras e automações corporativas.
+                  software com mais de 7 anos de experiência, e por um time
+                  enxuto que conecta descoberta, requisitos, desenvolvimento, QA
+                  e entrega.
                 </p>
                 <p>
-                  Aqui, você conversa direto com quem entende o problema, define
-                  a arquitetura e acompanha a execução. Sem camadas
-                  desnecessárias entre decisão técnica e entrega.
+                  Essa estrutura mantém o cliente próximo das decisões e
+                  permite recorrer a especialistas, como infraestrutura, quando
+                  o escopo do projeto exige.
                 </p>
                 <ul className="space-y-2.5 text-sm text-cl-text-on-light sm:text-base">
                   <li className="flex gap-3">
                     <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--cl-accent-royal)]" />
                     <span>
-                      Experiência com sistemas financeiros, integrações e
-                      automações
+                      Descoberta, requisitos e QA integrados à execução
                     </span>
                   </li>
                   <li className="flex gap-3">
                     <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--cl-accent-royal)]" />
-                    <span>Atuação em produtos reais, não apenas protótipos</span>
-                  </li>
-                  <li className="flex gap-3">
-                    <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--cl-accent-royal)]" />
-                    <span>Entrega próxima, técnica e orientada ao resultado</span>
+                    <span>
+                      Contato próximo com quem toma as decisões técnicas
+                    </span>
                   </li>
                 </ul>
               </div>

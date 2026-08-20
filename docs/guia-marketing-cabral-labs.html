@@ -1,0 +1,582 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Guia de Marketing Inicial — Cabral Labs</title>
+  <style>
+    :root { --ink:#101117; --muted:#5d6270; --line:#dfe2ea; --soft:#f3f4f7; --blue:#2340d8; --green:#168a55; --dark:#0b0d11; }
+    * { box-sizing:border-box; }
+    html { background:#dfe2e8; }
+    body { margin:0; color:var(--ink); font-family:Arial, Helvetica, sans-serif; font-size:10.2pt; line-height:1.48; }
+    .page { width:210mm; min-height:297mm; margin:0 auto 8mm; padding:16mm 17mm 17mm; background:white; position:relative; page-break-after:always; overflow:hidden; }
+    .page:last-child { page-break-after:auto; }
+    .cover { background:var(--dark); color:white; display:flex; flex-direction:column; justify-content:space-between; }
+    .cover::after { content:""; position:absolute; inset:0; background:radial-gradient(circle at 85% 20%,rgba(35,64,216,.42),transparent 32%),linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px); background-size:auto,24px 24px,24px 24px; pointer-events:none; }
+    .cover > * { position:relative; z-index:1; }
+    .brand { display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:.02em; }
+    .brand img { width:34px; height:34px; object-fit:contain; }
+    h1 { font-size:36pt; line-height:1.02; letter-spacing:-.045em; margin:0; max-width:150mm; text-transform:uppercase; }
+    h2 { font-size:23pt; line-height:1.05; letter-spacing:-.035em; margin:0 0 7mm; text-transform:uppercase; }
+    h3 { font-size:15pt; line-height:1.18; margin:7mm 0 3mm; }
+    h4 { font-size:11.5pt; margin:5mm 0 2mm; }
+    p { margin:0 0 3.2mm; }
+    ul,ol { margin:2mm 0 4mm 5mm; padding-left:4mm; }
+    li { margin-bottom:1.5mm; }
+    .eyebrow { color:var(--blue); font-size:8pt; font-weight:700; text-transform:uppercase; letter-spacing:.18em; margin-bottom:3mm; }
+    .cover .eyebrow { color:#9db0ff; }
+    .lead { font-size:14pt; line-height:1.45; color:#d6d9e1; max-width:145mm; }
+    .muted { color:var(--muted); }
+    .cover-foot { color:#9fa5b4; font-size:9pt; display:flex; justify-content:space-between; border-top:1px solid rgba(255,255,255,.14); padding-top:5mm; }
+    .callout { border-left:4px solid var(--blue); background:#f2f4ff; padding:4mm 5mm; margin:5mm 0; border-radius:0 3mm 3mm 0; }
+    .warning { border-left-color:#d67a23; background:#fff7ed; }
+    .success { border-left-color:var(--green); background:#effaf5; }
+    .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:5mm; }
+    .grid3 { display:grid; grid-template-columns:repeat(3,1fr); gap:4mm; }
+    .card { border:1px solid var(--line); border-radius:4mm; padding:5mm; background:white; }
+    .card.dark { background:var(--dark); color:white; border-color:var(--dark); }
+    .metric { font-size:22pt; font-weight:800; letter-spacing:-.04em; color:var(--blue); }
+    .tag { display:inline-block; padding:1.2mm 2.5mm; border-radius:99px; background:#e9edff; color:var(--blue); font-size:7.5pt; font-weight:700; text-transform:uppercase; letter-spacing:.08em; margin-right:1mm; }
+    table { width:100%; border-collapse:collapse; margin:3mm 0 5mm; table-layout:fixed; }
+    th { text-align:left; background:var(--dark); color:white; font-size:8pt; text-transform:uppercase; letter-spacing:.06em; padding:3mm; }
+    td { border:1px solid var(--line); vertical-align:top; padding:3mm; }
+    td:first-child { font-weight:700; color:var(--blue); }
+    .slide-table th:nth-child(1), .slide-table td:nth-child(1) { width:12mm; }
+    .slide-table th:nth-child(2), .slide-table td:nth-child(2) { width:82mm; }
+    .caption { background:#f5f6f8; border:1px solid var(--line); border-radius:3mm; padding:4mm; white-space:pre-line; font-size:9.3pt; }
+    .post-head { display:flex; justify-content:space-between; gap:6mm; align-items:flex-start; border-bottom:2px solid var(--ink); padding-bottom:4mm; margin-bottom:5mm; }
+    .post-no { font-size:34pt; line-height:1; font-weight:800; color:#d9dce5; }
+    .meta { display:flex; flex-wrap:wrap; gap:2mm; margin-top:3mm; }
+    .shot { border:1px solid var(--line); border-radius:3mm; overflow:hidden; background:#eef0f4; margin:3mm 0; }
+    .shot img { display:block; width:100%; max-height:65mm; object-fit:cover; object-position:top; }
+    .shot figcaption { padding:2.5mm 3mm; font-size:8pt; color:var(--muted); background:white; }
+    .timeline { display:grid; grid-template-columns:22mm 1fr 1.2fr; gap:0; border:1px solid var(--line); border-radius:3mm; overflow:hidden; }
+    .timeline > div { padding:3mm; border-bottom:1px solid var(--line); }
+    .timeline > div:nth-last-child(-n+3) { border-bottom:0; }
+    .time { font-weight:800; color:var(--blue); background:#f2f4ff; }
+    .footer-note { position:absolute; left:17mm; right:17mm; bottom:8mm; color:#979ba6; font-size:7.5pt; display:flex; justify-content:space-between; border-top:1px solid #eceef2; padding-top:2mm; }
+    .checklist { columns:2; column-gap:10mm; }
+    .checklist li { break-inside:avoid; }
+    .small { font-size:8.5pt; }
+    .no-break { break-inside:avoid; }
+    @page { size:A4; margin:0; }
+    @media print { html { background:white; } body { -webkit-print-color-adjust:exact; print-color-adjust:exact; } .page { margin:0; } }
+  </style>
+</head>
+<body>
+
+<section class="page cover">
+  <div class="brand"><img src="../public/logo.png" alt="Logo Cabral Labs" /> Cabral Labs</div>
+  <div>
+    <div class="eyebrow">Guia operacional · LinkedIn + Instagram</div>
+    <h1>Marketing inicial e sequência de conteúdo</h1>
+    <p class="lead">12 publicações prontas, com legendas, carrosséis, roteiros de Reels, imagens, ordem de publicação e chamadas para ação.</p>
+  </div>
+  <div class="cover-foot"><span>Versão 1.0 · Agosto de 2026</span><span>Uso interno</span></div>
+</section>
+
+<section class="page">
+  <div class="eyebrow">Direção editorial</div>
+  <h2>O conteúdo precisa vender confiança antes de vender serviço</h2>
+  <div class="grid2">
+    <div class="card"><h3>Objetivo</h3><p>Fazer gestores e donos de empresas reconhecerem um problema real, perceberem competência na Cabral Labs e iniciarem uma conversa.</p></div>
+    <div class="card"><h3>Público</h3><p>CTOs, Heads de Produto, gestores de operações e donos de empresas com sistemas, integrações ou processos importantes para o negócio.</p></div>
+  </div>
+  <h3>Quatro pilares</h3>
+  <div class="grid2">
+    <div class="card"><span class="tag">40%</span><h4>Problemas</h4><p>Planilhas críticas, tarefas manuais, projetos travados, integrações frágeis e sistemas difíceis de evoluir.</p></div>
+    <div class="card"><span class="tag">30%</span><h4>Provas</h4><p>Cases, telas, métricas, decisões tomadas e colaboração necessária para chegar à produção.</p></div>
+    <div class="card"><span class="tag">20%</span><h4>Educação</h4><p>Requisitos, QA, arquitetura, priorização e como contratar desenvolvimento com menos risco.</p></div>
+    <div class="card"><span class="tag">10%</span><h4>Bastidores</h4><p>Trajetória, aprendizados e construção da Cabral Labs como operação enxuta e próxima.</p></div>
+  </div>
+  <div class="callout"><strong>Regra editorial:</strong> escrever para quem compra ou gerencia software. Evitar transformar o perfil em uma sequência de tutoriais de framework para desenvolvedores.</div>
+  <h3>Cadência sustentável</h3>
+  <ul>
+    <li><strong>Duas publicações por semana</strong>, durante seis semanas.</li>
+    <li>LinkedIn: publicar primeiro no perfil de Liam; adaptar ou republicar na página da Cabral Labs.</li>
+    <li>Instagram: publicar na conta da Cabral Labs; usar Stories para bastidores e perguntas.</li>
+    <li>Somente uma publicação a cada quatro deve ter CTA comercial direto.</li>
+  </ul>
+  <div class="footer-note"><span>Cabral Labs · Guia de marketing</span><span>Estratégia</span></div>
+</section>
+
+<section class="page">
+  <div class="eyebrow">Calendário de seis semanas</div>
+  <h2>Ordem recomendada</h2>
+  <table>
+    <thead><tr><th style="width:20mm">Semana</th><th style="width:32mm">Momento</th><th>Publicação</th><th style="width:40mm">Formato principal</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Terça</td><td>1. Apresentação da Cabral Labs</td><td>Carrossel</td></tr>
+      <tr><td>1</td><td>Quinta</td><td>2. De tecnologia X para problema real</td><td>Texto + Reel</td></tr>
+      <tr><td>2</td><td>Terça</td><td>3. Case: aplicação financeira</td><td>Carrossel com telas</td></tr>
+      <tr><td>2</td><td>Quinta</td><td>4. Quando uma planilha vira sistema</td><td>Carrossel educativo</td></tr>
+      <tr><td>3</td><td>Terça</td><td>5. Case: redução de licenças</td><td>Carrossel de resultado</td></tr>
+      <tr><td>3</td><td>Quinta</td><td>6. Projetos travam antes do código</td><td>Texto/carrossel</td></tr>
+      <tr><td>4</td><td>Terça</td><td>7. Reescrever ou evoluir um legado</td><td>Carrossel</td></tr>
+      <tr><td>4</td><td>Quinta</td><td>8. QA não é a última etapa</td><td>Carrossel</td></tr>
+      <tr><td>5</td><td>Terça</td><td>9. Checklist para integrações</td><td>Carrossel salvável</td></tr>
+      <tr><td>5</td><td>Quinta</td><td>10. Tour pela aplicação financeira</td><td>Reel de 45 segundos</td></tr>
+      <tr><td>6</td><td>Terça</td><td>11. IA em processo desorganizado</td><td>Carrossel/opinião</td></tr>
+      <tr><td>6</td><td>Quinta</td><td>12. O que sustenta 99,9%</td><td>Texto + Reel</td></tr>
+    </tbody>
+  </table>
+  <h3>Distribuição</h3>
+  <div class="grid3">
+    <div class="card"><div class="metric">1×</div><p>Ideia central e argumento original.</p></div>
+    <div class="card"><div class="metric">2×</div><p>Adaptação: LinkedIn e Instagram.</p></div>
+    <div class="card"><div class="metric">3×</div><p>Reuso: texto, carrossel e Story/Reel.</p></div>
+  </div>
+  <div class="callout success"><strong>Não espere perfeição visual.</strong> Use um template único com fundo claro ou preto, tipografia forte, azul da marca e no máximo uma ideia principal por slide.</div>
+  <div class="footer-note"><span>Cabral Labs · Guia de marketing</span><span>Calendário</span></div>
+</section>
+
+<section class="page">
+  <div class="post-head"><div><div class="eyebrow">Lançamento · Semana 1</div><h2>Apresentação da Cabral Labs</h2><div class="meta"><span class="tag">LinkedIn</span><span class="tag">Instagram</span><span class="tag">Carrossel</span></div></div><div class="post-no">01</div></div>
+  <p><strong>Objetivo:</strong> apresentar a empresa sem parecer apenas “mais uma software house”.</p>
+  <table class="slide-table">
+    <thead><tr><th>Slide</th><th>Texto exato</th><th>Visual e imagem</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td><strong>Software que funciona em produção.<br>Sem atalhos.</strong></td><td>Fundo preto, logo no canto superior e detalhe azul. Sem fotografia.</td></tr>
+      <tr><td>2</td><td>A Cabral Labs nasce para transformar processos complexos em sistemas eficientes, rastreáveis e previsíveis.</td><td>Captura do hero do portfólio dentro de uma moldura de navegador.</td></tr>
+      <tr><td>3</td><td><strong>Construímos.</strong><br>Sistemas e produtos digitais conectados ao problema real.</td><td>Ícone de escudo/sistema. Fundo claro.</td></tr>
+      <tr><td>4</td><td><strong>Integramos.</strong><br>Sistemas e fluxos que precisam trocar informações sem depender de trabalho manual.</td><td>Diagrama simples de dois blocos conectados.</td></tr>
+      <tr><td>5</td><td><strong>Automatizamos.</strong><br>Processos repetitivos, difíceis de rastrear e sujeitos a erros.</td><td>Fluxo manual → automação → resultado.</td></tr>
+      <tr><td>6</td><td><strong>Evoluímos.</strong><br>Sistemas existentes que precisam ganhar estabilidade, capacidade e velocidade de entrega.</td><td>Seta de evolução; sem imagem de banco de fotos.</td></tr>
+      <tr><td>7</td><td>Da descoberta à produção, com requisitos, desenvolvimento e QA próximos do cliente.<br><strong>Conheça a Cabral Labs.</strong></td><td>Logo central e “link no perfil”.</td></tr>
+    </tbody>
+  </table>
+  <h4>Legenda — LinkedIn</h4>
+  <div class="caption">Por muito tempo, eu me apresentei pelo conjunto de tecnologias que sabia usar.
+
+Hoje, prefiro começar pelo problema que precisa ser resolvido.
+
+A Cabral Labs nasce dessa mudança: construir, integrar e evoluir sistemas que fazem parte da operação real de uma empresa.
+
+Da descoberta à produção, reunimos requisitos, desenvolvimento e QA em uma estrutura enxuta e próxima do cliente.
+
+Este é o início de uma nova fase. Nos próximos conteúdos, vou compartilhar projetos, decisões, erros evitados e aprendizados de sistemas que chegaram à produção.
+
+Conheça a Cabral Labs no link do perfil.</div>
+  <h4>Legenda — Instagram</h4>
+  <div class="caption">Tecnologia é meio. O objetivo é resolver um problema real.
+
+A Cabral Labs constrói, integra e evolui sistemas para operações que precisam de eficiência, rastreabilidade e previsibilidade.
+
+Este é o começo. Nos próximos posts, vamos mostrar os projetos e as decisões por trás das entregas.
+
+#sistemas #automacao #integracaodesistemas #tecnologia</div>
+  <div class="footer-note"><span>Cabral Labs · Post 01</span><span>Lançamento</span></div>
+</section>
+
+<section class="page">
+  <div class="post-head"><div><div class="eyebrow">Lançamento · Semana 1</div><h2>De tecnologia X para problema real</h2><div class="meta"><span class="tag">LinkedIn texto</span><span class="tag">Reel 40s</span></div></div><div class="post-no">02</div></div>
+  <p><strong>Objetivo:</strong> explicar a mudança de posicionamento e humanizar a marca.</p>
+  <h3>Texto completo — LinkedIn</h3>
+  <div class="caption">Durante boa parte da minha carreira, eu respondia “o que você faz?” listando tecnologias.
+
+Node, Angular, cloud, mensageria e por aí vai.
+
+Isso ajuda em uma entrevista técnica. Para uma empresa com um problema real, diz muito pouco.
+
+Quem possui um processo manual não está procurando Node. Está procurando menos retrabalho.
+
+Quem tem uma integração travada não quer apenas uma API. Quer previsibilidade para a operação.
+
+Quem possui um sistema instável não está comprando um framework. Está tentando reduzir risco.
+
+Depois de mais de sete anos trabalhando com sistemas em produção, essa foi uma das mudanças mais importantes na minha forma de enxergar a profissão.
+
+É também o princípio por trás da Cabral Labs: tecnologia é uma decisão da solução, não o produto que vendemos.
+
+Qual problema de tecnologia mais consome tempo na sua operação hoje?</div>
+  <h3>Roteiro exato — Reel</h3>
+  <div class="timeline">
+    <div class="time">0–4s</div><div><strong>Imagem</strong><br>Liam olhando para a câmera.</div><div><strong>Fala:</strong> “Por muito tempo, eu respondia o que eu fazia listando tecnologias.”</div>
+    <div class="time">4–10s</div><div>Texto na tela: Node, Angular, Cloud.</div><div>“Isso funciona em entrevista técnica. Para uma empresa com um problema real, diz muito pouco.”</div>
+    <div class="time">10–22s</div><div>B-roll: planilha, fluxo e painel.</div><div>“Quem tem processo manual quer menos retrabalho. Quem tem integração travada quer previsibilidade. Quem tem sistema instável quer reduzir risco.”</div>
+    <div class="time">22–34s</div><div>Captura do portfólio.</div><div>“Foi dessa mudança que surgiu a Cabral Labs: começar pelo problema e escolher a tecnologia depois.”</div>
+    <div class="time">34–40s</div><div>Logo + pergunta.</div><div>“Qual problema de tecnologia mais consome tempo na sua operação hoje?”</div>
+  </div>
+  <h4>Legenda — Instagram</h4>
+  <div class="caption">Empresas não compram frameworks. Compram menos risco, menos retrabalho e mais previsibilidade.
+
+Foi dessa mudança de visão que surgiu a Cabral Labs.
+
+Qual processo ou sistema mais consome tempo na sua empresa hoje?</div>
+  <div class="callout"><strong>Captação:</strong> esta publicação não oferece serviço. Ela abre conversa por meio da pergunta final.</div>
+  <div class="footer-note"><span>Cabral Labs · Post 02</span><span>Posicionamento</span></div>
+</section>
+
+<section class="page">
+  <div class="post-head"><div><div class="eyebrow">Prova · Semana 2</div><h2>Case da aplicação financeira</h2><div class="meta"><span class="tag">LinkedIn documento</span><span class="tag">Instagram carrossel</span></div></div><div class="post-no">03</div></div>
+  <p><strong>Objetivo:</strong> demonstrar capacidade com telas, escopo e resultados, sem posicionar a empresa apenas como fintech.</p>
+  <table class="slide-table">
+    <thead><tr><th>Slide</th><th>Texto exato</th><th>Visual e imagem exata</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td><strong>Por trás de uma aplicação financeira em operação</strong></td><td><code>app-inicial.jpeg</code> com overlay preto de 55%; título por cima.</td></tr>
+      <tr><td>2</td><td>Uma operação com PIX, TED, boletos, onboarding, pagamentos em lote, crédito e painel administrativo.</td><td><code>app-login.jpeg</code> ocupando o lado direito.</td></tr>
+      <tr><td>3</td><td><strong>Experiência do cliente</strong><br>Saldo, extratos, cobranças, pagamentos e comprovantes em um único fluxo.</td><td><code>app-extratos.jpeg</code>.</td></tr>
+      <tr><td>4</td><td><strong>Operações em escala</strong><br>Pagamentos em lote exigem validação, retorno, rastreabilidade e tratamento de exceções.</td><td>Metade <code>app-pagamentos-lote-pix.jpeg</code>; metade <code>app-pagamentos-boleto.jpeg</code>.</td></tr>
+      <tr><td>5</td><td><strong>Visão administrativa</strong><br>A operação precisa enxergar contas, transações e variações sem depender do banco de dados.</td><td><code>admin-dashboard.jpeg</code>.</td></tr>
+      <tr><td>6</td><td><strong>Reconciliação</strong><br>Mensalidades, pendências e valores devidos centralizados para decisão operacional.</td><td><code>admin-reconciliacao-mensalidades.jpeg</code>.</td></tr>
+      <tr><td>7</td><td><strong>Resultados da plataforma</strong><br>99,9% de disponibilidade<br>99% de aprovação automática no onboarding<br>95% menos bugs críticos</td><td>Slide tipográfico; números grandes, sem print.</td></tr>
+      <tr><td>8</td><td>A Cabral Labs liderou o desenvolvimento e a evolução da aplicação. Infraestrutura e ambientes foram operados em colaboração com uma equipe especializada.</td><td>Diagrama “Aplicação ↔ Infraestrutura”; não usar fotografia.</td></tr>
+      <tr><td>9</td><td>Um sistema importante para sua operação precisa evoluir?<br><strong>Vamos entender o cenário.</strong></td><td>Logo, fundo preto e CTA “link no perfil”.</td></tr>
+    </tbody>
+  </table>
+  <div class="footer-note"><span>Cabral Labs · Post 03</span><span>Case financeiro</span></div>
+</section>
+
+<section class="page">
+  <div class="eyebrow">Post 03 · Legendas</div>
+  <h2>Copy para publicação</h2>
+  <h3>Legenda — LinkedIn</h3>
+  <div class="caption">Uma aplicação financeira não é apenas uma interface para consultar saldo.
+
+Por trás dela existem integrações, regras de negócio, pagamentos, onboarding, rotinas administrativas, rastreabilidade e disponibilidade.
+
+Neste projeto, a Cabral Labs liderou o desenvolvimento e a evolução da aplicação, incluindo módulos financeiros, aplicativo do cliente e painel administrativo.
+
+Alguns resultados da plataforma:
+— 99,9% de disponibilidade
+— 99% de aprovação automática no onboarding
+— 95% de redução de bugs críticos
+
+A infraestrutura e a operação dos ambientes foram realizadas em colaboração com uma equipe especializada. Sistemas críticos são entregas coletivas — atribuição clara também é parte de uma boa engenharia.
+
+As telas do carrossel pertencem à operação real, com dados, nomes e identidade adaptados por sigilo.
+
+Sua empresa possui um sistema que precisa evoluir ou uma integração importante travada?</div>
+  <h3>Legenda — Instagram</h3>
+  <div class="caption">Uma aplicação financeira vai muito além da interface.
+
+PIX, boletos, onboarding, pagamentos em lote, painel administrativo, rastreabilidade e disponibilidade precisam funcionar como uma única operação.
+
+Neste projeto, a Cabral Labs liderou o desenvolvimento e a evolução da aplicação. A infraestrutura foi conduzida em colaboração com uma equipe especializada.
+
+Arraste para conhecer algumas telas e resultados.
+
+Dados e identidade adaptados por sigilo.
+
+#software #fintech #sistemas #integracoes #automacao</div>
+  <div class="grid2">
+    <figure class="shot"><img src="../public/fintech-screens/app-inicial.jpeg" alt="Tela inicial da aplicação" /><figcaption>Usar na capa com overlay escuro.</figcaption></figure>
+    <figure class="shot"><img src="../public/fintech-screens/admin-dashboard.jpeg" alt="Dashboard administrativo" /><figcaption>Usar no slide de visão administrativa.</figcaption></figure>
+  </div>
+  <div class="callout warning"><strong>Antes de publicar:</strong> ampliar cada print e verificar nomes, documentos, e-mails, saldos, chaves, IDs, URLs e marcas. Se houver dúvida, ocultar ou substituir.</div>
+  <div class="footer-note"><span>Cabral Labs · Post 03</span><span>Legendas e prova</span></div>
+</section>
+
+<section class="page">
+  <div class="post-head"><div><div class="eyebrow">Educação · Semana 2</div><h2>Quando uma planilha vira sistema</h2><div class="meta"><span class="tag">Carrossel salvável</span></div></div><div class="post-no">04</div></div>
+  <table class="slide-table"><thead><tr><th>Slide</th><th>Texto exato</th><th>Visual</th></tr></thead><tbody>
+    <tr><td>1</td><td><strong>5 sinais de que sua planilha já virou um sistema — só que sem controle</strong></td><td>Planilha estilizada em fundo claro.</td></tr>
+    <tr><td>2</td><td><strong>1. Poucas pessoas entendem como ela funciona.</strong><br>Se quem criou sair, a operação para.</td><td>Ícone de pessoa-chave.</td></tr>
+    <tr><td>3</td><td><strong>2. Existem várias versões do mesmo arquivo.</strong><br>Ninguém sabe qual contém o dado correto.</td><td>Arquivos duplicados.</td></tr>
+    <tr><td>4</td><td><strong>3. Erros são descobertos tarde.</strong><br>Não há validação, histórico ou alerta automático.</td><td>Alerta vermelho discreto.</td></tr>
+    <tr><td>5</td><td><strong>4. A equipe copia informações entre ferramentas.</strong><br>O mesmo dado é digitado mais de uma vez.</td><td>Setas entre planilha, e-mail e sistema.</td></tr>
+    <tr><td>6</td><td><strong>5. A planilha participa de uma decisão importante.</strong><br>Financeiro, cliente ou operação dependem dela.</td><td>Ícone de decisão/risco.</td></tr>
+    <tr><td>7</td><td>Planilhas são excelentes ferramentas.<br>O problema começa quando viram infraestrutura invisível.<br><strong>Qual desses sinais existe na sua empresa?</strong></td><td>Checklist final + logo pequeno.</td></tr>
+  </tbody></table>
+  <h4>Legenda — LinkedIn</h4><div class="caption">Planilhas não são o problema.
+
+O problema começa quando uma planilha se torna essencial para a operação, mas continua sem permissões, histórico, validações e integração.
+
+Nesse ponto, ela já funciona como um sistema — apenas sem a estrutura de um sistema.
+
+Antes de automatizar, vale medir frequência, quantidade de pessoas envolvidas, custo dos erros e impacto de uma interrupção.
+
+Qual desses sinais você mais encontra nas empresas?</div>
+  <h4>Legenda — Instagram</h4><div class="caption">Planilha não é inimiga. Infraestrutura invisível é.
+
+Arraste para identificar cinco sinais de que um processo precisa ser estruturado.
+
+Salve para revisar com sua equipe.</div>
+  <div class="footer-note"><span>Cabral Labs · Post 04</span><span>Diagnóstico</span></div>
+</section>
+
+<section class="page">
+  <div class="post-head"><div><div class="eyebrow">Prova · Semana 3</div><h2>Case de governança de licenças</h2><div class="meta"><span class="tag">Carrossel</span><span class="tag">Sem print do sistema</span></div></div><div class="post-no">05</div></div>
+  <table class="slide-table"><thead><tr><th>Slide</th><th>Texto exato</th><th>Visual</th></tr></thead><tbody>
+    <tr><td>1</td><td><strong>Como uma automação ajudou a reduzir cerca de R$ 1 milhão por ano</strong></td><td>“R$ 1M/ano” em destaque; fundo preto.</td></tr>
+    <tr><td>2</td><td><strong>O problema</strong><br>Licenças corporativas sem uso continuavam gerando custo porque a identificação e a decisão eram manuais.</td><td>Ícones de licenças acumuladas.</td></tr>
+    <tr><td>3</td><td><strong>Não bastava cancelar.</strong><br>Era necessário notificar, validar o uso, respeitar regras e registrar a decisão.</td><td>Fluxo com quatro etapas.</td></tr>
+    <tr><td>4</td><td><strong>A solução</strong><br>Um sistema para identificar inatividade, notificar colaboradores e acompanhar o ciclo antes do cancelamento.</td><td>Diagrama do fluxo; não usar print financeiro.</td></tr>
+    <tr><td>5</td><td><strong>Governança</strong><br>Dashboards mostravam economia, licenças cortadas, valores recuperados e decisões pendentes.</td><td>Gráfico ilustrativo sem dados inventados.</td></tr>
+    <tr><td>6</td><td><strong>Resultado</strong><br>aproximadamente R$ 1 milhão por ano em redução de custo operacional.</td><td>Número grande + seta de redução.</td></tr>
+    <tr><td>7</td><td>Automação não é apenas fazer mais rápido.<br>É tornar o processo mensurável, rastreável e governável.</td><td>Três palavras em destaque.</td></tr>
+    <tr><td>8</td><td>Existe um custo recorrente escondido em algum processo da sua empresa?</td><td>CTA suave + logo.</td></tr>
+  </tbody></table>
+  <h4>Legenda — LinkedIn</h4><div class="caption">Uma licença sem uso parece um custo pequeno quando observada isoladamente.
+
+Em escala, vira um vazamento recorrente e quase invisível.
+
+Neste projeto, a Cabral Labs construiu um sistema para identificar licenças inativas, notificar colaboradores, aplicar regras de validação e acompanhar a decisão antes do cancelamento.
+
+O resultado foi uma redução de custo operacional próxima de R$ 1 milhão por ano.
+
+O ganho não veio apenas do cancelamento. Veio de transformar uma decisão manual em um processo rastreável e governável.
+
+Qual custo recorrente ainda permanece invisível na sua operação?</div>
+  <h4>Legenda — Instagram</h4><div class="caption">Pequenos custos recorrentes se tornam grandes quando ninguém consegue enxergá-los em escala.
+
+Neste case, automação e governança ajudaram a reduzir aproximadamente R$ 1 milhão por ano.
+
+Arraste para entender o processo.</div>
+  <div class="footer-note"><span>Cabral Labs · Post 05</span><span>Case de automação</span></div>
+</section>
+
+<section class="page">
+  <div class="post-head"><div><div class="eyebrow">Autoridade · Semana 3</div><h2>Projetos travam antes do código</h2><div class="meta"><span class="tag">LinkedIn texto</span><span class="tag">Carrossel</span></div></div><div class="post-no">06</div></div>
+  <table class="slide-table"><thead><tr><th>Slide</th><th>Texto exato</th><th>Visual</th></tr></thead><tbody>
+    <tr><td>1</td><td><strong>Muitos projetos de software travam antes da primeira linha de código.</strong></td><td>Cursor piscando em tela vazia.</td></tr>
+    <tr><td>2</td><td><strong>O sintoma virou requisito.</strong><br>“Precisamos de um dashboard” não explica qual decisão precisa melhorar.</td><td>Dashboard desfocado + pergunta.</td></tr>
+    <tr><td>3</td><td><strong>Ninguém definiu sucesso.</strong><br>Sem critério de aceite, toda entrega parece incompleta.</td><td>Checklist vazio.</td></tr>
+    <tr><td>4</td><td><strong>As exceções apareceram tarde.</strong><br>O fluxo feliz foi desenhado; a operação real ficou de fora.</td><td>Caminho simples bifurcando.</td></tr>
+    <tr><td>5</td><td><strong>Decisões não têm responsável.</strong><br>O time espera enquanto custo e prazo continuam correndo.</td><td>Relógio + cadeira vazia.</td></tr>
+    <tr><td>6</td><td><strong>Descoberta não é burocracia.</strong><br>É reduzir incerteza antes que ela vire retrabalho.</td><td>Funil “incerteza → clareza”.</td></tr>
+    <tr><td>7</td><td>Antes de perguntar “quanto tempo leva?”, pergunte:<br><strong>qual problema, para quem e como saberemos que foi resolvido?</strong></td><td>Slide tipográfico.</td></tr>
+  </tbody></table>
+  <h4>Legenda — LinkedIn</h4><div class="caption">Quando um projeto atrasa, a explicação costuma terminar no desenvolvimento.
+
+Mas muitos atrasos começam antes:
+
+— o sintoma foi tratado como requisito;
+— ninguém definiu sucesso;
+— as exceções apareceram tarde;
+— decisões ficaram sem responsável.
+
+Código não elimina essas incertezas. Normalmente apenas as torna mais caras.
+
+Uma boa descoberta não precisa durar meses. Precisa esclarecer problema, restrições, responsáveis e critérios de aceite.
+
+Qual desses pontos mais atrasa projetos na sua experiência?</div>
+  <h4>Legenda — Instagram</h4><div class="caption">Nem todo atraso de software começa no desenvolvimento.
+
+Arraste para ver quatro problemas que travam um projeto antes do código — e salve para a próxima descoberta.</div>
+  <div class="footer-note"><span>Cabral Labs · Post 06</span><span>Descoberta</span></div>
+</section>
+
+<section class="page">
+  <div class="post-head"><div><div class="eyebrow">Autoridade · Semana 4</div><h2>Reescrever ou evoluir?</h2><div class="meta"><span class="tag">Carrossel de decisão</span></div></div><div class="post-no">07</div></div>
+  <table class="slide-table"><thead><tr><th>Slide</th><th>Texto exato</th><th>Visual</th></tr></thead><tbody>
+    <tr><td>1</td><td><strong>Seu sistema precisa ser reescrito ou apenas evoluído?</strong></td><td>Tela dividida: reescrever × evoluir.</td></tr>
+    <tr><td>2</td><td><strong>Reescrever parece mais limpo.</strong><br>Mas também recria anos de regras, exceções e conhecimento operacional.</td><td>Prédio sendo reconstruído.</td></tr>
+    <tr><td>3</td><td><strong>Evolua quando:</strong><br>o núcleo funciona, os problemas estão localizados e é possível criar limites claros.</td><td>Checklist verde.</td></tr>
+    <tr><td>4</td><td><strong>Considere reescrever quando:</strong><br>a arquitetura impede qualquer mudança segura e o custo de manter supera o de migrar.</td><td>Checklist azul.</td></tr>
+    <tr><td>5</td><td><strong>Antes de decidir, meça:</strong><br>frequência de incidentes, tempo para entregar, cobertura de testes e dependências críticas.</td><td>Quatro indicadores.</td></tr>
+    <tr><td>6</td><td><strong>Planeje convivência e migração.</strong><br>O sistema antigo raramente pode desaparecer de uma vez.</td><td>Duas linhas convergindo.</td></tr>
+    <tr><td>7</td><td>A pergunta não é “qual código é mais bonito?”.<br><strong>É qual caminho reduz risco para a operação.</strong></td><td>Slide tipográfico.</td></tr>
+    <tr><td>8</td><td>Tem um sistema difícil de evoluir?<br>A Cabral Labs pode ajudar a diagnosticar o cenário.</td><td>Logo + CTA.</td></tr>
+  </tbody></table>
+  <h4>Legenda — LinkedIn</h4><div class="caption">Reescrever um sistema legado é uma decisão de negócio apresentada como decisão técnica.
+
+O código novo parece atraente, mas o sistema antigo carrega regras, exceções e conhecimento que nem sempre estão documentados.
+
+Por isso, a decisão precisa considerar risco operacional, frequência de incidentes, velocidade atual de entrega, dependências e estratégia de migração.
+
+Às vezes, a resposta é reescrever. Muitas vezes, é criar limites e evoluir por partes.
+
+O melhor código é irrelevante se a migração colocar a operação em risco.</div>
+  <h4>Legenda — Instagram</h4><div class="caption">Sistema legado não significa automaticamente “jogar tudo fora”.
+
+Arraste para comparar evolução e reescrita pela ótica do risco operacional.</div>
+  <div class="footer-note"><span>Cabral Labs · Post 07</span><span>Sistemas existentes</span></div>
+</section>
+
+<section class="page">
+  <div class="post-head"><div><div class="eyebrow">Educação · Semana 4</div><h2>QA não é a última etapa</h2><div class="meta"><span class="tag">Carrossel</span></div></div><div class="post-no">08</div></div>
+  <table class="slide-table"><thead><tr><th>Slide</th><th>Texto exato</th><th>Visual</th></tr></thead><tbody>
+    <tr><td>1</td><td><strong>QA não deveria ser a última etapa de um projeto.</strong></td><td>Linha do tempo com QA no começo, meio e fim.</td></tr>
+    <tr><td>2</td><td>Quando QA entra apenas no final, encontra problemas quando corrigi-los já custa mais.</td><td>Curva de custo crescente.</td></tr>
+    <tr><td>3</td><td><strong>Na descoberta:</strong><br>QA ajuda a identificar exceções, ambiguidades e critérios de aceite.</td><td>Lupa sobre requisitos.</td></tr>
+    <tr><td>4</td><td><strong>Durante a construção:</strong><br>valida entregas pequenas antes que erros se acumulem.</td><td>Blocos sendo verificados.</td></tr>
+    <tr><td>5</td><td><strong>Antes da produção:</strong><br>confirma fluxos críticos, regressões e comportamento das integrações.</td><td>Checklist de produção.</td></tr>
+    <tr><td>6</td><td><strong>Depois da publicação:</strong><br>acompanha o uso real e transforma incidentes em aprendizado.</td><td>Gráfico + feedback.</td></tr>
+    <tr><td>7</td><td>Qualidade não é um portão no final.<br><strong>É uma responsabilidade durante toda a entrega.</strong></td><td>Mensagem final + logo discreto.</td></tr>
+  </tbody></table>
+  <h4>Legenda — LinkedIn</h4><div class="caption">Tratar QA como “a pessoa que testa no final” cria um problema previsível: a qualidade só aparece quando quase tudo já foi decidido.
+
+QA gera mais valor quando participa da descoberta, ajuda a escrever critérios de aceite, valida entregas progressivas e acompanha a entrada em produção.
+
+O objetivo não é criar mais etapas. É encontrar incerteza enquanto ainda é barato resolvê-la.
+
+Na Cabral Labs, requisitos, desenvolvimento e QA fazem parte da mesma esteira.</div>
+  <h4>Legenda — Instagram</h4><div class="caption">QA não é um portão no final do projeto.
+
+É uma responsabilidade que começa na descoberta e continua depois da publicação.
+
+Arraste para ver onde QA reduz mais risco.</div>
+  <div class="footer-note"><span>Cabral Labs · Post 08</span><span>Qualidade</span></div>
+</section>
+
+<section class="page">
+  <div class="post-head"><div><div class="eyebrow">Educação · Semana 5</div><h2>Checklist para integrações</h2><div class="meta"><span class="tag">Carrossel salvável</span></div></div><div class="post-no">09</div></div>
+  <table class="slide-table"><thead><tr><th>Slide</th><th>Texto exato</th><th>Visual</th></tr></thead><tbody>
+    <tr><td>1</td><td><strong>7 perguntas antes de integrar dois sistemas</strong></td><td>Dois blocos conectados; fundo azul.</td></tr>
+    <tr><td>2</td><td><strong>1. Quem é dono de cada dado?</strong><br>Defina a fonte oficial antes de sincronizar.</td><td>Banco A × Banco B.</td></tr>
+    <tr><td>3</td><td><strong>2. O que acontece quando um sistema estiver fora?</strong><br>Timeout, fila, repetição ou intervenção manual?</td><td>Fluxo com falha controlada.</td></tr>
+    <tr><td>4</td><td><strong>3. A operação pode ser repetida?</strong><br>Idempotência evita cobranças e registros duplicados.</td><td>Seta repetida bloqueada.</td></tr>
+    <tr><td>5</td><td><strong>4. Como erros serão rastreados?</strong><br>Logs sem contexto não explicam impacto operacional.</td><td>Log ligado a uma transação.</td></tr>
+    <tr><td>6</td><td><strong>5. Existem limites e picos?</strong><br>Volume médio não representa fechamento, campanha ou lote.</td><td>Gráfico com pico.</td></tr>
+    <tr><td>7</td><td><strong>6. Como será testado?<br>7. Quem decide em uma exceção?</strong></td><td>Ambiente de teste + responsável.</td></tr>
+    <tr><td>8</td><td>Uma integração não termina quando a API responde 200.<br><strong>Ela termina quando a operação consegue confiar no fluxo.</strong></td><td>Slide final tipográfico.</td></tr>
+  </tbody></table>
+  <h4>Legenda — LinkedIn</h4><div class="caption">Conectar duas APIs pode ser simples. Integrar duas operações raramente é.
+
+Além do caminho feliz, uma integração precisa responder quem é dono do dado, como recuperar falhas, impedir duplicidade, rastrear erros e lidar com picos.
+
+Uma resposta 200 confirma uma chamada. Não confirma que o processo terminou corretamente.
+
+Salve este checklist para a próxima integração.</div>
+  <h4>Legenda — Instagram</h4><div class="caption">Integração não é apenas fazer uma API conversar com outra.
+
+Arraste para revisar sete perguntas que evitam problemas em produção.</div>
+  <div class="footer-note"><span>Cabral Labs · Post 09</span><span>Integrações</span></div>
+</section>
+
+<section class="page">
+  <div class="post-head"><div><div class="eyebrow">Prova visual · Semana 5</div><h2>Tour pela aplicação financeira</h2><div class="meta"><span class="tag">Reel 45s</span><span class="tag">9:16</span></div></div><div class="post-no">10</div></div>
+  <p><strong>Objetivo:</strong> transformar os prints em uma demonstração curta, sem virar vídeo técnico.</p>
+  <div class="timeline">
+    <div class="time">0–3s</div><div><strong>Imagem</strong><br><code>app-inicial.jpeg</code>, zoom lento.</div><div><strong>Texto/fala:</strong> “Uma aplicação financeira é muito mais que uma tela de saldo.”</div>
+    <div class="time">3–9s</div><div><code>app-extratos.jpeg</code>.</div><div>“O cliente precisa consultar movimentações, entradas, saídas e comprovantes com clareza.”</div>
+    <div class="time">9–16s</div><div><code>app-pagamentos-lote-pix.jpeg</code>.</div><div>“Pagamentos em lote exigem validação, rastreabilidade e tratamento de exceções.”</div>
+    <div class="time">16–23s</div><div><code>app-credito-linhas.jpeg</code>.</div><div>“Crédito e antecipações adicionam regras e estados que precisam permanecer consistentes.”</div>
+    <div class="time">23–30s</div><div><code>admin-dashboard.jpeg</code>.</div><div>“No backoffice, a operação precisa enxergar contas, volumes e transações.”</div>
+    <div class="time">30–36s</div><div><code>admin-reconciliacao-mensalidades.jpeg</code>.</div><div>“E reconciliar pendências sem depender de consultas manuais.”</div>
+    <div class="time">36–42s</div><div>Números animados.</div><div>“A plataforma alcançou 99,9% de disponibilidade e reduziu bugs críticos em 95%.”</div>
+    <div class="time">42–45s</div><div>Logo + URL/link no perfil.</div><div>“Cabral Labs. Software que funciona em produção.”</div>
+  </div>
+  <h3>Direção de edição</h3>
+  <ul>
+    <li>Tela vertical 9:16; encaixar os prints horizontais dentro de uma moldura, sem cortar informações importantes.</li>
+    <li>Adicionar zoom de 3% a 5% e destacar com círculo apenas a área mencionada.</li>
+    <li>Usar voz original; música instrumental baixa e sem direitos autorais.</li>
+    <li>Legendas embutidas e mensagem principal longe das bordas.</li>
+  </ul>
+  <h4>Legenda — Instagram/LinkedIn</h4><div class="caption">Um passeio rápido por algumas partes de uma aplicação financeira real: experiência do cliente, pagamentos, crédito, backoffice e reconciliação.
+
+A Cabral Labs liderou o desenvolvimento e a evolução da aplicação. A infraestrutura e os ambientes foram conduzidos em colaboração com uma equipe especializada.
+
+Dados, nomes e identidade foram adaptados por sigilo.</div>
+  <div class="footer-note"><span>Cabral Labs · Post 10</span><span>Reel de prova</span></div>
+</section>
+
+<section class="page">
+  <div class="post-head"><div><div class="eyebrow">Opinião · Semana 6</div><h2>IA em processo desorganizado</h2><div class="meta"><span class="tag">Carrossel</span><span class="tag">Reel opcional</span></div></div><div class="post-no">11</div></div>
+  <table class="slide-table"><thead><tr><th>Slide</th><th>Texto exato</th><th>Visual</th></tr></thead><tbody>
+    <tr><td>1</td><td><strong>IA aplicada a um processo desorganizado só automatiza a desorganização.</strong></td><td>Frase grande; fundo preto.</td></tr>
+    <tr><td>2</td><td>Se entrada, regra e responsável mudam toda semana, a tecnologia não possui uma verdade para seguir.</td><td>Fluxo com setas conflitantes.</td></tr>
+    <tr><td>3</td><td><strong>Antes da IA, esclareça:</strong><br>qual decisão será apoiada e qual resultado será medido.</td><td>Pergunta → decisão → métrica.</td></tr>
+    <tr><td>4</td><td><strong>Organize os dados.</strong><br>Informação incompleta ou contraditória gera respostas aparentemente corretas.</td><td>Dados limpos × dados ruins.</td></tr>
+    <tr><td>5</td><td><strong>Defina limites.</strong><br>O que pode ser automático? O que exige validação humana?</td><td>IA + pessoa com fronteira.</td></tr>
+    <tr><td>6</td><td><strong>Comece pequeno.</strong><br>Valide uma decisão ou tarefa recorrente antes de automatizar todo o processo.</td><td>Um bloco destacado no fluxo.</td></tr>
+    <tr><td>7</td><td>IA é uma ferramenta dentro da solução.<br><strong>O produto continua sendo o resultado operacional.</strong></td><td>Logo discreto + frase.</td></tr>
+  </tbody></table>
+  <h4>Legenda — LinkedIn</h4><div class="caption">Colocar IA em um processo mal definido não elimina a confusão. Apenas aumenta a velocidade e a escala dela.
+
+Antes de escolher modelo ou ferramenta, é preciso definir decisão, dados, limites, validação humana e resultado esperado.
+
+Em muitos casos, a primeira melhoria nem é IA. É organizar o processo e tornar seus estados visíveis.
+
+IA deve fazer parte da solução quando gera valor concreto — não porque precisa aparecer na apresentação.</div>
+  <h4>Legenda — Instagram</h4><div class="caption">IA não conserta um processo que ninguém consegue explicar.
+
+Arraste para ver o que precisa existir antes da automação inteligente.</div>
+  <div class="footer-note"><span>Cabral Labs · Post 11</span><span>IA aplicada</span></div>
+</section>
+
+<section class="page">
+  <div class="post-head"><div><div class="eyebrow">Autoridade · Semana 6</div><h2>O que sustenta 99,9%</h2><div class="meta"><span class="tag">LinkedIn texto</span><span class="tag">Reel 35s</span></div></div><div class="post-no">12</div></div>
+  <h3>Texto completo — LinkedIn</h3>
+  <div class="caption">99,9% de disponibilidade não é resultado apenas de um código bem escrito.
+
+É o resultado conjunto de decisões de aplicação e infraestrutura:
+
+— tratamento de falhas e exceções;
+— observabilidade e alertas;
+— capacidade de recuperar operações;
+— publicação segura;
+— infraestrutura preparada;
+— pessoas responsáveis por reagir quando algo foge do esperado.
+
+Na aplicação financeira apresentada pela Cabral Labs, o desenvolvimento foi liderado por nós e a infraestrutura foi conduzida em colaboração com uma equipe especializada.
+
+Essa divisão não diminui a entrega. Ela mostra como sistemas críticos realmente são construídos: responsabilidades claras e colaboração entre competências.
+
+Disponibilidade não é uma funcionalidade isolada. É uma propriedade de toda a operação.</div>
+  <h3>Roteiro — Reel</h3>
+  <div class="timeline">
+    <div class="time">0–4s</div><div>Liam em quadro.</div><div>“99,9% de disponibilidade não vem apenas de código bem escrito.”</div>
+    <div class="time">4–15s</div><div>Palavras entrando na tela.</div><div>“Vem de tratamento de falhas, observabilidade, recuperação, publicação segura e infraestrutura preparada.”</div>
+    <div class="time">15–25s</div><div><code>admin-dashboard.jpeg</code> em moldura.</div><div>“Neste projeto, a Cabral Labs liderou a aplicação e trabalhou com uma equipe especializada em infraestrutura.”</div>
+    <div class="time">25–35s</div><div>Diagrama aplicação + infra.</div><div>“Sistemas críticos são construídos com responsabilidades claras e colaboração.”</div>
+  </div>
+  <h4>Legenda — Instagram</h4><div class="caption">Disponibilidade não é uma funcionalidade isolada.
+
+É uma propriedade construída por aplicação, infraestrutura, observabilidade e operação trabalhando juntas.</div>
+  <div class="footer-note"><span>Cabral Labs · Post 12</span><span>Engenharia em produção</span></div>
+</section>
+
+<section class="page">
+  <div class="eyebrow">Biblioteca visual</div>
+  <h2>Onde usar cada imagem disponível</h2>
+  <table>
+    <thead><tr><th>Arquivo</th><th>Uso recomendado</th><th>Evitar</th></tr></thead>
+    <tbody>
+      <tr><td>logo.png</td><td>Capas, encerramentos e assinatura discreta.</td><td>Logo grande em todos os slides.</td></tr>
+      <tr><td>perfil.png</td><td>Post de trajetória, bastidores e capa de artigo pessoal.</td><td>Usar como decoração em conteúdo técnico.</td></tr>
+      <tr><td>app-inicial.jpeg</td><td>Capa do case e abertura do tour.</td><td>Mostrar sem explicar o valor da tela.</td></tr>
+      <tr><td>app-extratos.jpeg</td><td>Conteúdo sobre rastreabilidade e experiência do cliente.</td><td>Deixar informações sensíveis legíveis.</td></tr>
+      <tr><td>app-pagamentos-lote-pix.jpeg</td><td>Integrações, escala, validações e exceções.</td><td>Prometer que toda a disponibilidade depende dessa tela.</td></tr>
+      <tr><td>app-pagamentos-boleto.jpeg</td><td>Pagamentos e diversidade de fluxos.</td><td>Usar isoladamente sem contexto.</td></tr>
+      <tr><td>app-credito-linhas.jpeg</td><td>Regras de negócio e estados de crédito.</td><td>Expor taxas, documentos ou nomes reais.</td></tr>
+      <tr><td>admin-dashboard.jpeg</td><td>Backoffice, operação e observabilidade de negócio.</td><td>Chamar de observabilidade técnica se for apenas dashboard operacional.</td></tr>
+      <tr><td>admin-reconciliacao-mensalidades.jpeg</td><td>Reconciliação, governança e decisão operacional.</td><td>Associar ao case de licenças corporativas.</td></tr>
+      <tr><td>demais telas</td><td>Posts futuros específicos: cadastro PJ, cargos, mensagens, pacotes, crédito e movimentação.</td><td>Publicar todas de uma vez e esgotar a prova.</td></tr>
+    </tbody>
+  </table>
+  <div class="grid2">
+    <figure class="shot"><img src="../public/fintech-screens/app-pagamentos-lote-pix.jpeg" alt="Pagamento PIX em lote" /><figcaption>Prova para integrações, escala e tratamento de lote.</figcaption></figure>
+    <figure class="shot"><img src="../public/fintech-screens/admin-reconciliacao-mensalidades.jpeg" alt="Reconciliação administrativa" /><figcaption>Prova para backoffice, reconciliação e rastreabilidade.</figcaption></figure>
+  </div>
+  <div class="footer-note"><span>Cabral Labs · Guia de marketing</span><span>Biblioteca visual</span></div>
+</section>
+
+<section class="page">
+  <div class="eyebrow">Operação semanal</div>
+  <h2>Checklist de publicação e medição</h2>
+  <h3>Antes de publicar</h3>
+  <ul class="checklist">
+    <li>O gancho fala de um problema ou resultado?</li>
+    <li>Existe somente uma ideia principal?</li>
+    <li>A linguagem é compreensível para um gestor?</li>
+    <li>A afirmação pode ser comprovada?</li>
+    <li>O print teve dados sensíveis removidos?</li>
+    <li>A atribuição entre aplicação e infraestrutura está clara?</li>
+    <li>O texto foi revisado por uma pessoa?</li>
+    <li>O CTA combina com o nível de consciência do post?</li>
+  </ul>
+  <h3>Depois de publicar</h3>
+  <ul>
+    <li>Responder comentários com perguntas reais, não apenas “obrigado”.</li>
+    <li>Registrar alcance, salvamentos, compartilhamentos, visitas ao perfil e conversas iniciadas.</li>
+    <li>Reaproveitar posts com muitos salvamentos como artigo, checklist ou anúncio.</li>
+    <li>Não concluir que um tema falhou por uma única publicação; testar gancho e formato.</li>
+  </ul>
+  <h3>Métrica principal por tipo</h3>
+  <div class="grid2">
+    <div class="card"><h4>Problema e educação</h4><p>Salvamentos, compartilhamentos e comentários de pessoas do público desejado.</p></div>
+    <div class="card"><h4>Case e prova</h4><p>Visitas ao perfil, cliques no portfólio e mensagens recebidas.</p></div>
+    <div class="card"><h4>Bastidores</h4><p>Respostas, reconexões e qualidade das conversas.</p></div>
+    <div class="card"><h4>CTA comercial</h4><p>Cenários enviados, conversas qualificadas e propostas — não curtidas.</p></div>
+  </div>
+  <div class="callout success"><strong>Critério final:</strong> a publicação deve ajudar alguém a reconhecer um problema, tomar uma decisão melhor ou confiar mais na capacidade da Cabral Labs.</div>
+  <h3>Fontes de formato</h3>
+  <p class="small muted">LinkedIn Help: posts, documentos, artigos, imagens e vídeos. Meta for Business: carrosséis para histórias/processos e Reels verticais com mensagem na área segura. As práticas de formato mudam; revisar as centrais oficiais antes de impulsionar conteúdo.</p>
+  <div class="footer-note"><span>Cabral Labs · Guia de marketing</span><span>Checklist final</span></div>
+</section>
+
+</body>
+</html>

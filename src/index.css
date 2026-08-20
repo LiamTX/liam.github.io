@@ -750,18 +750,18 @@
     opacity: 1;
   }
 
-  .hero-grid-label--plataformas {
+  .hero-grid-label--sistemas {
+    font-size: calc(var(--hero-grid-cell) * 0.125);
+    letter-spacing: -0.024em;
+  }
+
+  .hero-grid-label--integracoes {
     font-size: calc(var(--hero-grid-cell) * 0.125);
     letter-spacing: -0.024em;
   }
 
   .hero-grid-label--automacao {
     font-size: calc(var(--hero-grid-cell) * 0.133);
-    letter-spacing: -0.026em;
-  }
-
-  .hero-grid-label--ia-aplicada {
-    font-size: calc(var(--hero-grid-cell) * 0.13);
     letter-spacing: -0.026em;
   }
 
@@ -794,6 +794,27 @@
     .hero-grid-logo,
     .hero-grid-label {
       transition: none;
+    }
+  }
+
+  .fintech-viewer-img {
+    opacity: 1;
+    transform: scale(1);
+    transition: opacity 200ms ease-out, transform 200ms ease-out;
+  }
+
+  .fintech-viewer-img.fintech-viewer-entering {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+
+  .fintech-thumb-img {
+    transition: transform 200ms ease-out;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .fintech-thumb-img:hover {
+      transform: scale(1.05);
     }
   }
 }
